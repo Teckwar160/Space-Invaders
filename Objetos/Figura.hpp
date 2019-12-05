@@ -9,7 +9,7 @@
 /**
  * @class Figura
  * @brief Representa a cualquier figura
- * capaz de moverse en el tablero
+ * del juego
  */
 class Figura{
 	private:
