@@ -1,0 +1,1 @@
+g++ main.cpp Objetos/Figura.cpp Objetos/Tablero.cpp -o space-invaders.out
