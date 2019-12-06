@@ -1,15 +1,19 @@
 /**!<Bibliotecas de inclusión*/
 #include "Objetos/Tablero.hpp"
 #include "Objetos/Jugador.hpp"
+#include "Objetos/Municion.hpp"
 #include <curses.h>
+
 int main(){
 	int Tecla;
 	initscr();
 	Jugador *p = new Jugador();
 	Tablero *t = new Tablero();
-
 	t -> pintaJugador(p);
-	t -> mostrar();
+	//t -> mostrar();
+	Municion *m = new Municion();
+      	m -> mostrar();
+	delete m;	
 
 	while((Tecla = getch()) != '.'){
 		erase();

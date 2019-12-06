@@ -36,8 +36,14 @@ Figura::Figura(int id){
 			direccionDimension = "Sprites/dimensionesBala.txt";
 			break;
 		case 4:
+			/*Tablero*/
 			direccionSprite = "Sprites/Tablero.txt";
 			direccionDimension = "Sprites/dimensionesTablero.txt";
+			break;
+		case 5:
+			/*Munición*/
+			direccionSprite = "Sprites/Municion.txt";
+			direccionDimension = "Sprites/dimensionesMunicion.txt";
 			break;
 	}
 
