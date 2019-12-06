@@ -93,13 +93,14 @@ Figura::~Figura(){
 }
 
 void Figura::mostrar(){
-
+	initscr();
 	for(size_t i = 0; i< this -> Filas; i++){
 		for(size_t j = 0; j< this -> Columnas; j++){
-			std::cout << this -> Forma[i][j];
+			printw("%c",this -> Forma[i][j]);
 		}
-		std::cout <<std::endl;
+		printw("\n");
 	}
+	endwin();
 }
 
 void Figura::setX(int x){

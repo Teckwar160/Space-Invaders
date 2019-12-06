@@ -4,8 +4,8 @@
 Jugador::Jugador():Figura(0){
 	this -> vidas = 3;
 	this -> puntos = 0;
-	this -> setX(19);
-	this -> setY(37);
+	this -> setX(9);
+	this -> setY(27);
 }
 
 Jugador::~Jugador(){

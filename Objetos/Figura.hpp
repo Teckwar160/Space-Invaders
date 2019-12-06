@@ -5,6 +5,7 @@
 /**!<Bibliotecas necesarias*/
 #include <iostream>
 #include <fstream>
+#include <curses.h>
 
 /**
  * @class Figura
