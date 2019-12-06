@@ -4,6 +4,7 @@
 
 /**!<Bibliotecas necesarias*/
 #include "Figura.hpp"
+#include "Jugador.hpp"
 
 /**
  * @class Tablero
@@ -22,6 +23,12 @@ class Tablero : public Figura{
 		 * @brief Método destructor de Tablero
 		 */
 		~Tablero();
+
+		/**
+		 * @brief Método que pinta al jugador
+		 * @param jugador Jugador a pintar en el tablero
+		 */
+		void pintaJugador(Jugador *J);
 };
 
 #endif

@@ -24,6 +24,13 @@ class Figura{
 
 		/**!<Columnas de la matriz*/
 		int Columnas;
+
+		/**!<Posición en x de la figura*/
+		int x;
+
+		/**!<Posición en y de la figura*/
+		int y;
+
 	public:
 		/**
 		 * @brief Método constructor de la Figura
@@ -40,6 +47,36 @@ class Figura{
 		 * @brief Método que imprime la figura
 		 */
 		void mostrar();
+
+		/**
+		 * @breif Método que coloca un valor en la posición x
+		 * @param x Posición en x de la figura
+		 */
+		void setX(int x);
+
+		/**
+		 * @brief Método que coloca un valor en la posición y
+		 * @param y Posición en y de la figura
+		 */
+		void setY(int y);
+
+		/**
+		 * @brief Método que retorna la posición en x de la figura
+		 * @return La posición en x de la figura
+		 */
+		int getX();
+
+		/**
+		 * @brief Método que retorna la posción en y de la figura
+		 * @return La psoción en y de la figura
+		 */
+		int getY();
+
+		/**
+		 * @brief Método que retorna la forma de la figura
+		 * @return Forma de la figura
+		 */
+		char **getForma();
 };
 
 #endif

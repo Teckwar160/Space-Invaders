@@ -5,6 +5,8 @@
 Figura::Figura(int id){
 	/*Definimos el id*/
 	this -> id = id;
+	this -> x = 0;
+	this -> y =0;
 
 	/*Variables necesarias para crear la forma*/
 	std::ifstream sprite;
@@ -86,6 +88,8 @@ Figura::~Figura(){
 	}
 
 	delete[] this -> Forma;
+
+	std::cout << "Destructor figura" << std::endl;
 }
 
 void Figura::mostrar(){
@@ -96,4 +100,24 @@ void Figura::mostrar(){
 		}
 		std::cout <<std::endl;
 	}
+}
+
+void Figura::setX(int x){
+	this -> x = x;
+}
+
+void Figura::setY(int y){
+	this -> y = y;
+}
+
+int Figura::getX(){
+	return this -> x;
+}
+
+int Figura::getY(){
+	return this -> y;
+}
+
+char **Figura::getForma(){
+	return this -> Forma;
 }

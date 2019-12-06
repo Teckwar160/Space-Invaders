@@ -1,1 +1,1 @@
-g++ main.cpp Objetos/Figura.cpp Objetos/Tablero.cpp -o space-invaders.out
+g++ main.cpp Objetos/Figura.cpp Objetos/Tablero.cpp Objetos/Jugador.cpp -o space-invaders.out
