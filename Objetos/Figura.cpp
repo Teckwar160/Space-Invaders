@@ -122,3 +122,11 @@ int Figura::getY(){
 char **Figura::getForma(){
 	return this -> Forma;
 }
+
+int Figura::getFilas(){
+	return this -> Filas;
+}
+
+int Figura::getColumnas(){
+	return this -> Columnas;
+}

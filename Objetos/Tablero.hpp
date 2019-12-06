@@ -13,6 +13,8 @@
  */
 class Tablero : public Figura{
 	private:
+		/*Caracter del fondo del tablero*/
+		char caracterBase;
 	public:
 		/**
 		 * @brief Método constructor de Tablero
@@ -26,9 +28,22 @@ class Tablero : public Figura{
 
 		/**
 		 * @brief Método que pinta al jugador
-		 * @param jugador Jugador a pintar en el tablero
+		 * @param J Jugador a pintar en el tablero
 		 */
 		void pintaJugador(Jugador *J);
+
+		/**
+		 * @brief Método que mueve al jugador
+		 * @param J Jugador a mover
+		 * @param Tecla tecla pulsada por el jugador
+		 */
+		void mueveJugador(Jugador *J, int Tecla);
+
+		/**
+		 * @brief Método que borrar al jugador
+		 * @param J Jugador a borrar
+		 */
+		void borrarJugador(Jugador *J);
 };
 
 #endif

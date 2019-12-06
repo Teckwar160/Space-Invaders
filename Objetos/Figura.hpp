@@ -78,6 +78,18 @@ class Figura{
 		 * @return Forma de la figura
 		 */
 		char **getForma();
+
+		/**
+		 * @brief Método que retorna el numero de filas de la forma
+		 * @return Filas de la forma
+		 */
+		int getFilas();
+
+		/**
+		 * @brief Método que retorn el numero de columnas de la forma
+		 * @return Columnas de la forma
+		 */
+		int getColumnas();
 };
 
 #endif

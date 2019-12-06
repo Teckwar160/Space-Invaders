@@ -3,6 +3,7 @@
 #include "Objetos/Jugador.hpp"
 #include <curses.h>
 int main(){
+	int Tecla;
 	initscr();
 	Jugador *p = new Jugador();
 	Tablero *t = new Tablero();
@@ -10,8 +11,10 @@ int main(){
 	t -> pintaJugador(p);
 	t -> mostrar();
 
-	while(getch() != '.'){
-
+	while((Tecla = getch()) != '.'){
+		erase();
+		t -> mueveJugador(p,Tecla);
+		t -> mostrar();
 	}
 
 	delete p;
