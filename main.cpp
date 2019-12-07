@@ -10,15 +10,18 @@ int main(){
 	Jugador *p = new Jugador();
 	Tablero *t = new Tablero();
 	t -> pintaJugador(p);
-	//t -> mostrar();
-	Municion *m = new Municion();
-      	m -> mostrar();
-	delete m;	
+	t -> mostrar();
 
 	while((Tecla = getch()) != '.'){
 		erase();
 		t -> mueveJugador(p,Tecla);
 		t -> mostrar();
+
+		if(Tecla == 'f'){
+			Municion *m = new Municion();
+			t -> dispararJugador(p,m);
+			delete m;
+		}
 	}
 
 	delete p;

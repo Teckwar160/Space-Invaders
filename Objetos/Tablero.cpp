@@ -146,3 +146,49 @@ void Tablero::borrarJugador(Jugador *J){
 	/*Borramos la parte de abajo del punto de control de la nave*/
 	formaTablero[y+1][x] = this -> caracterBase;
 }
+
+void Tablero::pintaMunicion(Municion *M){
+
+	/*Obtenemos la forma del tablero*/
+	char **formaTablero = this -> getForma();
+
+	/*Obtenemos la forma de la munición*/
+	char **formaMunicion = M -> getForma();
+
+	/*Obtenemos las coordenadas de la munición*/
+	int x = M -> getX();
+	int y = M -> getY();
+
+	/*Pintamos la munición en el tablero*/
+	formaTablero[y][x] = formaMunicion[0][0];
+}
+
+void Tablero::borrarMunicion(Municion *M){
+	/*Obtenemos la forma del tablero*/
+	char **formaTablero = this -> getForma();
+
+	/*Obtenemos las coordenadas de la munición*/
+	int x = M -> getX();
+	int y = M -> getY();
+
+	/*Borramos a la munición*/
+	formaTablero[y][x] = this -> caracterBase;
+}
+
+void Tablero::dispararJugador(Jugador *J, Municion *M){
+
+	/*Obtenemos la forma del tablero*/
+	char **formaTablero = this -> getForma();
+
+	/*Obtenemos las coordenadas del jugador*/
+	int x = J -> getX();
+	int y = J -> getY();
+
+	/*Definimos las coordenadas de la munición*/
+	M -> setX(x);
+	M -> setY(y-3);
+
+	/*Pintamos la bala*/
+	this -> pintaMunicion(M);
+
+}
