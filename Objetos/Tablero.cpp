@@ -190,5 +190,23 @@ void Tablero::dispararJugador(Jugador *J, Municion *M){
 
 	/*Pintamos la bala*/
 	this -> pintaMunicion(M);
+}
+
+bool Tablero::mueveMunicion(Municion *M){
+	/*Obtenemos la coordenada en y de la munición*/
+	int y = M -> getY();
+
+	/*Movemos la municion una posición*/
+	y -=1;
+
+	if(y > 0){
+		this -> borrarMunicion(M);
+		M -> setY(y);
+		this -> pintaMunicion(M);
+		return true;
+	}else{
+		this -> borrarMunicion(M);
+		return false;
+	}
 
 }
