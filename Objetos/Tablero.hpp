@@ -63,13 +63,13 @@ class Tablero : public Figura{
 		 * @param J Jugador que disparara la munición
 		 * @param M Munición que se va a disparar
 		 */
-		void dispararJugador(Jugador *J, Municion *M);
+		void dispararJugador(Jugador *J);
 
 		/**
 		 * @brief Método que mueve la bala en la pantalla
 		 * @param M Municiónm que se movera
 		 */
-		bool mueveMunicion(Municion *M);
+		bool mueveMunicion(Jugador *J);
 };
 
 #endif

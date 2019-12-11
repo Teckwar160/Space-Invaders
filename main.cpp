@@ -1,7 +1,6 @@
 /**!<Bibliotecas de inclusión*/
 #include "Objetos/Tablero.hpp"
 #include "Objetos/Jugador.hpp"
-#include "Objetos/Municion.hpp"
 #include <curses.h>
 
 #define BALAS 1000
@@ -10,17 +9,8 @@ int main(){
 	/**!<Tecla pulsada por el usuario*/
 	int Tecla = 0;
 	
-	/**!<Indica si se disparo o no una bla*/
-	bool disparo[BALAS] = {false};
-
-	/**!<Contador de que bala fue disparada*/
-	int martillo = 0;
-
 	/**!<Tablero del juego*/
 	Tablero *T;
-
-	/**!<Arreglo de municiones del jugador*/
-	Municion **Cargador;
 
 	/**!<Jugador*/
 	Jugador *J;
@@ -28,13 +18,6 @@ int main(){
 	/*Iniciamos los componenes del juego*/
 	T = new Tablero();
 	J = new Jugador();
-
-	/*Creamos el cargador del jugador*/
-	Cargador = new Municion*[BALAS];
-
-	for(size_t i = 0; i<BALAS; i++){
-		Cargador[i] = new Municion();
-	}
 
 	/*Cambiamos el modo de pantalla para usar curses*/
 	initscr();
@@ -58,23 +41,17 @@ int main(){
 		}
 
 		/*Vemos si quiere disparar*/
-		if(Tecla == 'f' && martillo != BALAS -1){
-			T -> dispararJugador(J,Cargador[martillo]);
-			disparo[martillo] = true;
-			
-			if(martillo < BALAS){
-				martillo++;
-			}
+		if(Tecla == 'f'){
+			T -> dispararJugador(J);
 		}
-		
+#if 1
 		/*Verificamos que haya balas que mover*/
-		if(martillo > 0){
-		
-			for(size_t i = 0; i< BALAS; i++){
-				disparo[i] = T -> mueveMunicion(Cargador[i]);
-			}
-		}
-
+		J -> primerBala();
+		for(int i = J -> getNumBalas(); i>0; i--){
+			T -> mueveMunicion(J);
+			J -> siguienteBala();
+		}	
+#endif
 		/*Borramos el tablero*/
 		erase();
 	
@@ -87,10 +64,4 @@ int main(){
 
 	delete T;
 	delete J;
-
-	for(size_t i = 0; i< BALAS; i++){
-		delete Cargador[i];
-	}
-
-	delete[] Cargador;
 }

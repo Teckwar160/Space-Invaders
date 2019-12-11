@@ -175,7 +175,7 @@ void Tablero::borrarMunicion(Municion *M){
 	formaTablero[y][x] = this -> caracterBase;
 }
 
-void Tablero::dispararJugador(Jugador *J, Municion *M){
+void Tablero::dispararJugador(Jugador *J){
 
 	/*Obtenemos la forma del tablero*/
 	char **formaTablero = this -> getForma();
@@ -183,6 +183,9 @@ void Tablero::dispararJugador(Jugador *J, Municion *M){
 	/*Obtenemos las coordenadas del jugador*/
 	int x = J -> getX();
 	int y = J -> getY();
+	
+	/*Creamos la  municion*/
+	Municion *M = new Municion();
 
 	/*Definimos las coordenadas de la munición*/
 	M -> setX(x);
@@ -190,9 +193,16 @@ void Tablero::dispararJugador(Jugador *J, Municion *M){
 
 	/*Pintamos la bala*/
 	this -> pintaMunicion(M);
+
+	/*Cargamos la munición al cargador*/
+	J -> cargarMunicion(M);
 }
 
-bool Tablero::mueveMunicion(Municion *M){
+bool Tablero::mueveMunicion(Jugador *J){
+
+	/*Obtenemos a la municion*/
+	Municion *M = J -> getMunicion();
+
 	/*Obtenemos la coordenada en y de la munición*/
 	int y = M -> getY();
 
@@ -206,6 +216,7 @@ bool Tablero::mueveMunicion(Municion *M){
 		return true;
 	}else{
 		this -> borrarMunicion(M);
+		J -> borrarBala();
 		return false;
 	}
 

@@ -94,19 +94,15 @@ Figura::~Figura(){
 	}
 
 	delete[] this -> Forma;
-
-	std::cout << "Destructor figura" << std::endl;
 }
 
 void Figura::mostrar(){
-	initscr();
 	for(size_t i = 0; i< this -> Filas; i++){
 		for(size_t j = 0; j< this -> Columnas; j++){
 			printw("%c",this -> Forma[i][j]);
 		}
 		printw("\n");
 	}
-	endwin();
 }
 
 void Figura::setX(int x){
