@@ -1,17 +1,33 @@
 /**!<Bibliotecas necesarias*/
 #include "Jugador.hpp"
 
+/***************************************
+ *	Método privado
+ **************************************/
+void Jugador::liberaBala(Bala *B){
+	delete B;
+}
+
+/***************************************
+ * 	Métodos publicos
+ **************************************/
 Jugador::Jugador():Figura(0){
 	this -> vidas = 3;
 	this -> puntos = 0;
 	this -> setX(9);
 	this -> setY(27);
-	this -> cargador = new DLL<Municion*>();
+	this -> deposito = new DLL<Bala*>();
 	this -> disparos = 0;
 }
 
 Jugador::~Jugador(){
-	delete cargador;
+	/*Liberamos la memoria de las balas que no se eliminaron solas*/
+	if(this -> getNumBalas() > 0){
+		this -> deposito -> Traverse(this -> liberaBala);
+	}
+
+	/*Borramos el depósito*/
+	delete deposito;
 }
 
 int Jugador::getVidas(){
@@ -34,46 +50,38 @@ void Jugador::incrementaDisparos(){
 	this -> disparos++;
 }
 
-bool Jugador::cargarMunicion(Municion *M){
-	this -> cargador -> InsertBack(M);
+bool Jugador::cargarBala(Bala *B){
+	this -> deposito -> InsertBack(B);
 }
 
-Municion *Jugador::getMunicion(){
-	Municion *tmp;
+Bala *Jugador::getBala(){
+	Bala *tmp;
 
-	this -> cargador -> Peek(&tmp);
+	this -> deposito -> Peek(&tmp);
 
 	return tmp;
 }
 
-void Jugador::caminoMunicion(){
-	
-}
-
-bool Jugador::hayMuniciones(){
-	return !this -> cargador -> IsEmpty();
-}
-
 void Jugador::borrarBala(){
-	Municion *M;
+	Bala *B;
 
-	this -> cargador -> Remove(&M);
+	this -> deposito -> Remove(&B);
 
-	delete M;
+	delete B;
 }
 
 void Jugador::primerBala(){
-	this -> cargador -> CursorFirst();
+	this -> deposito -> CursorFirst();
 }
 
 void Jugador::siguienteBala(){
-	this -> cargador -> CursorNext();
+	this -> deposito -> CursorNext();
 }
 
 void Jugador::ultimaBala(){
-	this -> cargador -> CursorLast();
+	this -> deposito -> CursorLast();
 }
 
 int Jugador::getNumBalas(){
-	this -> cargador -> Len();
+	this -> deposito -> Len();
 }

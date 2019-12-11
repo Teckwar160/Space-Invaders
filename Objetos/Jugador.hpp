@@ -5,8 +5,12 @@
 /**!<Bibliotecas necesarias*/
 #include "Figura.hpp"
 #include "../Recursos/DLL.hpp"
-#include "Municion.hpp"
+#include "Bala.hpp"
 
+/**
+ * @class Jugador
+ * @brief Representa al jugador
+ */
 class Jugador: public Figura{
 	private:
 		/**!<Son las vidas del jugador*/
@@ -15,11 +19,17 @@ class Jugador: public Figura{
 		/*!<Son los puntos obtenidos por el jugador*/
 		int puntos;
 		
-		/**!<Cargador de municiones*/
-		DLL<Municion*>* cargador;
+		/**!<Depósito de balas*/
+		DLL<Bala*>* deposito;
 
-		/**!<Contador que lleva el numero de municiones disparadas*/
-		int disparos;	
+		/**!<Contador que lleva el numero de balas disparadas*/
+		int disparos;
+
+		/**
+		 * @brief Método que libera la memoria de las balas
+		 * @param B Bala que se liberara la memoria
+		 */
+		static void liberaBala(Bala *B);	
 	public:
 		/**
 		 * @brief Método constructor de figura
@@ -59,52 +69,41 @@ class Jugador: public Figura{
 		void incrementaDisparos();
 
 		/**
-		 * @brief Método que ingresa una munición al cargador
-		 * @param M Munición que se va a cargar
+		 * @brief Método que ingresa una bala al depósito
+		 * @param B Bala que se va agregar al depósito
 		 * @return true si se logro cargar correctamente, en caso contrario false
 		 */
-		bool cargarMunicion(Municion *M);
+		bool cargarBala(Bala *B);
 		
 		/**
-		 * @brief Método que retorna una munición del cargador
-		 * @return Apuntador de municion en el cargador
+		 * @brief Método que retorna una bala del depósito
+		 * @return Apuntador de bala del depósito
 		 */
-		Municion *getMunicion();
+		Bala *getBala();
 
 		/**
-		 * @brief Método que ve si una munición debe seguir existiendo o no
-		 */
-		void caminoMunicion();
-
-		/**
-		 * @brief Método que indica si hay municiones en el cargador
-		 * @return true si hay municiones en el cargador, en caso contrario false
-		 */
-		bool hayMuniciones();
-
-		/**
-		 * @brief Método que borra una bala del deposito
+		 * @brief Método que borra una bala del depósito
 		 */
 		void borrarBala();
 
 		/**
-		 * @brief Método que mueve el cursor del deposito a la primer bala
+		 * @brief Método que mueve el cursor del depósito a la primer bala
 		 */
 		void primerBala();
 
 		/**
-		 * @brief Método que mueve el cursor del deposito a la siguiente bala
+		 * @brief Método que mueve el cursor del depósito a la siguiente bala
 		 */
 		void siguienteBala();
 
 		/**
-		 * @brief Método que mueve el cursor del deposito a la ultima bala
+		 * @brief Método que mueve el cursor del depósito a la ultima bala
 		 */
 		void ultimaBala();
 
 		/**
-		 * @brief Método que retorna el numero de balas en el deposito del jugador
-		 * @return Numero de balas del deposito
+		 * @brief Método que retorna el numero de balas en el depósito del jugador
+		 * @return Numero de balas del depósito
 		 */
 		int getNumBalas();
 

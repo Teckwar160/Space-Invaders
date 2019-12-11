@@ -147,31 +147,31 @@ void Tablero::borrarJugador(Jugador *J){
 	formaTablero[y+1][x] = this -> caracterBase;
 }
 
-void Tablero::pintaMunicion(Municion *M){
+void Tablero::pintaBala(Bala *B){
 
 	/*Obtenemos la forma del tablero*/
 	char **formaTablero = this -> getForma();
 
-	/*Obtenemos la forma de la munición*/
-	char **formaMunicion = M -> getForma();
+	/*Obtenemos la forma de la bala*/
+	char **formaBala = B -> getForma();
 
-	/*Obtenemos las coordenadas de la munición*/
-	int x = M -> getX();
-	int y = M -> getY();
+	/*Obtenemos las coordenadas de la bala*/
+	int x = B -> getX();
+	int y = B -> getY();
 
-	/*Pintamos la munición en el tablero*/
-	formaTablero[y][x] = formaMunicion[0][0];
+	/*Pintamos la bala en el tablero*/
+	formaTablero[y][x] = formaBala[0][0];
 }
 
-void Tablero::borrarMunicion(Municion *M){
+void Tablero::borrarBala(Bala *B){
 	/*Obtenemos la forma del tablero*/
 	char **formaTablero = this -> getForma();
 
-	/*Obtenemos las coordenadas de la munición*/
-	int x = M -> getX();
-	int y = M -> getY();
+	/*Obtenemos las coordenadas de la bala*/
+	int x = B -> getX();
+	int y = B -> getY();
 
-	/*Borramos a la munición*/
+	/*Borramos a la bala*/
 	formaTablero[y][x] = this -> caracterBase;
 }
 
@@ -184,38 +184,38 @@ void Tablero::dispararJugador(Jugador *J){
 	int x = J -> getX();
 	int y = J -> getY();
 	
-	/*Creamos la  municion*/
-	Municion *M = new Municion();
+	/*Creamos la bala*/
+	Bala *B = new Bala();
 
-	/*Definimos las coordenadas de la munición*/
-	M -> setX(x);
-	M -> setY(y-3);
+	/*Definimos las coordenadas de la bala*/
+	B -> setX(x);
+	B -> setY(y-3);
 
 	/*Pintamos la bala*/
-	this -> pintaMunicion(M);
+	this -> pintaBala(B);
 
-	/*Cargamos la munición al cargador*/
-	J -> cargarMunicion(M);
+	/*Cargamos la bala al depósito*/
+	J -> cargarBala(B);
 }
 
-bool Tablero::mueveMunicion(Jugador *J){
+bool Tablero::mueveBala(Jugador *J){
 
-	/*Obtenemos a la municion*/
-	Municion *M = J -> getMunicion();
+	/*Obtenemos a la bala*/
+	Bala *B = J -> getBala();
 
-	/*Obtenemos la coordenada en y de la munición*/
-	int y = M -> getY();
+	/*Obtenemos la coordenada en y de la bala*/
+	int y = B -> getY();
 
-	/*Movemos la municion una posición*/
+	/*Movemos la bala una posición*/
 	y -=1;
 
 	if(y > 0){
-		this -> borrarMunicion(M);
-		M -> setY(y);
-		this -> pintaMunicion(M);
+		this -> borrarBala(B);
+		B -> setY(y);
+		this -> pintaBala(B);
 		return true;
 	}else{
-		this -> borrarMunicion(M);
+		this -> borrarBala(B);
 		J -> borrarBala();
 		return false;
 	}

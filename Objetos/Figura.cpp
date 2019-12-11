@@ -8,10 +8,11 @@ Figura::Figura(int id){
 	this -> x = 0;
 	this -> y =0;
 
-	/*Variables necesarias para crear la forma*/
+	/*Variables que leen la forma y dimensión del sprite*/
 	std::ifstream sprite;
 	std::ifstream dimensiones;
 
+	/*Variables que guardan las direcciones del sprite y su dimensión*/
 	std::string direccionDimension;
 	std::string direccionSprite;
 	
@@ -41,9 +42,9 @@ Figura::Figura(int id){
 			direccionDimension = "Sprites/dimensionesTablero.txt";
 			break;
 		case 5:
-			/*Munición*/
-			direccionSprite = "Sprites/Municion.txt";
-			direccionDimension = "Sprites/dimensionesMunicion.txt";
+			/*Bala*/
+			direccionSprite = "Sprites/Bala.txt";
+			direccionDimension = "Sprites/dimensionesBala.txt";
 			break;
 	}
 

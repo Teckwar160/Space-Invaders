@@ -44,14 +44,21 @@ int main(){
 		if(Tecla == 'f'){
 			T -> dispararJugador(J);
 		}
-#if 1
+
 		/*Verificamos que haya balas que mover*/
+
+		/*Ponemos el cursor del deposito del jugador en la primer bala*/
 		J -> primerBala();
+		
+		/*Recorremos todo el deposito moviendo cada bala*/
 		for(int i = J -> getNumBalas(); i>0; i--){
-			T -> mueveMunicion(J);
+			/*Movemos a la bala*/
+			T -> mueveBala(J);
+
+			/*Nos movemos a la siguiente bala del deposito*/
 			J -> siguienteBala();
 		}	
-#endif
+
 		/*Borramos el tablero*/
 		erase();
 	
@@ -61,7 +68,6 @@ int main(){
 	endwin();
 
 	/*Eliminamos los objetos creados*/
-
 	delete T;
 	delete J;
 }

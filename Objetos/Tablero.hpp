@@ -5,7 +5,7 @@
 /**!<Bibliotecas necesarias*/
 #include "Figura.hpp"
 #include "Jugador.hpp"
-#include "Municion.hpp"
+#include "Bala.hpp"
 
 /**
  * @class Tablero
@@ -14,7 +14,7 @@
  */
 class Tablero : public Figura{
 	private:
-		/*Caracter del fondo del tablero*/
+		/**!<Caracter del fondo del tablero*/
 		char caracterBase;
 	public:
 		/**
@@ -47,29 +47,27 @@ class Tablero : public Figura{
 		void borrarJugador(Jugador *J);
 
 		/**
-		 * @brief Método que pinta una munición
-		 * @param M Munición que se va a pintar
+		 * @brief Método que pinta una bala
+		 * @param B Bala que se va a pintar
 		 */
-		void pintaMunicion(Municion *M);
+		void pintaBala(Bala *B);
 
 		/**
-		 * @brief Método que borra a la munición
-		 * @param M Munición que se va a borrar
+		 * @brief Método que borra a la bala
+		 * @param B Bala que se va a borrar
 		 */
-		void borrarMunicion(Municion *M);
+		void borrarBala(Bala *B);
 
 		/**
 		 * @brief Método que hace que dispare la nave
-		 * @param J Jugador que disparara la munición
-		 * @param M Munición que se va a disparar
+		 * @param J Jugador que disparara la bala
 		 */
 		void dispararJugador(Jugador *J);
 
 		/**
 		 * @brief Método que mueve la bala en la pantalla
-		 * @param M Municiónm que se movera
 		 */
-		bool mueveMunicion(Jugador *J);
+		bool mueveBala(Jugador *J);
 };
 
 #endif
