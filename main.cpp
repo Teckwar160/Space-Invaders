@@ -1,6 +1,7 @@
 /**!<Bibliotecas de inclusión*/
 #include "Objetos/Tablero.hpp"
 #include "Objetos/Jugador.hpp"
+#include "Objetos/Soldado.hpp"
 #include <curses.h>
 
 #define BALAS 1000
@@ -15,15 +16,23 @@ int main(){
 	/**!<Jugador*/
 	Jugador *J;
 
+	/**!<Enemigo para probar*/
+	Soldado *S;
 	/*Iniciamos los componenes del juego*/
 	T = new Tablero();
 	J = new Jugador();
+	S = new Soldado(4,2);
 
 	/*Cambiamos el modo de pantalla para usar curses*/
 	initscr();
 
 	/*Cargamos al jugador en el tablero*/
 	T -> pintaJugador(J);
+
+	/*Cargamos al enemigo de prueba*/
+	T -> pintaSoldado(S);
+
+	/**/
 
 	/*Iniciamos el juego*/
 	while(J -> getVidas() != 0 && Tecla != '.'){
@@ -72,4 +81,5 @@ int main(){
 	/*Eliminamos los objetos creados*/
 	delete T;
 	delete J;
+	delete S;
 }

@@ -6,6 +6,7 @@
 #include "Figura.hpp"
 #include "Jugador.hpp"
 #include "Bala.hpp"
+#include "Soldado.hpp"
 
 /**
  * @class Tablero
@@ -27,6 +28,7 @@ class Tablero : public Figura{
 		 */
 		~Tablero();
 
+		/*========Métodos para el jugador========*/
 		/**
 		 * @brief Método que pinta al jugador
 		 * @param J Jugador a pintar en el tablero
@@ -68,6 +70,13 @@ class Tablero : public Figura{
 		 * @brief Método que mueve la bala en la pantalla
 		 */
 		bool mueveBala(Jugador *J);
+		
+		/*========Métodos de los soldados========*/
+		/**
+		 * @brief Método que pinta al soldado en el tablero
+		 * @param S Soldado que se pintara en el tablero
+		 */
+		void pintaSoldado(Soldado *S);
 };
 
 #endif

@@ -1,1 +1,1 @@
-g++ main.cpp Objetos/Figura.cpp Objetos/Tablero.cpp Objetos/Jugador.cpp Objetos/Bala.cpp -o space-invaders.out -lncurses
+g++ main.cpp Objetos/Figura.cpp Objetos/Tablero.cpp Objetos/Jugador.cpp Objetos/Bala.cpp Objetos/Soldado.cpp -o space-invaders.out -lncurses

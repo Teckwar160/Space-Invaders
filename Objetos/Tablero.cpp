@@ -229,3 +229,49 @@ bool Tablero::mueveBala(Jugador *J){
 	}
 
 }
+
+void Tablero::pintaSoldado(Soldado *S){
+	/*Obtenemos la forma del tablero*/
+	char **formaTablero = this -> getForma();
+	
+	/*Obtenemos la forma del soldado*/
+	char **formaSoldado = S -> getForma();
+
+	/*Obtenemos las coordenadas del punto de control del soldado*/
+	int x = S -> getX();
+	int y = S -> getY();
+
+	/*Pintamos el punto de control del soldado*/
+	formaTablero[y][x] = formaSoldado[1][3];
+
+	/*Pintamos la parte superior izquierda*/
+	formaTablero[y-1][x-1] = formaSoldado[0][2];
+	formaTablero[y-1][x-2] = formaSoldado[0][1];
+
+	/*Pintamos la parte superior central*/
+	formaTablero[y-1][x] = formaSoldado[0][3];
+
+	/*Pintamos la parte superior derecha*/
+	formaTablero[y-1][x+1] = formaSoldado[0][4];
+	formaTablero[y-1][x+2] = formaSoldado[0][5];
+
+	/*Pintamos la parte central izquierda*/
+	formaTablero[y][x-1] = formaSoldado[1][2];
+	formaTablero[y][x-2] = formaSoldado[1][1];
+
+	/*Pintamos la parte central derecha*/
+	formaTablero[y][x+1] = formaSoldado[1][4];
+	formaTablero[y][x+2] = formaSoldado[1][5];
+
+	/*Pintamos la parte inferior izquierda*/
+	formaTablero[y+1][x-1] = formaSoldado[2][2];
+	formaTablero[y+1][x-2] = formaSoldado[2][1];
+
+	/*Pintamos la parte inferior central*/
+	formaTablero[y+1][x] = formaSoldado[2][3];
+
+	/*Pintamos la parte inferior derecha*/
+	formaTablero[y+1][x+1] = formaSoldado[2][4];
+	formaTablero[y+1][x+2] = formaSoldado[2][5];
+
+}
