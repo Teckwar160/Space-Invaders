@@ -18,10 +18,11 @@ int main(){
 
 	/**!<Enemigo para probar*/
 	Soldado *S;
+	
 	/*Iniciamos los componenes del juego*/
 	T = new Tablero();
 	J = new Jugador();
-	S = new Soldado(4,2);
+	S = new Soldado(4,22/*2*/);
 
 	/*Cambiamos el modo de pantalla para usar curses*/
 	initscr();
@@ -54,8 +55,6 @@ int main(){
 			T -> dispararJugador(J);
 		}
 
-		/*==Bloque que se encarga de mover las balas en el tablero===*/
-
 		/*Ponemos el cursor del deposito del jugador en la primer bala*/
 		J -> primerBala();
 		
@@ -68,7 +67,8 @@ int main(){
 			J -> siguienteBala();
 		}	
 
-		/*=========================================================*/
+		/*Mueve al soldado de prueba*/
+		T -> mueveSoldado(S);
 
 		/*Borramos el tablero*/
 		erase();

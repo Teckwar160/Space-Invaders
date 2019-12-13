@@ -12,12 +12,18 @@ void Jugador::liberaBala(Bala *B){
  * 	Métodos publicos
  **************************************/
 Jugador::Jugador():Figura(0){
+	/*Definimos los datos visibles del jugador*/
 	this -> vidas = 3;
 	this -> puntos = 0;
+	this -> disparos = 0;
+
+	/*Definimos el punto de control del jugador*/
 	this -> setX(50);
 	this -> setY(25);
+
+	/*Creamos el depósito de balas del jugador*/
 	this -> deposito = new DLL<Bala*>();
-	this -> disparos = 0;
+
 }
 
 Jugador::~Jugador(){

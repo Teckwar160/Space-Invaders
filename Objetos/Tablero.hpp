@@ -29,6 +29,7 @@ class Tablero : public Figura{
 		~Tablero();
 
 		/*========Métodos para el jugador========*/
+
 		/**
 		 * @brief Método que pinta al jugador
 		 * @param J Jugador a pintar en el tablero
@@ -68,15 +69,31 @@ class Tablero : public Figura{
 
 		/**
 		 * @brief Método que mueve la bala en la pantalla
+		 * @param J Jugador que disparo la bala
+		 * @return Contra que choco la bala
 		 */
-		bool mueveBala(Jugador *J);
+		int mueveBala(Jugador *J);
 		
 		/*========Métodos de los soldados========*/
+
 		/**
 		 * @brief Método que pinta al soldado en el tablero
 		 * @param S Soldado que se pintara en el tablero
 		 */
 		void pintaSoldado(Soldado *S);
+
+		/**
+		 * @brief Método que borra al soldado en el tablero
+		 * @param S Soldado que se va a borrar del tablero
+		 */
+		void borrarSoldado(Soldado *S);
+
+		/**
+		 * @brief Método que mueve al soldado en el tablero
+		 * @param S Sodlado que se movera en el tablero
+		 */
+		void mueveSoldado(Soldado *S);
+
 };
 
 #endif

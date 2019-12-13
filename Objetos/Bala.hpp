@@ -10,6 +10,9 @@
  */
 class Bala : public Figura{
 	public:
+		/**!<Indica contra que choco la bala*/
+		enum Choco{SOLDADO,MURO,NADA};
+	public:
 		/**
 		 * @brief Método constructor de bala
 		 */
