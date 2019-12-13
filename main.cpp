@@ -35,7 +35,7 @@ int main(){
 		Tecla = getch();
 
 		/*Vemos si se quiere mover el jugador*/
-		if(Tecla == 'w' || Tecla == 'a' || Tecla == 's' || Tecla == 'd'){
+		if(Tecla == 'a' || Tecla == 'd'){
 			T -> mueveJugador(J,Tecla);
 			Tecla = 0;
 		}

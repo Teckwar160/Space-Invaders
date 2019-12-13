@@ -6,7 +6,7 @@ Tablero::Tablero():Figura(4){
 	/*Obtenemos la forma del tablero*/
 	char **Forma = this -> getForma();
 
-	caracterBase = Forma[0][0];
+	caracterBase = Forma[2][2];
 }
 
 Tablero::~Tablero(){
@@ -70,23 +70,13 @@ void Tablero::mueveJugador(Jugador *J, int Tecla){
 
 	/*Dependiendo la tecla sera el movimiento*/
 	switch(Tecla){
-		case 'w':
-			if(y -2 > 0){
-				y-=1;
-			}
-			break;
-		case 's':
-			if(y +1 < tableroFilas -1){
-				y+=1;
-			}
-			break;
 		case 'a':
-			if(x -3 > 0){
+			if(x -3 > 1){
 				x -=1;
 			}
 			break;
 		case 'd':
-			if(x + 3 < tableroColumnas -1){
+			if(x + 3 < tableroColumnas -2){
 				x+=1;
 			}
 			break;
@@ -203,11 +193,26 @@ bool Tablero::mueveBala(Jugador *J){
 	/*Obtenemos a la bala*/
 	Bala *B = J -> getBala();
 
-	/*Obtenemos la coordenada en y de la bala*/
+	/*Obtenemos las coordenadas de la bala*/
+	int x = B -> getX();
 	int y = B -> getY();
 
 	/*Movemos la bala una posición*/
 	y -=1;
+	
+	/*Obtenemos la forma del tablero*/
+	char **formaTablero = this -> getForma();
+
+	/*Veirifcamos que no choque contra un muro*/
+
+	if(formaTablero[y][x] == '#'){
+		this -> borrarBala(B);
+		formaTablero[y][x] = this -> caracterBase;
+		J -> borrarBala();
+		return false;
+	}
+
+	/*Verificamos que siga en el tablero*/
 
 	if(y > 0){
 		this -> borrarBala(B);
