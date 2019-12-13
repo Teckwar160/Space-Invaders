@@ -2,7 +2,7 @@
 #include "Bala.hpp"
 
 
-Bala::Bala(): Figura(5){
+Bala::Bala(): Figura(3){
 
 }
 

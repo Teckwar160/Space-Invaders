@@ -186,6 +186,9 @@ void Tablero::dispararJugador(Jugador *J){
 
 	/*Cargamos la bala al depósito*/
 	J -> cargarBala(B);
+
+	/*Incrementamos el numero de disparos*/
+	J -> incrementaDisparos();
 }
 
 bool Tablero::mueveBala(Jugador *J){

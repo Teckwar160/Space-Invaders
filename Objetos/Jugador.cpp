@@ -14,7 +14,7 @@ void Jugador::liberaBala(Bala *B){
 Jugador::Jugador():Figura(0){
 	this -> vidas = 3;
 	this -> puntos = 0;
-	this -> setX(25);
+	this -> setX(50);
 	this -> setY(25);
 	this -> deposito = new DLL<Bala*>();
 	this -> disparos = 0;

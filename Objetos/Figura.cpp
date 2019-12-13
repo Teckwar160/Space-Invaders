@@ -26,6 +26,7 @@ Figura::Figura(int id){
 			break;
 		case 1:
 			/*Enemigo soldado*/
+			direccionSprite = "Sprites/Soldado.txt";
 			direccionDimension = "Sprites/dimensionesSoldado.txt";
 			break;
 		case 2:
@@ -34,17 +35,13 @@ Figura::Figura(int id){
 			break;
 		case 3:
 			/*Bala*/
+			direccionSprite = "Sprites/Bala.txt";
 			direccionDimension = "Sprites/dimensionesBala.txt";
 			break;
 		case 4:
 			/*Tablero*/
 			direccionSprite = "Sprites/Tablero.txt";
 			direccionDimension = "Sprites/dimensionesTablero.txt";
-			break;
-		case 5:
-			/*Bala*/
-			direccionSprite = "Sprites/Bala.txt";
-			direccionDimension = "Sprites/dimensionesBala.txt";
 			break;
 	}
 
