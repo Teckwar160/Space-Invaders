@@ -45,7 +45,7 @@ int main(){
 			T -> dispararJugador(J);
 		}
 
-		/*Verificamos que haya balas que mover*/
+		/*==Bloque que se encarga de mover las balas en el tablero===*/
 
 		/*Ponemos el cursor del deposito del jugador en la primer bala*/
 		J -> primerBala();
@@ -58,6 +58,8 @@ int main(){
 			/*Nos movemos a la siguiente bala del deposito*/
 			J -> siguienteBala();
 		}	
+
+		/*=========================================================*/
 
 		/*Borramos el tablero*/
 		erase();
