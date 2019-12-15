@@ -115,7 +115,7 @@ class Tablero : public Figura{
 
 		/**
 		 * @brief Método que mueve al soldado en el tablero
-		 * @param S Sodlado que se movera en el tablero
+		 * @param S Soldado que se movera en el tablero
 		 */
 		void mueveSoldados();
 };
