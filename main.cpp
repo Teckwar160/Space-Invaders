@@ -4,8 +4,6 @@
 #include "Objetos/Soldado.hpp"
 #include <curses.h>
 
-#define BALAS 1000
-
 int main(){
 	/**!<Tecla pulsada por el usuario*/
 	int Tecla = 0;
@@ -26,11 +24,8 @@ int main(){
 	/*Cargamos al jugador en el tablero*/
 	T -> pintaJugador(J);
 
-	/*Cargamos al enemigo de prueba*/
+	/*Cargamos a los enemigos en el tablero*/
 	T -> pintaSoldados();
-
-
-	/**/
 
 	/*Iniciamos el juego*/
 	while(J -> getVidas() != 0 && Tecla != '.'){
@@ -52,10 +47,6 @@ int main(){
 			T -> dispararJugador(J);
 		}
 
-		if(Tecla == 'v'){
-				T -> borrarSoldados();
-		}
-
 		/*Ponemos el cursor del deposito del jugador en la primer bala*/
 		J -> primerBala();
 		
@@ -68,7 +59,7 @@ int main(){
 			J -> siguienteBala();
 		}	
 
-		/*Mueve al soldado de prueba*/
+		/*Mueve a los soldados en el tablero*/
 		T -> mueveSoldados();
 
 		/*Borramos el tablero*/

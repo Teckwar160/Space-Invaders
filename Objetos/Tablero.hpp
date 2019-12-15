@@ -21,9 +21,12 @@ class Tablero : public Figura{
 		/**!<Caracter del fondo del tablero*/
 		char caracterBase;
 
+		/**!<Lista de soldados en el tablero*/
 		DLL<Soldado*>* soldados;
 
+		/**!<Método que libera la memoria de los soldados que no se hayan matado*/
 		static void liberaSoldado(Soldado *S);
+		
 	public:
 		/**
 		 * @brief Método constructor de Tablero
@@ -84,8 +87,7 @@ class Tablero : public Figura{
 		/*========Métodos de los soldados========*/
 
 		/**
-		 * @brief Método que pinta al soldado en el tablero
-		 * @param S Soldado que se pintara en el tablero
+		 * @brief Método que pinta a los soldados en el tablero
 		 */
 		void pintaSoldados();
 
@@ -95,6 +97,9 @@ class Tablero : public Figura{
 		 */
 		void borrarSoldado(Soldado *S);
 
+		/**
+		 * @brief Método que borra a los soldados del tablero
+		 */
 		void borrarSoldados();
 
 		/**
