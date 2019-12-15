@@ -9,7 +9,8 @@
 #include "Soldado.hpp"
 #include "../Recursos/DLL.hpp"
 
-#define ENEMIGOS 2
+/**!<Numero de puntos que se dan por soldado derrotado*/
+#define puntosSoldado 3
 
 /**
  * @class Tablero
@@ -26,17 +27,27 @@ class Tablero : public Figura{
 
 		/**!<Método que libera la memoria de los soldados que no se hayan matado*/
 		static void liberaSoldado(Soldado *S);
-		
+
+		/**!<Número de enemigos por tablero*/
+		int numEnemigos;
+
 	public:
 		/**
 		 * @brief Método constructor de Tablero
+		 * @param numEnemigos Número de enemigos que tendra el tablero
 		 */
-		Tablero();
+		Tablero(int numEnemigos);
 
 		/**
 		 * @brief Método destructor de Tablero
 		 */
 		~Tablero();
+
+		/**
+		 *@brief Método que muestar en pantalla el numero de puntos del jugador
+		 *@param J Jugador que se mostraran sus puntos
+		 */
+		void pintaPuntos(Jugador *J);
 
 		/*========Métodos para el jugador========*/
 
@@ -107,8 +118,6 @@ class Tablero : public Figura{
 		 * @param S Sodlado que se movera en el tablero
 		 */
 		void mueveSoldados();
-
-
 };
 
 #endif

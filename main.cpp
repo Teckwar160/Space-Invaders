@@ -15,7 +15,7 @@ int main(){
 	Jugador *J;
 	
 	/*Iniciamos los componenes del juego*/
-	T = new Tablero();
+	T = new Tablero(5);
 	J = new Jugador();
 
 	/*Cambiamos el modo de pantalla para usar curses*/
@@ -28,7 +28,10 @@ int main(){
 	T -> pintaSoldados();
 
 	/*Iniciamos el juego*/
-	while(J -> getVidas() != 0 && Tecla != '.'){
+	while(J -> getVidas() != 0 && Tecla != '.' && J -> getPuntos() != 9999){
+
+		/*Mostramos los puntos del jugador*/
+		T -> pintaPuntos(J);
 
 		/*Mostramos el tablero*/
 		T -> mostrar();
@@ -65,6 +68,11 @@ int main(){
 		/*Borramos el tablero*/
 		erase();
 	
+	}
+
+	if(J -> getPuntos() == 9999){
+		printw("\n\n¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡FELICIDADES GANASTE!!!!!!!!!!!!!!!!!\n\n");
+		getch();
 	}
 
 	/*Fin del cambio de modo*/

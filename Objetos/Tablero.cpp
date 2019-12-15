@@ -11,18 +11,21 @@ void Tablero::liberaSoldado(Soldado *S){
 /***************************************
  * 	Métodos publicos
  **************************************/
-Tablero::Tablero():Figura(4){
+Tablero::Tablero(int numEnemigos):Figura(4){
 	/*Obtenemos la forma del tablero*/
 	char **Forma = this -> getForma();
 
 	/*Definimos el fondo del tablero*/
 	caracterBase = Forma[2][2];
 
+	/*Definimos el numero de enemigos*/
+	this -> numEnemigos = numEnemigos;
+
 	/*Creamos la lista de los soldados*/
 	soldados = new DLL<Soldado*>();
 
 	/*Creamos a los soldados*/
-	for(size_t i = 0; i< ENEMIGOS; i++){
+	for(size_t i = 0; i< this -> numEnemigos; i++){
 		this -> soldados -> InsertBack(new Soldado(4+i*7,2));
 	}
 }
@@ -35,6 +38,26 @@ Tablero::~Tablero(){
 
 	/*Borramos la lista de soldados*/
 	delete soldados;
+}
+
+void Tablero::pintaPuntos(Jugador *J){
+	/*Obtenemos la forma de tablero*/
+	char **formaTablero = this -> getForma();
+
+	/*Obtenemos los puntos del jugador*/
+	int puntos = J -> getPuntos();
+
+	/*Separamos el numero*/
+	int millares = puntos/1000;
+	int centenas = (puntos - (millares *1000))/100;
+	int decenas = (puntos - (millares*1000 + centenas*100))/10;
+	int unidades = puntos -(millares*1000 + centenas*100 +decenas*10);
+
+	/*Actualizamos los puntos en el pantalla*/
+	formaTablero[28][63] = '0' + unidades;
+	formaTablero[28][61] = '0' + decenas;
+	formaTablero[28][59] = '0' + centenas;
+	formaTablero[28][57] = '0' + millares;
 }
 
 /*========Métodos para el jugador========*/
@@ -284,6 +307,9 @@ int Tablero::mueveBala(Jugador *J){
 
 			/*Cambiamos el estado del soldado*/
 			muereSoldado = true;
+
+			/*Aumentamos los puntos del jugador*/
+			J -> setPuntos(J -> getPuntos() + puntosSoldado);
 
 			/*Salimos el bucle*/
 			break;
