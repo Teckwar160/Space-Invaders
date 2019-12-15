@@ -22,7 +22,7 @@ int main(){
 	/*Iniciamos los componenes del juego*/
 	T = new Tablero();
 	J = new Jugador();
-	S = new Soldado(4,22/*2*/);
+	S = new Soldado(9,19/*2*/);
 
 	/*Cambiamos el modo de pantalla para usar curses*/
 	initscr();
@@ -61,14 +61,14 @@ int main(){
 		/*Recorremos todo el deposito moviendo cada bala*/
 		for(int i = J -> getNumBalas(); i>0; i--){
 			/*Movemos a la bala*/
-			T -> mueveBala(J);
+			T -> mueveBala(J,S);
 
 			/*Nos movemos a la siguiente bala del deposito*/
 			J -> siguienteBala();
 		}	
 
 		/*Mueve al soldado de prueba*/
-		T -> mueveSoldado(S);
+		//T -> mueveSoldado(S);
 
 		/*Borramos el tablero*/
 		erase();

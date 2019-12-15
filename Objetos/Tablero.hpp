@@ -72,7 +72,7 @@ class Tablero : public Figura{
 		 * @param J Jugador que disparo la bala
 		 * @return Contra que choco la bala
 		 */
-		int mueveBala(Jugador *J);
+		int mueveBala(Jugador *J, Soldado *S);
 		
 		/*========Métodos de los soldados========*/
 

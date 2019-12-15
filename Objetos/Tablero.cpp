@@ -192,7 +192,7 @@ void Tablero::dispararJugador(Jugador *J){
 	J -> incrementaDisparos();
 }
 
-int Tablero::mueveBala(Jugador *J){
+int Tablero::mueveBala(Jugador *J, Soldado *S){
 
 	/*Obtenemos a la bala*/
 	Bala *B = J -> getBala();
@@ -213,6 +213,15 @@ int Tablero::mueveBala(Jugador *J){
 		formaTablero[y][x] = this -> caracterBase;
 		J -> borrarBala();
 		return Bala::Choco::MURO;
+	}
+
+	/*Verificamos si choco contra un soldado*/
+
+	if(y -2 == S -> getY() && x == S -> getX() ||  x -1 == S -> getX() || x +1 == S -> getX() || x +2 == S -> getX() || x -2 == S -> getX()){
+		this -> borrarBala(B);
+		this -> borrarSoldado(S);
+		J -> borrarBala();
+		return Bala::Choco::SOLDADO;
 	}
 
 	/*Verificamos que siga en el tablero*/
