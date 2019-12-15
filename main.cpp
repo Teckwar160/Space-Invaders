@@ -15,14 +15,10 @@ int main(){
 
 	/**!<Jugador*/
 	Jugador *J;
-
-	/**!<Enemigo para probar*/
-	Soldado *S;
 	
 	/*Iniciamos los componenes del juego*/
 	T = new Tablero();
 	J = new Jugador();
-	S = new Soldado(9,19/*2*/);
 
 	/*Cambiamos el modo de pantalla para usar curses*/
 	initscr();
@@ -31,7 +27,8 @@ int main(){
 	T -> pintaJugador(J);
 
 	/*Cargamos al enemigo de prueba*/
-	T -> pintaSoldado(S);
+	T -> pintaSoldados();
+
 
 	/**/
 
@@ -55,20 +52,24 @@ int main(){
 			T -> dispararJugador(J);
 		}
 
+		if(Tecla == 'v'){
+				T -> borrarSoldados();
+		}
+
 		/*Ponemos el cursor del deposito del jugador en la primer bala*/
 		J -> primerBala();
 		
 		/*Recorremos todo el deposito moviendo cada bala*/
 		for(int i = J -> getNumBalas(); i>0; i--){
 			/*Movemos a la bala*/
-			T -> mueveBala(J,S);
+			T -> mueveBala(J);
 
 			/*Nos movemos a la siguiente bala del deposito*/
 			J -> siguienteBala();
 		}	
 
 		/*Mueve al soldado de prueba*/
-		//T -> mueveSoldado(S);
+		T -> mueveSoldados();
 
 		/*Borramos el tablero*/
 		erase();
@@ -81,5 +82,4 @@ int main(){
 	/*Eliminamos los objetos creados*/
 	delete T;
 	delete J;
-	delete S;
 }

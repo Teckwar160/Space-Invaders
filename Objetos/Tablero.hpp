@@ -7,6 +7,9 @@
 #include "Jugador.hpp"
 #include "Bala.hpp"
 #include "Soldado.hpp"
+#include "../Recursos/DLL.hpp"
+
+#define ENEMIGOS 2
 
 /**
  * @class Tablero
@@ -17,6 +20,10 @@ class Tablero : public Figura{
 	private:
 		/**!<Caracter del fondo del tablero*/
 		char caracterBase;
+
+		DLL<Soldado*>* soldados;
+
+		static void liberaSoldado(Soldado *S);
 	public:
 		/**
 		 * @brief Método constructor de Tablero
@@ -72,7 +79,7 @@ class Tablero : public Figura{
 		 * @param J Jugador que disparo la bala
 		 * @return Contra que choco la bala
 		 */
-		int mueveBala(Jugador *J, Soldado *S);
+		int mueveBala(Jugador *J);
 		
 		/*========Métodos de los soldados========*/
 
@@ -80,7 +87,7 @@ class Tablero : public Figura{
 		 * @brief Método que pinta al soldado en el tablero
 		 * @param S Soldado que se pintara en el tablero
 		 */
-		void pintaSoldado(Soldado *S);
+		void pintaSoldados();
 
 		/**
 		 * @brief Método que borra al soldado en el tablero
@@ -88,11 +95,14 @@ class Tablero : public Figura{
 		 */
 		void borrarSoldado(Soldado *S);
 
+		void borrarSoldados();
+
 		/**
 		 * @brief Método que mueve al soldado en el tablero
 		 * @param S Sodlado que se movera en el tablero
 		 */
-		void mueveSoldado(Soldado *S);
+		void mueveSoldados();
+
 
 };
 

@@ -1,16 +1,37 @@
 /**!<Bibliotecas necesarias*/
 #include "Tablero.hpp"
 
+/***************************************
+ *	Método privado
+ **************************************/
+void Tablero::liberaSoldado(Soldado *S){
+	delete S;
+}
 
+/***************************************
+ * 	Métodos publicos
+ **************************************/
 Tablero::Tablero():Figura(4){
 	/*Obtenemos la forma del tablero*/
 	char **Forma = this -> getForma();
 
 	caracterBase = Forma[2][2];
+
+	soldados = new DLL<Soldado*>();
+
+	for(size_t i = 0; i< ENEMIGOS; i++){
+		this -> soldados -> InsertBack(new Soldado(4+i*7,2));
+	}
 }
 
 Tablero::~Tablero(){
+	/*Liberamos la memoria de los soldados que no se elminaron*/
+	if(this -> soldados -> Len() > 0){
+		this -> soldados -> Traverse(this -> liberaSoldado);
+	}
 
+	/*Borramos la lista de soldados*/
+	delete soldados;
 }
 
 /*========Métodos para el jugador========*/
@@ -192,7 +213,7 @@ void Tablero::dispararJugador(Jugador *J){
 	J -> incrementaDisparos();
 }
 
-int Tablero::mueveBala(Jugador *J, Soldado *S){
+int Tablero::mueveBala(Jugador *J){
 
 	/*Obtenemos a la bala*/
 	Bala *B = J -> getBala();
@@ -216,13 +237,37 @@ int Tablero::mueveBala(Jugador *J, Soldado *S){
 	}
 
 	/*Verificamos si choco contra un soldado*/
-
+#if 0
 	if(y -2 == S -> getY() && x == S -> getX() ||  x -1 == S -> getX() || x +1 == S -> getX() || x +2 == S -> getX() || x -2 == S -> getX()){
 		this -> borrarBala(B);
 		this -> borrarSoldado(S);
 		J -> borrarBala();
 		return Bala::Choco::SOLDADO;
 	}
+#endif
+	Soldado *S = NULL;
+	bool eliminado = false;
+	this -> soldados -> CursorFirst();
+	for(size_t i = this -> soldados -> Len(); i > 0; i--){
+		this -> soldados -> Peek(&S);
+		#if 1
+		if(y -2 == S -> getY() && x == S -> getX() ||  x -1 == S -> getX() || x +1 == S -> getX() || x +2 == S -> getX() || x -2 == S -> getX()){
+			this -> borrarBala(B);
+			this -> borrarSoldado(S);
+			this -> soldados -> Remove(&S);
+			delete S;
+			J -> borrarBala();
+			eliminado = true;
+			break;
+		}
+		#endif
+		this -> soldados -> CursorNext();
+	}
+
+	if(eliminado){
+		return Bala::Choco::SOLDADO;
+	}
+
 
 	/*Verificamos que siga en el tablero*/
 	if(y > 0){
@@ -239,56 +284,68 @@ int Tablero::mueveBala(Jugador *J, Soldado *S){
 }
 
 /*========Métodos de los soldados========*/
-void Tablero::pintaSoldado(Soldado *S){
+void Tablero::pintaSoldados(){
 	/*Obtenemos la forma del tablero*/
 	char **formaTablero = this -> getForma();
 	
-	/*Obtenemos la forma del soldado*/
-	char **formaSoldado = S -> getForma();
+	this -> soldados -> CursorFirst();
+	Soldado *S;
 
-	/*Obtenemos las coordenadas del punto de control del soldado*/
-	int x = S -> getX();
-	int y = S -> getY();
+	for(size_t i = this -> soldados -> Len(); i > 0; i--){
 
-	/*Pintamos el punto de control del soldado*/
-	formaTablero[y][x] = formaSoldado[1][3];
+		/*Obtenemos al soldado*/
+		this -> soldados -> Peek(&S);
 
-	/*Pintamos la parte superior izquierda*/
-	formaTablero[y-1][x-1] = formaSoldado[0][2];
-	formaTablero[y-1][x-2] = formaSoldado[0][1];
+		/*Obtenemos la forma del soldado*/
+		char **formaSoldado = S -> getForma();
 
-	/*Pintamos la parte superior central*/
-	formaTablero[y-1][x] = formaSoldado[0][3];
+		/*Obtenemos las coordenadas del punto de control del soldado*/
+		int x = S -> getX();
+		int y = S -> getY();
 
-	/*Pintamos la parte superior derecha*/
-	formaTablero[y-1][x+1] = formaSoldado[0][4];
-	formaTablero[y-1][x+2] = formaSoldado[0][5];
+		/*Pintamos el punto de control del soldado*/
+		formaTablero[y][x] = formaSoldado[1][3];
 
-	/*Pintamos la parte central izquierda*/
-	formaTablero[y][x-1] = formaSoldado[1][2];
-	formaTablero[y][x-2] = formaSoldado[1][1];
+		/*Pintamos la parte superior izquierda*/
+		formaTablero[y-1][x-1] = formaSoldado[0][2];
+		formaTablero[y-1][x-2] = formaSoldado[0][1];
 
-	/*Pintamos la parte central derecha*/
-	formaTablero[y][x+1] = formaSoldado[1][4];
-	formaTablero[y][x+2] = formaSoldado[1][5];
+		/*Pintamos la parte superior central*/
+		formaTablero[y-1][x] = formaSoldado[0][3];
 
-	/*Pintamos la parte inferior izquierda*/
-	formaTablero[y+1][x-1] = formaSoldado[2][2];
-	formaTablero[y+1][x-2] = formaSoldado[2][1];
+		/*Pintamos la parte superior derecha*/
+		formaTablero[y-1][x+1] = formaSoldado[0][4];
+		formaTablero[y-1][x+2] = formaSoldado[0][5];
 
-	/*Pintamos la parte inferior central*/
-	formaTablero[y+1][x] = formaSoldado[2][3];
+		/*Pintamos la parte central izquierda*/
+		formaTablero[y][x-1] = formaSoldado[1][2];
+		formaTablero[y][x-2] = formaSoldado[1][1];
 
-	/*Pintamos la parte inferior derecha*/
-	formaTablero[y+1][x+1] = formaSoldado[2][4];
-	formaTablero[y+1][x+2] = formaSoldado[2][5];
+		/*Pintamos la parte central derecha*/
+		formaTablero[y][x+1] = formaSoldado[1][4];
+		formaTablero[y][x+2] = formaSoldado[1][5];
+
+		/*Pintamos la parte inferior izquierda*/
+		formaTablero[y+1][x-1] = formaSoldado[2][2];
+		formaTablero[y+1][x-2] = formaSoldado[2][1];
+
+		/*Pintamos la parte inferior central*/
+		formaTablero[y+1][x] = formaSoldado[2][3];
+
+		/*Pintamos la parte inferior derecha*/
+		formaTablero[y+1][x+1] = formaSoldado[2][4];
+		formaTablero[y+1][x+2] = formaSoldado[2][5];
+
+		this -> soldados -> CursorNext();	
+	}
+
 
 }
 
 void Tablero::borrarSoldado(Soldado *S){
 	/*Obtenemos la forma del tablero*/
 	char **formaTablero = this -> getForma();
-	
+
 	/*Obtenemos la forma del soldado*/
 	char **formaSoldado = S -> getForma();
 
@@ -327,53 +384,123 @@ void Tablero::borrarSoldado(Soldado *S){
 
 	/*Borramos la parte inferior derecha*/
 	formaTablero[y+1][x+1] = this -> caracterBase;
-	formaTablero[y+1][x+2] = this -> caracterBase;
-
+	formaTablero[y+1][x+2] = this -> caracterBase;	
+			
 }
 
-void Tablero::mueveSoldado(Soldado *S){
-	/*Obtenemos las coordenadas del soldado*/
-	int x = S -> getX();
-	int y = S -> getY();
+void Tablero::borrarSoldados(){
+	/*Obtenemos la forma del tablero*/
+	char **formaTablero = this -> getForma();
 
-	/*Obtenemos las dimensiones del tablero*/
-	int tableroFilas = this -> getFilas();
-	int tableroColumnas = this -> getColumnas();
+	this -> soldados -> CursorFirst();
+	Soldado *S;
+	if(this -> soldados -> Len() > 0){
+		for(size_t i = this -> soldados -> Len(); i> 0; i--){
+			/*Obtenemos al soldado*/
+			this -> soldados -> Peek(&S);
 
-	/*Obtenemos el sentido del movimiento del soldado*/
-	int sentido = S -> getSentido();
+			/*Obtenemos la forma del soldado*/
+			char **formaSoldado = S -> getForma();
 
-	/*Movemos al jugador a la derecha*/
-	if(sentido == Soldado::Sentido::DERECHA && x +2 < tableroColumnas -2){
-		x +=1;
-	}else if(x == tableroColumnas -4 && sentido == Soldado::Sentido::DERECHA){
-		/*Si llego al limite de la pantalla bajamos un lugar al soldado y cambiamos su sentido*/
-		if(y +1 != tableroFilas -4){
-			y += 1;	
-		}
+			/*Obtenemos las coordenadas del punto de control del soldado*/
+			int x = S -> getX();
+			int y = S -> getY();
 
-		S -> setSentido(Soldado::Sentido::IZQUIERDA);
+			/*Borramos el punto de control del soldado*/
+			formaTablero[y][x] = this -> caracterBase;
+
+			/*Borramos la parte superior izquierda*/
+			formaTablero[y-1][x-1] = this -> caracterBase;
+			formaTablero[y-1][x-2] = this -> caracterBase;
+
+			/*Borramos la parte superior central*/
+			formaTablero[y-1][x] = this -> caracterBase;
+
+			/*Borramos la parte superior derecha*/
+			formaTablero[y-1][x+1] = this -> caracterBase;
+			formaTablero[y-1][x+2] = this -> caracterBase;
+
+			/*Borramos la parte central izquierda*/
+			formaTablero[y][x-1] = this -> caracterBase;
+			formaTablero[y][x-2] = this -> caracterBase;
+
+			/*Borramos la parte central derecha*/
+			formaTablero[y][x+1] = this -> caracterBase;
+			formaTablero[y][x+2] = this -> caracterBase;
+
+			/*Borramos la parte inferior izquierda*/
+			formaTablero[y+1][x-1] = this -> caracterBase;
+			formaTablero[y+1][x-2] = this -> caracterBase;
+
+			/*Borramos la parte inferior central*/
+			formaTablero[y+1][x] = this -> caracterBase;
+
+			/*Borramos la parte inferior derecha*/
+			formaTablero[y+1][x+1] = this -> caracterBase;
+			formaTablero[y+1][x+2] = this -> caracterBase;	
+
+			this -> soldados -> CursorNext();	
+		}		
 	}
 
-	/*Movemos al jugador a la izquierda*/
-	if(sentido == Soldado::Sentido::IZQUIERDA && x -2 > 1){
-		x -=1;
-	}else if(x == 3 && sentido == Soldado::Sentido::IZQUIERDA){
-		/*Si llego al limite de la pantalla bajamos un lugar al soldado y cambiamos su sentido*/
-		if(y +1 != tableroFilas -4){
-			y += 1;	
-		}
+	
 
-		S -> setSentido(Soldado::Sentido::DERECHA);
-	}
 
+}
+int Soldado::sentido;
+void Tablero::mueveSoldados(){
 	/*Borramos al viejo soldado*/
-	this -> borrarSoldado(S);
+	this -> borrarSoldados();
 
-	/*Actualziamos las coordenadas*/
-	S -> setX(x);
-	S -> setY(y);
+	this -> soldados -> CursorFirst();
+	Soldado *S;
+	for(size_t i = this -> soldados -> Len(); i> 0; i--){
+		/*Obtenemos al soldado*/
+		this -> soldados -> Peek(&S);
+
+		/*Obtenemos las coordenadas del soldado*/
+		int x = S -> getX();
+		int y = S -> getY();
+
+		/*Obtenemos las dimensiones del tablero*/
+		int tableroFilas = this -> getFilas();
+		int tableroColumnas = this -> getColumnas();
+
+		/*Obtenemos el sentido del movimiento del soldado*/
+		int sentido = Soldado::sentido;
+
+		/*Movemos al jugador a la derecha*/
+		if(sentido == Soldado::Sentido::DERECHA && x +2 < tableroColumnas -2){
+			x +=1;
+		}else if(x == tableroColumnas -4 && sentido == Soldado::Sentido::DERECHA){
+			/*Si llego al limite de la pantalla bajamos un lugar al soldado y cambiamos su sentido*/
+			if(y +1 != tableroFilas -4){
+				y += 1;	
+			}
+
+			Soldado::sentido = Soldado::Sentido::IZQUIERDA;
+		}
+
+		/*Movemos al jugador a la izquierda*/
+		if(sentido == Soldado::Sentido::IZQUIERDA && x -2 > 1){
+			x -=1;
+		}else if(x == 3 && sentido == Soldado::Sentido::IZQUIERDA){
+			/*Si llego al limite de la pantalla bajamos un lugar al soldado y cambiamos su sentido*/
+			if(y +1 != tableroFilas -4){
+				y += 1;	
+			}
+
+			Soldado::sentido = Soldado::Sentido::DERECHA;
+		}
+
+		/*Actualziamos las coordenadas*/
+		S -> setX(x);
+		S -> setY(y);
+
+		this -> soldados -> CursorNext();
+	}
 
 	/*Pintamos al nuevo soldado*/
-	this -> pintaSoldado(S);
+	this -> pintaSoldados();
+
 }
