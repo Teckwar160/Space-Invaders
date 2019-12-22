@@ -271,7 +271,7 @@ int Tablero::mueveBala(Jugador *J){
 	}
 
 	/*Verificamos si choco contra un soldado*/
-#if 0
+
 	/**!<Soldados que se verificara si choco contra el la bala*/
 	Soldado *S = NULL;
 
@@ -288,31 +288,38 @@ int Tablero::mueveBala(Jugador *J){
 		this -> soldados -> Peek(&S);
 		
 		/*Vemos si la bala choco contra el soldado*/
-		if(y -2 == S -> getY() && x == S -> getX() ||  x -1 == S -> getX() || x +1 == S -> getX() || x +2 == S -> getX() || x -2 == S -> getX()){
+
+		/*Verificamos la coordenada en Y*/
+		if(y -2 == S -> getY()){
 			
-			/*Borramos la bala*/
-			this -> borrarBala(B);
+			/*Verificamos la coordenada en X*/
+			if(x == S -> getX() ||  x -1 == S -> getX() || x +1 == S -> getX() || x +2 == S -> getX() || x -2 == S -> getX()){
+				
+				/*Borramos la bala*/
+				this -> borrarBala(B);
 
-			/*Borramos al soldado*/
-			this -> borrarSoldado(S);
+				/*Borramos al soldado*/
+				this -> borrarSoldado(S);
 
-			/*Eliminamos al soldado de la lista*/
-			this -> soldados -> Remove(&S);
+				/*Eliminamos al soldado de la lista*/
+				this -> soldados -> Remove(&S);
 
-			/*Liberamos la memoria del soldado*/
-			delete S;
+				/*Liberamos la memoria del soldado*/
+				delete S;
 
-			/*Borramos la bala de la lista de balas del jugador*/
-			J -> borrarBala();
+				/*Borramos la bala de la lista de balas del jugador*/
+				J -> borrarBala();
 
-			/*Cambiamos el estado del soldado*/
-			muereSoldado = true;
+				/*Cambiamos el estado del soldado*/
+				muereSoldado = true;
 
-			/*Aumentamos los puntos del jugador*/
-			J -> setPuntos(J -> getPuntos() + puntosSoldado);
+				/*Aumentamos los puntos del jugador*/
+				J -> setPuntos(J -> getPuntos() + puntosSoldado);
 
-			/*Salimos el bucle*/
-			break;
+				/*Salimos el bucle*/
+				break;			
+			}
+
 		}
 
 		/*Movemos el cursor al siguiente soldado en la lista*/
@@ -324,7 +331,6 @@ int Tablero::mueveBala(Jugador *J){
 		return Bala::Choco::SOLDADO;
 	}
 
-#endif
 	/*Verificamos que siga en el tablero*/
 	if(y > 0){
 		/*Borramos la bala*/
@@ -523,108 +529,112 @@ int Soldado::sentido;
 
 void Tablero::mueveSoldados(){
 
-	/*Obtenemos al primer y al ultimo soldado*/
-	Soldado *primer;
-	Soldado *ultimo;
+	/*Verificamos que existan soldados que mover*/
+	if(this -> soldados -> Len() > 0){
 
-	this -> soldados -> CursorFirst();
-	this -> soldados -> Peek(&primer);
+		/*Obtenemos al primer y al ultimo soldado*/
+		Soldado *primer;
+		Soldado *ultimo;
 
-	this -> soldados -> CursorLast();
-	this -> soldados -> Peek(&ultimo);
+		this -> soldados -> CursorFirst();
+		this -> soldados -> Peek(&primer);
 
-	/*Borramos a los viejos soldados*/
-	this -> borrarSoldados();
+		this -> soldados -> CursorLast();
+		this -> soldados -> Peek(&ultimo);
+
+		/*Borramos a los viejos soldados*/
+		this -> borrarSoldados();
 
 
-	/**!<Indica si se moveran a los soldados hacia la derecha o no*/
-	bool derecha = false;
+		/**!<Indica si se moveran a los soldados hacia la derecha o no*/
+		bool derecha = false;
 
-	/**!<Indica si se moveran a los soldados hacia la izquierda o no*/
-	bool izquierda = false;
+		/**!<Indica si se moveran a los soldados hacia la izquierda o no*/
+		bool izquierda = false;
 
-	/**!<Indica si se moveran a los soldados hacia abajo o no*/
-	bool abajo = false;
+		/**!<Indica si se moveran a los soldados hacia abajo o no*/
+		bool abajo = false;
 
-	/*Obtenemos las coodenadas de los soldados especiales*/
+		/*Obtenemos las coodenadas de los soldados especiales*/
 
-	/*Coordenadas del primer soldado*/
-	int xP = primer -> getX();
-	int yP = primer -> getY();
+		/*Coordenadas del primer soldado*/
+		int xP = primer -> getX();
+		int yP = primer -> getY();
 
-	/*Coordenadas del ultimo soldado*/
-	int xU = ultimo -> getX();
-	int yU = ultimo -> getY();
+		/*Coordenadas del ultimo soldado*/
+		int xU = ultimo -> getX();
+		int yU = ultimo -> getY();
 
-	/*Obtenemos las dimensiones del tablero*/
-	int tableroFilas = this -> getFilas();
-	int tableroColumnas = this -> getColumnas();
+		/*Obtenemos las dimensiones del tablero*/
+		int tableroFilas = this -> getFilas();
+		int tableroColumnas = this -> getColumnas();
 
-	/*Obtenemos el sentido del movimiento del soldado*/
-	int sentido = Soldado::sentido;
+		/*Obtenemos el sentido del movimiento del soldado*/
+		int sentido = Soldado::sentido;
 
-	/*Vemos si se pueden mover a los soldados hacia la derecha*/
-	if(sentido == Soldado::Sentido::DERECHA && xU +2 < tableroColumnas -2){
-		derecha = true;
+		/*Vemos si se pueden mover a los soldados hacia la derecha*/
+		if(sentido == Soldado::Sentido::DERECHA && xU +2 < tableroColumnas -2){
+			derecha = true;
 
-	}else if(xU == tableroColumnas -4 && sentido == Soldado::Sentido::DERECHA){
-		
-		/*Si llego al limite de la pantalla, indicamos que se muevan hacia abajo a los soldados*/
-		if(yU +1 != tableroFilas -4){
-			abajo = true;
+		}else if(xU == tableroColumnas -4 && sentido == Soldado::Sentido::DERECHA){
+			
+			/*Si llego al limite de la pantalla, indicamos que se muevan hacia abajo a los soldados*/
+			if(yU +1 != tableroFilas -4){
+				abajo = true;
+			}
+
+			/*Cambiamos el sentido del movimiento*/
+			Soldado::sentido = Soldado::Sentido::IZQUIERDA;
 		}
 
-		/*Cambiamos el sentido del movimiento*/
-		Soldado::sentido = Soldado::Sentido::IZQUIERDA;
+		/*MVemos si se pueden mover a los soldados hacia la izquierda*/
+		if(sentido == Soldado::Sentido::IZQUIERDA && xP -2 > 1){
+			izquierda = true;
+
+		}else if(xP == 3 && sentido == Soldado::Sentido::IZQUIERDA){
+
+			/*Si llego al limite de la pantalla, indicamos que se muevan hacia abajo a los soldados*/
+			if(yP +1 != tableroFilas -4){
+				abajo = true;	
+			}
+
+			/*Cambiamos el sentido del movimiento*/
+			Soldado::sentido = Soldado::Sentido::DERECHA;
+		}
+
+		/*Una vez definidos los movimientos de los soldados, actualizamos sus posiciones*/
+
+		/*Colocamos el cursor de los soldados en la primera posición*/
+		this -> soldados -> CursorFirst();
+
+		/**!<Soldado de apoyo para actualizar las coordenadas de los soldados*/
+		Soldado *S;
+
+		/*Bucle que actualiza las coordenadas de los soldados*/
+		for(size_t i = this -> soldados -> Len(); i> 0; i--){
+
+			/*Obtenemos al soldado*/
+			this ->  soldados -> Peek(&S);
+
+			/*Dependiendo el movimiento actualizamos su posición*/
+			if(derecha == true){
+				S -> setX(S -> getX() +1);
+			}
+
+			if(izquierda == true){
+				S -> setX(S -> getX() -1 );
+			}
+
+			if(abajo == true){
+				S -> setY(S -> getY() + 1);
+			}
+
+			/*Pasamos al siguiente soldado*/
+			this -> soldados -> CursorNext();
+		}
+
+		/*Pintamos al nuevo soldado*/
+		this -> pintaSoldados();
+
 	}
-
-	/*MVemos si se pueden mover a los soldados hacia la izquierda*/
-	if(sentido == Soldado::Sentido::IZQUIERDA && xP -2 > 1){
-		izquierda = true;
-
-	}else if(xP == 3 && sentido == Soldado::Sentido::IZQUIERDA){
-
-		/*Si llego al limite de la pantalla, indicamos que se muevan hacia abajo a los soldados*/
-		if(yP +1 != tableroFilas -4){
-			abajo = true;	
-		}
-
-		/*Cambiamos el sentido del movimiento*/
-		Soldado::sentido = Soldado::Sentido::DERECHA;
-	}
-
-	/*Una vez definidos los movimientos de los soldados, actualizamos sus posiciones*/
-
-	/*Colocamos el cursor de los soldados en la primera posición*/
-	this -> soldados -> CursorFirst();
-
-	/**!<Soldado de apoyo para actualizar las coordenadas de los soldados*/
-	Soldado *S;
-
-	/*Bucle que actualiza las coordenadas de los soldados*/
-	for(size_t i = this -> soldados -> Len(); i> 0; i--){
-
-		/*Obtenemos al soldado*/
-		this ->  soldados -> Peek(&S);
-
-		/*Dependiendo el movimiento actualizamos su posición*/
-		if(derecha == true){
-			S -> setX(S -> getX() +1);
-		}
-
-		if(izquierda == true){
-			S -> setX(S -> getX() -1 );
-		}
-
-		if(abajo == true){
-			S -> setY(S -> getY() + 1);
-		}
-
-		/*Pasamos al siguiente soldado*/
-		this -> soldados -> CursorNext();
-	}
-
-	/*Pintamos al nuevo soldado*/
-	this -> pintaSoldados();
-
 }

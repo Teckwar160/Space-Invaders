@@ -43,7 +43,10 @@ int main(){
 
 	/**!<Jugador*/
 	Jugador *J;
-	
+
+	/**!<Indica si el juego acabo o no*/
+	bool gameOver = false;
+
 	/*Iniciamos los componenes del juego*/
 	T = new Tablero(7);
 	J = new Jugador();
@@ -62,7 +65,7 @@ int main(){
 	T -> pintaSoldados();
 
 	/*Iniciamos el juego*/
-	while(J -> getVidas() != 0 && Tecla != '.' && J -> getPuntos() != 15){
+	while(Tecla != '.'){
 
 		/*Mostramos los puntos del jugador*/
 		T -> pintaPuntos(J);
@@ -108,7 +111,11 @@ int main(){
 
 		/*Dormimos el hilo para que no haga cosas extrañas*/
 		std::this_thread::sleep_for (std::chrono::milliseconds(50));
-	
+
+		/*Verificamos que se pueda seguir jugando*/
+		if(J -> getVidas() == 0){
+			gameOver = true;
+		}
 	}
 
 	/*Fin del cambio de modo*/
