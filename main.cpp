@@ -45,7 +45,7 @@ int main(){
 	Jugador *J;
 	
 	/*Iniciamos los componenes del juego*/
-	T = new Tablero(1);
+	T = new Tablero(7);
 	J = new Jugador();
 
 	/*Cambiamos el modo de pantalla para usar curses y la función kbhit*/
