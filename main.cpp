@@ -1,8 +1,38 @@
 /**!<Bibliotecas de inclusión*/
+
+/**!<Objeto Tablero*/
 #include "Objetos/Tablero.hpp"
+
+/**!<Objeto Jugador*/
 #include "Objetos/Jugador.hpp"
+
+/**!<Objeto Soldado*/
 #include "Objetos/Soldado.hpp"
+
+/**!<Biblioteca para moverse en pantalla*/
 #include <curses.h>
+
+/**!<Para manejo de hilos*/
+#include <thread>        
+
+/**!<Para uso del tiempo*/ 
+#include <chrono>
+
+/**
+ * @brief Función que checa si se pulso una tecla
+ * @return 1 Si si se pulso una tecla 0 en caso contrario
+ */
+int kbhit()
+{
+    int ch = getch();
+ 
+    if (ch != ERR) {
+        ungetch(ch);
+        return 1;
+    } else {
+        return 0;
+    }
+}
 
 int main(){
 	/**!<Tecla pulsada por el usuario*/
@@ -15,11 +45,15 @@ int main(){
 	Jugador *J;
 	
 	/*Iniciamos los componenes del juego*/
-	T = new Tablero(5);
+	T = new Tablero(1);
 	J = new Jugador();
 
-	/*Cambiamos el modo de pantalla para usar curses*/
+	/*Cambiamos el modo de pantalla para usar curses y la función kbhit*/
 	initscr();
+    cbreak();
+    noecho();
+    nodelay(stdscr, TRUE);
+    scrollok(stdscr, TRUE);
 
 	/*Cargamos al jugador en el tablero*/
 	T -> pintaJugador(J);
@@ -28,7 +62,7 @@ int main(){
 	T -> pintaSoldados();
 
 	/*Iniciamos el juego*/
-	while(J -> getVidas() != 0 && Tecla != '.' && J -> getPuntos() != 9999){
+	while(J -> getVidas() != 0 && Tecla != '.' && J -> getPuntos() != 15){
 
 		/*Mostramos los puntos del jugador*/
 		T -> pintaPuntos(J);
@@ -36,18 +70,22 @@ int main(){
 		/*Mostramos el tablero*/
 		T -> mostrar();
 
-		/*Leemos la tecla*/
-		Tecla = getch();
+		/*Comprobamos si se pulso una tecla*/
+		if(kbhit()){
 
-		/*Vemos si se quiere mover el jugador*/
-		if(Tecla == 'a' || Tecla == 'd'){
-			T -> mueveJugador(J,Tecla);
-			Tecla = 0;
-		}
+			/*Leemos la tecla*/
+			Tecla = getch();
 
-		/*Vemos si quiere disparar*/
-		if(Tecla == 'f'){
-			T -> dispararJugador(J);
+			/*Vemos si se quiere mover el jugador*/
+			if(Tecla == 'a' || Tecla == 'd'){
+				T -> mueveJugador(J,Tecla);
+				Tecla = 0;
+			}
+
+			/*Vemos si quiere disparar*/
+			if(Tecla == 'f'){
+				T -> dispararJugador(J);
+			}
 		}
 
 		/*Ponemos el cursor del deposito del jugador en la primer bala*/
@@ -67,12 +105,10 @@ int main(){
 
 		/*Borramos el tablero*/
 		erase();
-	
-	}
 
-	if(J -> getPuntos() == 9999){
-		printw("\n\n¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡FELICIDADES GANASTE!!!!!!!!!!!!!!!!!\n\n");
-		getch();
+		/*Dormimos el hilo para que no haga cosas extrañas*/
+		std::this_thread::sleep_for (std::chrono::milliseconds(50));
+	
 	}
 
 	/*Fin del cambio de modo*/
