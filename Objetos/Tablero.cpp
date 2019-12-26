@@ -254,7 +254,7 @@ int Tablero::mueveBala(Jugador *J){
 	/*Obtenemos la forma del tablero*/
 	char **formaTablero = this -> getForma();
 
-	/*Veirifcamos si choco contra un muro*/
+	/*Veirificamos si choco contra un muro*/
 	if(formaTablero[y][x] == '#'){
 
 		/*Borramos la bala*/
@@ -640,24 +640,39 @@ void Tablero::mueveSoldados(){
 }
 
 void Tablero::dispararSoldados(){
+	
 	srand(time(NULL));
+
+	/**!<Soldado temporal*/
 	Soldado *S;
+
+	/*Colocamos el cursor de soldados en el primero de ellos*/
 	this -> soldados -> CursorFirst();
+
+	/*Recorremos a todos los soldados vivos*/
 	for(size_t i = this -> soldados -> Len(); i > 0; i--){
 
+		/*Si el destino dice que dispare*/
 		if((rand()%99)%2 == 0 && S -> getY() +2 <27){
+			
+			/*Obtenemos al soldado*/
 			this -> soldados -> Peek(&S);
 
+			/*Creamos a la bala que se dispara*/
 			Bala *B = new Bala();
 
+			/*Asignamos las coordenadas de la bala*/
 			B -> setX(S -> getX());
 			B -> setY(S -> getY() +2);
 
+			/*Pintamos la bala en el tablero*/
 			this -> pintaBala(B);
 
+			/*Cargamos la bala en el deposito del soldado*/
 			S -> cargarBala(B);			
 		}
 
+		/*Pasamos al siguiente soldado*/
 		this -> soldados -> CursorNext();
 
 	}
@@ -678,7 +693,7 @@ int Tablero::mueveBala(Soldado *S){
 	/*Obtenemos la forma del tablero*/
 	char **formaTablero = this -> getForma();
 
-	/*Veirifcamos si choco contra un muro*/
+	/*Veirificamos si choco contra un muro*/
 	if(formaTablero[y][x] == '#'){
 
 		/*Borramos la bala*/
@@ -770,10 +785,11 @@ int Tablero::mueveBala(Soldado *S){
 		/*Borramos la bala*/
 		this -> borrarBala(B);
 
-		/*Borramos a la bala de la lista de balas del jugador*/
+		/*Borramos a la bala de la lista de balas del soldado*/
 		S -> borrarBala();
 	}
 
+	/*Indicamos que no paso nada*/
 	return Bala::Choco::NADA;
 
 }

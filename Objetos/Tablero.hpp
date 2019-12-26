@@ -121,14 +121,38 @@ class Tablero : public Figura{
 		 */
 		void mueveSoldados();
 
+		/**
+		 * @brief Método que hace que disparen los soldados
+		 */
 		void dispararSoldados();
 
+		/**
+		 * @brief Método que mueve las balas de los soldados
+		 * @param S Soldado que se moveran sus balas
+		 * @return Contra que choco la bala
+		 */
 		int mueveBala(Soldado *S);
 
+		/**
+		 * @brief Método que mueve el cursor de los soldados al primero de ellos
+		 */
 		void primerSoldado();
+
+		/**
+		 * @brief Método que mueve el cursor de los soldados al siguiente de ellos
+		 */
 		void siguienteSoldado();
+
+		/**
+		 * @brief Método que dice cuantos soldados vivos hay
+		 * @return Numero de soldados vivos
+		 */
 		int getNumSoldados();
 
+		/**
+		 * @brief Método que retorna al soldado al que apunte el cursor de soldados
+		 * @return Soldado al que esta apuntando el cursor de soldados
+		 */
 		Soldado *getSoldado();
 };
 

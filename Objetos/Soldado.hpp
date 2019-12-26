@@ -23,6 +23,7 @@ class Soldado : public Figura{
 		 * @param B Bala que se liberara la memoria
 		 */
 		static void liberaBala(Bala *B);	
+		
 	public:
 		enum Sentido{DERECHA,IZQUIERDA};
 
