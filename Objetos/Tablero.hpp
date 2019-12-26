@@ -33,6 +33,18 @@ class Tablero : public Figura{
 		/**!<Número de enemigos por tablero*/
 		int numEnemigos;
 
+		/**!<Posición en x de los puntos del jugador en el tablero*/
+		int puntosX;
+
+		/**!<Posición en y de los puntos del jugador en el tablero*/
+		int puntosY;
+
+		/**!<Posición en x de las vidas del jugador en el tablero*/
+		int vidasX;
+
+		/**!<Posición en y de las vidas del jugador en el tablero*/
+		int vidasY;		
+
 	public:
 		/**
 		 * @brief Método constructor de Tablero

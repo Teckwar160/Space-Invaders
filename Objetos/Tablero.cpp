@@ -28,6 +28,14 @@ Tablero::Tablero(int numEnemigos):Figura(4){
 	for(size_t i = 0; i< this -> numEnemigos; i++){
 		this -> soldados -> InsertBack(new Soldado(4+i*7,2));
 	}
+
+	/*Definimos la posición de los puntos en el tablero*/
+	this -> puntosX = 63;
+	this -> puntosY = 28;
+
+	/*Definimos la posición de las vidas en el tablero*/
+	this -> vidasX = 37;
+	this -> vidasY = 28;
 }
 
 Tablero::~Tablero(){
@@ -54,10 +62,10 @@ void Tablero::pintaPuntos(Jugador *J){
 	int unidades = puntos -(millares*1000 + centenas*100 +decenas*10);
 
 	/*Actualizamos los puntos en el pantalla*/
-	formaTablero[28][63] = '0' + unidades;
-	formaTablero[28][61] = '0' + decenas;
-	formaTablero[28][59] = '0' + centenas;
-	formaTablero[28][57] = '0' + millares;
+	formaTablero[puntosY][puntosX] = '0' + unidades;
+	formaTablero[puntosY][puntosX -2] = '0' + decenas;
+	formaTablero[puntosY][puntosX -4] = '0' + centenas;
+	formaTablero[puntosY][puntosX -6] = '0' + millares;
 }
 
 /*========Métodos para el jugador========*/
@@ -726,16 +734,16 @@ int Tablero::mueveBala(Soldado *S, Jugador *J){
 				/*Borramos la bala*/
 				this -> borrarBala(B);
 
-				/*Borramos al jugador*/
-				//37
+				/*Restamos vidas al jugador*/
 				J -> setVidas(J -> getVidas() -1);
 
-				if(formaTablero[28][37] == '$'){
-					formaTablero[28][37] = '.';
-				}else if(formaTablero[28][35] == '$'){
-					formaTablero[28][35] = '.';
-				}else if(formaTablero[28][33] == '$'){
-					formaTablero[28][33] = '.';
+				/*Dependiendo el numero de vidas actualizara el tablero*/
+				if(formaTablero[vidasY][vidasX] == '$'){
+					formaTablero[vidasY][vidasX] = '.';
+				}else if(formaTablero[vidasY][vidasX -2] == '$'){
+					formaTablero[vidasY][vidasX -2] = '.';
+				}else if(formaTablero[vidasY][vidasX -4] == '$'){
+					formaTablero[vidasY][vidasX -4] = '.';
 				}
 				
 
