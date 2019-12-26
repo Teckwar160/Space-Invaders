@@ -130,7 +130,7 @@ int main(){
 			for(size_t j = S -> getNumBalas(); j>0; j--){
 
 				/*Movemos a la bala del soldado*/
-				T -> mueveBala(S);
+				T -> mueveBala(S,J);
 
 				/*Pasamos a la siguiente bala*/
 				S -> siguienteBala();

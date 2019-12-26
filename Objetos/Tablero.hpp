@@ -129,9 +129,10 @@ class Tablero : public Figura{
 		/**
 		 * @brief Método que mueve las balas de los soldados
 		 * @param S Soldado que se moveran sus balas
+		 * @param J Jugador del tablero
 		 * @return Contra que choco la bala
 		 */
-		int mueveBala(Soldado *S);
+		int mueveBala(Soldado *S, Jugador *J);
 
 		/**
 		 * @brief Método que mueve el cursor de los soldados al primero de ellos

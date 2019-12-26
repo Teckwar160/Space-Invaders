@@ -678,7 +678,7 @@ void Tablero::dispararSoldados(){
 	}
 }
 
-int Tablero::mueveBala(Soldado *S){
+int Tablero::mueveBala(Soldado *S, Jugador *J){
 
 	/*Obtenemos a la bala*/
 	Bala *B = S -> getBala();
@@ -708,65 +708,38 @@ int Tablero::mueveBala(Soldado *S){
 		/*Salimos del método*/
 		return Bala::Choco::MURO;
 	}
-#if 0
-	/*Verificamos si choco contra un soldado*/
-
-	/**!<Soldados que se verificara si choco contra el la bala*/
-	Soldado *S = NULL;
+#if 1
+	/*Verificamos si choco contra el jugador*/
 
 	/**!<Indicador de si el soldado fue eliminado o no*/
-	bool muereSoldado = false;
+	bool muereJugador = false;
 
-	/*Colocamos el cursor de los soldados en la primera posición*/
-	this -> soldados -> CursorFirst();
-
-	/*Recorremos la lista de soldados para verificacar si la bala choco contra alguno*/
-	for(size_t i = this -> soldados -> Len(); i > 0; i--){
-
-		/*Obtenemos al soldado*/
-		this -> soldados -> Peek(&S);
 		
-		/*Vemos si la bala choco contra el soldado*/
+	/*Vemos si la bala choco contra el jugador*/
 
-		/*Verificamos la coordenada en Y*/
-		if(y -2 == S -> getY()){
+	/*Verificamos la coordenada en Y*/
+	if(y + 2 == J -> getY() || y +1 == J -> getY() -1 || y +3 == J -> getY() +1){
 			
-			/*Verificamos la coordenada en X*/
-			if(x == S -> getX() ||  x -1 == S -> getX() || x +1 == S -> getX() || x +2 == S -> getX() || x -2 == S -> getX()){
+		/*Verificamos la coordenada en X*/
+		if(x == J -> getX() ||  x -1 == J -> getX() ||  x -2 == J -> getX() ||  x -3 == J -> getX() ||  x +1 == J -> getX() || x +2 == J -> getX() || x + 3 == J -> getX()){
 				
 				/*Borramos la bala*/
 				this -> borrarBala(B);
 
-				/*Borramos al soldado*/
-				this -> borrarSoldado(S);
-
-				/*Eliminamos al soldado de la lista*/
-				this -> soldados -> Remove(&S);
-
-				/*Liberamos la memoria del soldado*/
-				delete S;
+				/*Borramos al jugador*/
+				
 
 				/*Borramos la bala de la lista de balas del jugador*/
-				J -> borrarBala();
+				S -> borrarBala();
 
 				/*Cambiamos el estado del soldado*/
-				muereSoldado = true;
-
-				/*Aumentamos los puntos del jugador*/
-				J -> setPuntos(J -> getPuntos() + puntosSoldado);
-
-				/*Salimos el bucle*/
-				break;			
-			}
-
+				muereJugador = true;
 		}
 
-		/*Movemos el cursor al siguiente soldado en la lista*/
-		this -> soldados -> CursorNext();
 	}
 
 	/*Si el soldado murio lo indicamos y salimos del método*/
-	if(muereSoldado){
+	if(muereJugador){
 		return Bala::Choco::SOLDADO;
 	}
 #endif
