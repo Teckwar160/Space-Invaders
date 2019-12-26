@@ -68,7 +68,7 @@ int main(){
 	T -> pintaSoldados();
 
 	/*Iniciamos el juego*/
-	while(Tecla != '.'){
+	while(Tecla != '.' && !gameOver){
 
 		/*Mostramos los puntos del jugador*/
 		T -> pintaPuntos(J);

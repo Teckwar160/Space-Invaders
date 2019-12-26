@@ -727,6 +727,16 @@ int Tablero::mueveBala(Soldado *S, Jugador *J){
 				this -> borrarBala(B);
 
 				/*Borramos al jugador*/
+				//37
+				J -> setVidas(J -> getVidas() -1);
+
+				if(formaTablero[28][37] == '$'){
+					formaTablero[28][37] = '.';
+				}else if(formaTablero[28][35] == '$'){
+					formaTablero[28][35] = '.';
+				}else if(formaTablero[28][33] == '$'){
+					formaTablero[28][33] = '.';
+				}
 				
 
 				/*Borramos la bala de la lista de balas del jugador*/
