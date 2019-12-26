@@ -726,7 +726,7 @@ int Tablero::mueveBala(Soldado *S, Jugador *J){
 	/*Vemos si la bala choco contra el jugador*/
 
 	/*Verificamos la coordenada en Y*/
-	if(y + 2 == J -> getY() || y +1 == J -> getY() -1 || y +3 == J -> getY() +1){
+	if(y + 2 == J -> getY() || y +1 == J -> getY() -1 || y +3 == J -> getY() + 1 || y + 4 == J -> getY() + 2){
 			
 		/*Verificamos la coordenada en X*/
 		if(x == J -> getX() ||  x -1 == J -> getX() ||  x -2 == J -> getX() ||  x -3 == J -> getX() ||  x +1 == J -> getX() || x +2 == J -> getX() || x + 3 == J -> getX()){
