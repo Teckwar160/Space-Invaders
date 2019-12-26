@@ -638,3 +638,161 @@ void Tablero::mueveSoldados(){
 
 	}
 }
+
+void Tablero::dispararSoldados(){
+	srand(time(NULL));
+	Soldado *S;
+	this -> soldados -> CursorFirst();
+	for(size_t i = this -> soldados -> Len(); i > 0; i--){
+
+		if((rand()%99)%2 == 0 && S -> getY() +2 <27){
+			this -> soldados -> Peek(&S);
+
+			Bala *B = new Bala();
+
+			B -> setX(S -> getX());
+			B -> setY(S -> getY() +2);
+
+			this -> pintaBala(B);
+
+			S -> cargarBala(B);			
+		}
+
+		this -> soldados -> CursorNext();
+
+	}
+}
+
+int Tablero::mueveBala(Soldado *S){
+
+	/*Obtenemos a la bala*/
+	Bala *B = S -> getBala();
+
+	/*Obtenemos las coordenadas de la bala*/
+	int x = B -> getX();
+	int y = B -> getY();
+
+	/*Movemos la bala una posición*/
+	y +=1;
+	
+	/*Obtenemos la forma del tablero*/
+	char **formaTablero = this -> getForma();
+
+	/*Veirifcamos si choco contra un muro*/
+	if(formaTablero[y][x] == '#'){
+
+		/*Borramos la bala*/
+		this -> borrarBala(B);
+
+		/*Pintamos el tablero con el fondo*/
+		formaTablero[y][x] = this -> caracterBase;
+
+		/*Borramos la bala de la lista de balas del jugador*/
+		S -> borrarBala();
+
+		/*Salimos del método*/
+		return Bala::Choco::MURO;
+	}
+#if 0
+	/*Verificamos si choco contra un soldado*/
+
+	/**!<Soldados que se verificara si choco contra el la bala*/
+	Soldado *S = NULL;
+
+	/**!<Indicador de si el soldado fue eliminado o no*/
+	bool muereSoldado = false;
+
+	/*Colocamos el cursor de los soldados en la primera posición*/
+	this -> soldados -> CursorFirst();
+
+	/*Recorremos la lista de soldados para verificacar si la bala choco contra alguno*/
+	for(size_t i = this -> soldados -> Len(); i > 0; i--){
+
+		/*Obtenemos al soldado*/
+		this -> soldados -> Peek(&S);
+		
+		/*Vemos si la bala choco contra el soldado*/
+
+		/*Verificamos la coordenada en Y*/
+		if(y -2 == S -> getY()){
+			
+			/*Verificamos la coordenada en X*/
+			if(x == S -> getX() ||  x -1 == S -> getX() || x +1 == S -> getX() || x +2 == S -> getX() || x -2 == S -> getX()){
+				
+				/*Borramos la bala*/
+				this -> borrarBala(B);
+
+				/*Borramos al soldado*/
+				this -> borrarSoldado(S);
+
+				/*Eliminamos al soldado de la lista*/
+				this -> soldados -> Remove(&S);
+
+				/*Liberamos la memoria del soldado*/
+				delete S;
+
+				/*Borramos la bala de la lista de balas del jugador*/
+				J -> borrarBala();
+
+				/*Cambiamos el estado del soldado*/
+				muereSoldado = true;
+
+				/*Aumentamos los puntos del jugador*/
+				J -> setPuntos(J -> getPuntos() + puntosSoldado);
+
+				/*Salimos el bucle*/
+				break;			
+			}
+
+		}
+
+		/*Movemos el cursor al siguiente soldado en la lista*/
+		this -> soldados -> CursorNext();
+	}
+
+	/*Si el soldado murio lo indicamos y salimos del método*/
+	if(muereSoldado){
+		return Bala::Choco::SOLDADO;
+	}
+#endif
+	/*Verificamos que siga en el tablero*/
+	if(y < 27){
+		/*Borramos la bala*/
+		this -> borrarBala(B);
+
+		/*Actualizamos la posicón de la bala*/
+		B -> setY(y);
+		
+		/*Repintamos la bala*/
+		this -> pintaBala(B);
+
+	}else{
+		/*Borramos la bala*/
+		this -> borrarBala(B);
+
+		/*Borramos a la bala de la lista de balas del jugador*/
+		S -> borrarBala();
+	}
+
+	return Bala::Choco::NADA;
+
+}
+
+void Tablero::primerSoldado(){
+	this -> soldados -> CursorFirst();
+}	
+void Tablero::siguienteSoldado(){
+	this -> soldados -> CursorNext();
+}
+
+int Tablero::getNumSoldados(){
+	return this -> soldados -> Len();
+}
+
+Soldado *Tablero::getSoldado(){
+	Soldado *tmp;
+
+	this -> soldados -> Peek(&tmp);
+
+	return tmp;
+}

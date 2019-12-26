@@ -8,6 +8,8 @@
 #include "Bala.hpp"
 #include "Soldado.hpp"
 #include "../Recursos/DLL.hpp"
+#include <stdlib.h>
+#include <time.h>
 
 /**!<Numero de puntos que se dan por soldado derrotado*/
 #define puntosSoldado 3
@@ -118,6 +120,16 @@ class Tablero : public Figura{
 		 * @param S Soldado que se movera en el tablero
 		 */
 		void mueveSoldados();
+
+		void dispararSoldados();
+
+		int mueveBala(Soldado *S);
+
+		void primerSoldado();
+		void siguienteSoldado();
+		int getNumSoldados();
+
+		Soldado *getSoldado();
 };
 
 #endif

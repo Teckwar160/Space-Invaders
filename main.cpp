@@ -44,11 +44,14 @@ int main(){
 	/**!<Jugador*/
 	Jugador *J;
 
+	/**!<Soldado generico de apoyo*/
+	Soldado *S;
+
 	/**!<Indica si el juego acabo o no*/
 	bool gameOver = false;
 
 	/*Iniciamos los componenes del juego*/
-	T = new Tablero(7);
+	T = new Tablero(1);
 	J = new Jugador();
 
 	/*Cambiamos el modo de pantalla para usar curses y la función kbhit*/
@@ -105,6 +108,29 @@ int main(){
 
 		/*Mueve a los soldados en el tablero*/
 		T -> mueveSoldados();
+
+		/*Hacemos que disparen los enemigos*/
+		T -> dispararSoldados();
+
+		/*Movemos las balas de cada soldado*/
+		T -> primerSoldado();
+
+		for(size_t i = T -> getNumSoldados(); i>0; i--){
+			S = T -> getSoldado();
+
+			S -> primerBala();
+			Bala *B;
+
+			for(size_t j = S -> getNumBalas(); j>0; j--){
+
+				T -> mueveBala(S);
+
+				S -> siguienteBala();
+			}
+
+
+			T -> siguienteSoldado();
+		}
 
 		/*Borramos el tablero*/
 		erase();
