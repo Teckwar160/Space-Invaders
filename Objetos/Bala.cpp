@@ -2,7 +2,7 @@
 #include "Bala.hpp"
 
 
-Bala::Bala(): Figura(3){
+Bala::Bala(): Figura(Figura::Sprite::BALA){
 
 }
 

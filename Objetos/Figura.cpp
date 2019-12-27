@@ -2,7 +2,7 @@
 #include "Figura.hpp"
 
 
-Figura::Figura(int id){
+Figura::Figura(Figura::Sprite id){
 	/*Definimos el id*/
 	this -> id = id;
 	this -> x = 0;
@@ -19,29 +19,42 @@ Figura::Figura(int id){
 
 	/*Dependiendo el id se toman los datos de las figuras*/
 	switch(this -> id){
-		case 0:
-			/*Jugador*/
+		case Figura::Sprite::JUGADOR:
+
 			direccionSprite = "Sprites/Jugador.txt";
+
 			direccionDimension = "Sprites/dimensionesJugador.txt";
+
 			break;
-		case 1:
-			/*Enemigo soldado*/
+
+		case Figura::Sprite::SOLDADO:
+
 			direccionSprite = "Sprites/Soldado.txt";
+
 			direccionDimension = "Sprites/dimensionesSoldado.txt";
+
 			break;
-		case 2:
-			/*Enemigo jefe*/
+
+		case Figura::Sprite::JEFE:
+
 			direccionDimension = "Sprites/dimensionesJefe.txt";
+
 			break;
-		case 3:
-			/*Bala*/
+
+		case Figura::Sprite::BALA:
+
 			direccionSprite = "Sprites/Bala.txt";
+
 			direccionDimension = "Sprites/dimensionesBala.txt";
+
 			break;
-		case 4:
-			/*Tablero*/
+
+		case Figura::Sprite::TABLERO:
+		
 			direccionSprite = "Sprites/Tablero.txt";
+
 			direccionDimension = "Sprites/dimensionesTablero.txt";
+
 			break;
 	}
 

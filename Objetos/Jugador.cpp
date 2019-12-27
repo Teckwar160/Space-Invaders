@@ -11,7 +11,7 @@ void Jugador::liberaBala(Bala *B){
 /***************************************
  * 	Métodos publicos
  **************************************/
-Jugador::Jugador():Figura(0){
+Jugador::Jugador():Figura(Figura::Sprite::JUGADOR){
 	/*Definimos los datos visibles del jugador*/
 	this -> vidas = 3;
 	this -> puntos = 0;
@@ -82,10 +82,6 @@ void Jugador::primerBala(){
 
 void Jugador::siguienteBala(){
 	this -> deposito -> CursorNext();
-}
-
-void Jugador::ultimaBala(){
-	this -> deposito -> CursorLast();
 }
 
 int Jugador::getNumBalas(){

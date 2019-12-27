@@ -13,12 +13,14 @@
  * del juego
  */
 class Figura{
+	public:
+		enum Sprite{JUGADOR,SOLDADO,JEFE,BALA,TABLERO};
 	private:
 		/**!<Es la forma que tomara la Figura*/
 		char **Forma;
 
 		/**!<Identificador de la figura que representa*/
-		int id;
+		Figura::Sprite id;
 
 		/**!<Filas de la matriz*/
 		int Filas;
@@ -37,7 +39,7 @@ class Figura{
 		 * @brief Método constructor de la Figura
 		 * @param id Identificador de la figura
 		 */
-		Figura(int id);
+		Figura(Figura::Sprite id);
 
 		/**
 		 * @brief Método destructor de la Figura

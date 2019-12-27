@@ -11,7 +11,7 @@ void Tablero::liberaSoldado(Soldado *S){
 /***************************************
  * 	Métodos publicos
  **************************************/
-Tablero::Tablero(int numEnemigos):Figura(4){
+Tablero::Tablero(int numEnemigos):Figura(Figura::Sprite::TABLERO){
 	/*Obtenemos la forma del tablero*/
 	char **Forma = this -> getForma();
 

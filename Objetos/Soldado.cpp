@@ -11,7 +11,7 @@ void Soldado::liberaBala(Bala *B){
 /***************************************
  * 	Métodos publicos
  **************************************/
-Soldado::Soldado(int x, int y) : Figura(1){
+Soldado::Soldado(int x, int y) : Figura(Figura::Sprite::SOLDADO){
 	/*Definimos el punto de control del soldado*/
 	this -> setX(x);
 	this -> setY(y);
@@ -56,10 +56,6 @@ void Soldado::primerBala(){
 
 void Soldado::siguienteBala(){
 	this -> deposito -> CursorNext();
-}
-
-void Soldado::ultimaBala(){
-	this -> deposito -> CursorLast();
 }
 
 int Soldado::getNumBalas(){

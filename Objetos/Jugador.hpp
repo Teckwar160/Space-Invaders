@@ -97,11 +97,6 @@ class Jugador: public Figura{
 		void siguienteBala();
 
 		/**
-		 * @brief Método que mueve el cursor del depósito a la ultima bala
-		 */
-		void ultimaBala();
-
-		/**
 		 * @brief Método que retorna el numero de balas en el depósito del jugador
 		 * @return Numero de balas del depósito
 		 */
