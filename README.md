@@ -3,7 +3,7 @@
 <h3>Objetivo: Se realizo este juego con el fin de poder practicar en c++ POO</h3>
 
 <h3>Requisitos: </h3>
-<h3>1-Tener una distribución de linux instala.</h3>
+<h3>1-Tener una distribución de linux instalada.</h3>
 <h3>2-Tener instalado build-essentials.</h3>
 <h4>Comandos para instalarlo: </h4>
 <h4>"sudo apt-get update"</h4>
