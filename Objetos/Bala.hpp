@@ -11,7 +11,7 @@
 class Bala : public Figura{
 	public:
 		/**!<Indica contra que choco la bala*/
-		enum Choco{SOLDADO,MURO,NADA};
+		enum Choco{SOLDADO,MURO,NADA,JUGADOR,BALA};
 	public:
 		/**
 		 * @brief Método constructor de bala

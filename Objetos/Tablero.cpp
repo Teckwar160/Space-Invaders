@@ -278,6 +278,22 @@ int Tablero::mueveBala(Jugador *J){
 		return Bala::Choco::MURO;
 	}
 
+	/*Verificamos si choco contra otra bala*/
+	if(formaTablero[y][x] == '*'){
+
+		/*Borramos a la bala*/
+		this -> borrarBala(B);
+
+		/*Pintamos el tablero con el fondo*/
+		formaTablero[y][x] = this -> caracterBase;
+
+		/*Borramos la bala de la lista de balas del jugador*/
+		J -> borrarBala();
+
+		/*Salimos del método*/
+		return Bala::Choco::BALA;
+	}
+
 	/*Verificamos si choco contra un soldado*/
 
 	/**!<Soldados que se verificara si choco contra el la bala*/
@@ -660,8 +676,10 @@ void Tablero::dispararSoldados(){
 	/*Recorremos a todos los soldados vivos*/
 	for(size_t i = this -> soldados -> Len(); i > 0; i--){
 
+		this -> soldados -> Peek(&S);
+
 		/*Si el destino dice que dispare*/
-		if((rand()%99)%2 == 0 && S -> getY() +2 <27){
+		if(rand()%999%5 == 0 && S -> getNumBalas() < 2 && S -> getY() +2 <27){
 			
 			/*Obtenemos al soldado*/
 			this -> soldados -> Peek(&S);
@@ -710,13 +728,29 @@ int Tablero::mueveBala(Soldado *S, Jugador *J){
 		/*Pintamos el tablero con el fondo*/
 		formaTablero[y][x] = this -> caracterBase;
 
-		/*Borramos la bala de la lista de balas del jugador*/
+		/*Borramos la bala de la lista de balas del soldado*/
 		S -> borrarBala();
 
 		/*Salimos del método*/
 		return Bala::Choco::MURO;
 	}
-#if 1
+
+	/*Verificamos si choco contra otra bala*/
+	if(formaTablero[y][x] == '*'){
+
+		/*Borramos a la bala*/
+		this -> borrarBala(B);
+
+		/*Pintamos el tablero con el fondo*/
+		formaTablero[y][x] = this -> caracterBase;
+
+		/*Borramos la bala de la lista de balas del soldado*/
+		S -> borrarBala();
+
+		/*Salimos del método*/
+		return Bala::Choco::BALA;
+	}
+
 	/*Verificamos si choco contra el jugador*/
 
 	/**!<Indicador de si el soldado fue eliminado o no*/
@@ -756,11 +790,11 @@ int Tablero::mueveBala(Soldado *S, Jugador *J){
 
 	}
 
-	/*Si el soldado murio lo indicamos y salimos del método*/
+	/*Si el jugador perdio una vida lo indicamos*/
 	if(muereJugador){
-		return Bala::Choco::SOLDADO;
+		return Bala::Choco::JUGADOR;
 	}
-#endif
+
 	/*Verificamos que siga en el tablero*/
 	if(y < 27){
 		/*Borramos la bala*/
