@@ -322,6 +322,30 @@ int Tablero::mueveBala(Jugador *J){
 				/*Borramos la bala*/
 				this -> borrarBala(B);
 
+				/*Liberamos la memoria de las balas disparadas por el soldado*/
+
+				/*Ponemos el cursor del depósito de balas del soldado en la primer bala*/
+				S -> primerBala();
+
+				/**!<Bala temporal que sirve de apoyo para liberar memoria*/
+				Bala *tmp;
+
+				/*Recorremos todo el depósito de balas del soldado*/
+				for(size_t i = S -> getNumBalas(); i> 0; i--){
+
+					/*Obtenemos a la bala*/
+					tmp = S -> getBala();
+
+					/*Eliminamos a la bala del tablero*/
+					formaTablero[tmp -> getY()][tmp -> getX()] = this -> caracterBase;
+
+					/*Borramos a la bala del depósito del soldado*/
+					S -> borrarBala();
+
+					/*Pasamos a la siguiente bala*/
+					S -> siguienteBala();
+				}
+
 				/*Borramos al soldado*/
 				this -> borrarSoldado(S);
 

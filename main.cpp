@@ -148,7 +148,7 @@ int main(){
 
 		/*Verificamos que se pueda seguir jugando*/
 		if(J -> getVidas() == 0){
-			//gameOver = true;
+			gameOver = true;
 		}
 	}
 
