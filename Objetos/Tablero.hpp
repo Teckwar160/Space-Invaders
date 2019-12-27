@@ -43,7 +43,19 @@ class Tablero : public Figura{
 		int vidasX;
 
 		/**!<Posición en y de las vidas del jugador en el tablero*/
-		int vidasY;		
+		int vidasY;
+
+		/**!<Posición en x del nivel*/
+		int nivelX;
+
+		/**!<Posición en y del nivel*/
+		int nivelY;		
+
+		/**!<Guarda el número anterior de puntos del jugador*/
+		int puntosJugador;
+
+		/**!<Bloqueo de balas de los soldados*/
+		int balasSoldados;
 
 	public:
 		/**
@@ -62,6 +74,14 @@ class Tablero : public Figura{
 		 *@param J Jugador que se mostraran sus puntos
 		 */
 		void pintaPuntos(Jugador *J);
+
+		void mostrarNivel(int nivel);
+
+		/**
+		 * @brief Método que aumenta el nivel del juego
+		 * @param 
+		 */
+		void subirNivel(Jugador *J, int *nivel);
 
 		/*========Métodos para el jugador========*/
 

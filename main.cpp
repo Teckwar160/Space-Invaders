@@ -50,8 +50,11 @@ int main(){
 	/**!<Indica si el juego acabo o no*/
 	bool gameOver = false;
 
+	/**!<Indica el nivel del juego*/
+	int nivel = 1;
+
 	/*Iniciamos los componenes del juego*/
-	T = new Tablero(7);
+	T = new Tablero(5);
 	J = new Jugador();
 
 	/*Cambiamos el modo de pantalla para usar curses y la función kbhit*/
@@ -75,6 +78,9 @@ int main(){
 
 		/*Mostramos el tablero*/
 		T -> mostrar();
+
+		/*Mostrar nivel*/
+		T -> mostrarNivel(nivel);
 
 		/*Comprobamos si se pulso una tecla*/
 		if(kbhit()){
@@ -148,8 +154,11 @@ int main(){
 
 		/*Verificamos que se pueda seguir jugando*/
 		if(J -> getVidas() == 0){
-			gameOver = true;
+			//gameOver = true;
 		}
+
+		/*Cambia el nivel si se llega a una cantidad de puntos*/
+		T -> subirNivel(J,&nivel);
 	}
 
 	/*Fin del cambio de modo*/

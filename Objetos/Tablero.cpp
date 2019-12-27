@@ -36,6 +36,16 @@ Tablero::Tablero(int numEnemigos):Figura(Figura::Sprite::TABLERO){
 	/*Definimos la posición de las vidas en el tablero*/
 	this -> vidasX = 37;
 	this -> vidasY = 28;
+
+	/*Definimos la posición del nivel en el tablero*/
+	this -> nivelX = 11;
+	this -> nivelY = 28;
+
+	/*Definimos el numero inicial de puntos del jugador*/
+	this -> puntosJugador = 0;
+
+	/*Definimos las balas que pueden disparar los soldados*/
+	this -> balasSoldados = 2;
 }
 
 Tablero::~Tablero(){
@@ -66,6 +76,31 @@ void Tablero::pintaPuntos(Jugador *J){
 	formaTablero[puntosY][puntosX -2] = '0' + decenas;
 	formaTablero[puntosY][puntosX -4] = '0' + centenas;
 	formaTablero[puntosY][puntosX -6] = '0' + millares;
+}
+
+void Tablero::mostrarNivel(int nivel){
+	char **formaTablero = this -> getForma();
+
+	formaTablero[nivelY][nivelX] = '0' + nivel;
+}
+
+void Tablero::subirNivel(Jugador *J, int *nivel){
+
+	if(J -> getPuntos() == numEnemigos*puntosSoldado + this -> puntosJugador){
+
+		this -> puntosJugador = J -> getPuntos();
+		*nivel +=1;
+
+		if(this -> numEnemigos <=10){
+			this -> numEnemigos++;
+		}
+
+		for(size_t i = 0; i< this -> numEnemigos; i++){
+			this -> soldados -> InsertBack(new Soldado(4+i*7,2));
+		}
+		this -> balasSoldados +=1;
+
+	}
 }
 
 /*========Métodos para el jugador========*/
@@ -701,7 +736,7 @@ void Tablero::dispararSoldados(){
 		this -> soldados -> Peek(&S);
 
 		/*Si el destino dice que dispare*/
-		if(rand()%999%5 == 0 && S -> getNumBalas() < 2 && S -> getY() +2 <27){
+		if(rand()%999%5 == 0 && S -> getNumBalas() < this -> balasSoldados && S -> getY() +2 <27){
 			
 			/*Obtenemos al soldado*/
 			this -> soldados -> Peek(&S);
