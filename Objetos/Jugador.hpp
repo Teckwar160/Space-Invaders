@@ -22,12 +22,12 @@ class Jugador: public Figura{
 		/**!<Depósito de balas*/
 		DLL<Bala*>* deposito;
 
-		/**!<Contador que lleva el numero de balas disparadas*/
+		/**!<Contador que lleva el número de balas disparadas*/
 		int disparos;
 
 		/**
 		 * @brief Método que libera la memoria de las balas
-		 * @param B Bala que se liberara la memoria
+		 * @param B Bala que se eliminara
 		 */
 		static void liberaBala(Bala *B);	
 	public:
@@ -42,24 +42,24 @@ class Jugador: public Figura{
 		~Jugador();
 
 		/**
-		 * @brief Método que retorna el numero de vidas del jugador
+		 * @brief Método que retorna el número de vidas del jugador
 		 */
 		int getVidas();
 
 		/**
 		 * @brief Método que define el valor de las vidas del jugador
-		 * @param vidas Nuevo numero de vidas del jugador
+		 * @param vidas Nuevo número de vidas del jugador
 		 */
 		void setVidas(int vidas);
 
 		/**
-		 * @brief Método que retorna el numero de puntos del jugador
+		 * @brief Método que retorna el número de puntos del jugador
 		 */
 		int getPuntos();
 
 		/**
-		 * @brief Método que define el numero de puntos del jugador
-		 * @param puntos Nuevo numero de puntos del jugador
+		 * @brief Método que define el número de puntos del jugador
+		 * @param puntos Nuevo número de puntos del jugador
 		 */
 		void setPuntos(int puntos);
 
@@ -97,8 +97,8 @@ class Jugador: public Figura{
 		void siguienteBala();
 
 		/**
-		 * @brief Método que retorna el numero de balas en el depósito del jugador
-		 * @return Numero de balas del depósito
+		 * @brief Método que retorna el número de balas en el depósito del jugador
+		 * @return Número de balas del depósito
 		 */
 		int getNumBalas();
 

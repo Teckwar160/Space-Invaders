@@ -6,7 +6,7 @@
 #include "Figura.hpp"
 /**
  * @class Bala
- * @brief Representa a la bala que dispara el jugador
+ * @brief Representa a la bala que dispara el jugador y los soldados
  */
 class Bala : public Figura{
 	public:
@@ -19,7 +19,7 @@ class Bala : public Figura{
 		Bala();
 
 		/**
-		 * @brief Método destrucotr de bala
+		 * @brief Método destructor de bala
 		 */
 		~Bala();
 };

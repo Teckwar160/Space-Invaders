@@ -18,7 +18,7 @@ Tablero::Tablero(int numEnemigos):Figura(Figura::Sprite::TABLERO){
 	/*Definimos el fondo del tablero*/
 	caracterBase = Forma[2][2];
 
-	/*Definimos el numero de enemigos*/
+	/*Definimos el número de enemigos*/
 	this -> numEnemigos = numEnemigos;
 
 	/*Creamos la lista de los soldados*/
@@ -138,14 +138,14 @@ void Tablero::mueveJugador(Jugador *J, int Tecla){
 			break;
 	}
 
-	/*Borramos al antiguo sprite*/
+	/*Borramos al antiguo jugador*/
 	this -> borrarJugador(J);
 
 	/*Actualizamos las coordenadas del jugador*/
 	J -> setX(x);
 	J -> setY(y);
 
-	/*Pintamos al nuevo sprite*/
+	/*Pintamos al nuevo jugador*/
 	this -> pintaJugador(J);
 	
 
@@ -243,11 +243,11 @@ void Tablero::dispararJugador(Jugador *J){
 	/*Cargamos la bala al depósito*/
 	J -> cargarBala(B);
 
-	/*Incrementamos el numero de disparos*/
+	/*Incrementamos el número de disparos*/
 	J -> incrementaDisparos();
 }
 
-int Tablero::mueveBala(Jugador *J){
+Bala::Choco Tablero::mueveBala(Jugador *J){
 
 	/*Obtenemos a la bala*/
 	Bala *B = J -> getBala();
@@ -262,7 +262,7 @@ int Tablero::mueveBala(Jugador *J){
 	/*Obtenemos la forma del tablero*/
 	char **formaTablero = this -> getForma();
 
-	/*Veirificamos si choco contra un muro*/
+	/*Verificamos si choco contra un muro*/
 	if(formaTablero[y][x] == '#'){
 
 		/*Borramos la bala*/
@@ -459,7 +459,7 @@ void Tablero::pintaSoldados(){
 		formaTablero[y+1][x+1] = formaSoldado[2][4];
 		formaTablero[y+1][x+2] = formaSoldado[2][5];
 
-		/*Movemos al cursor a la siguiente posición*/
+		/*Movemos el cursor al siguiente soldado*/
 		this -> soldados -> CursorNext();	
 	}
 
@@ -524,6 +524,7 @@ void Tablero::borrarSoldados(){
 
 	/*Recorremos la lista de soldados*/
 	for(size_t i = this -> soldados -> Len(); i> 0; i--){
+		
 		/*Obtenemos al soldado*/
 		this -> soldados -> Peek(&S);
 
@@ -573,7 +574,7 @@ void Tablero::borrarSoldados(){
 }
 
 /**!<Inicialización de la variable de sentido*/
-int Soldado::sentido;
+Soldado::Sentido Soldado::sentido;
 
 void Tablero::mueveSoldados(){
 
@@ -620,7 +621,7 @@ void Tablero::mueveSoldados(){
 		/*Obtenemos el sentido del movimiento del soldado*/
 		int sentido = Soldado::sentido;
 
-		/*Vemos si se pueden mover a los soldados hacia la derecha*/
+		/*Vemos si se puede mover a los soldados hacia la derecha*/
 		if(sentido == Soldado::Sentido::DERECHA && xU +2 < tableroColumnas -2){
 			derecha = true;
 
@@ -635,7 +636,7 @@ void Tablero::mueveSoldados(){
 			Soldado::sentido = Soldado::Sentido::IZQUIERDA;
 		}
 
-		/*MVemos si se pueden mover a los soldados hacia la izquierda*/
+		/*Vemos si se puede mover a los soldados hacia la izquierda*/
 		if(sentido == Soldado::Sentido::IZQUIERDA && xP -2 > 1){
 			izquierda = true;
 
@@ -691,7 +692,7 @@ void Tablero::dispararSoldados(){
 	
 	srand(time(NULL));
 
-	/**!<Soldado temporal*/
+	/**!<Soldado de apoyo*/
 	Soldado *S;
 
 	/*Colocamos el cursor de soldados en el primero de ellos*/
@@ -728,7 +729,7 @@ void Tablero::dispararSoldados(){
 	}
 }
 
-int Tablero::mueveBala(Soldado *S, Jugador *J){
+Bala::Choco Tablero::mueveBala(Soldado *S, Jugador *J){
 
 	/*Obtenemos a la bala*/
 	Bala *B = S -> getBala();
@@ -777,12 +778,6 @@ int Tablero::mueveBala(Soldado *S, Jugador *J){
 
 	/*Verificamos si choco contra el jugador*/
 
-	/**!<Indicador de si el soldado fue eliminado o no*/
-	bool muereJugador = false;
-
-		
-	/*Vemos si la bala choco contra el jugador*/
-
 	/*Verificamos la coordenada en Y*/
 	if(y + 2 == J -> getY() || y +1 == J -> getY() -1 || y +3 == J -> getY() + 1 || y + 4 == J -> getY() + 2){
 			
@@ -795,7 +790,7 @@ int Tablero::mueveBala(Soldado *S, Jugador *J){
 				/*Restamos vidas al jugador*/
 				J -> setVidas(J -> getVidas() -1);
 
-				/*Dependiendo el numero de vidas actualizara el tablero*/
+				/*Dependiendo el numero de vidas, se actualizara el tablero*/
 				if(formaTablero[vidasY][vidasX] == '$'){
 					formaTablero[vidasY][vidasX] = '.';
 				}else if(formaTablero[vidasY][vidasX -2] == '$'){
@@ -805,18 +800,13 @@ int Tablero::mueveBala(Soldado *S, Jugador *J){
 				}
 				
 
-				/*Borramos la bala de la lista de balas del jugador*/
+				/*Borramos la bala de la lista de balas del soldado*/
 				S -> borrarBala();
 
-				/*Cambiamos el estado del soldado*/
-				muereJugador = true;
+				/*Salimos del método*/
+				return Bala::Choco::JUGADOR;
 		}
 
-	}
-
-	/*Si el jugador perdio una vida lo indicamos*/
-	if(muereJugador){
-		return Bala::Choco::JUGADOR;
 	}
 
 	/*Verificamos que siga en el tablero*/

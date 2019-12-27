@@ -5,6 +5,8 @@
 Figura::Figura(Figura::Sprite id){
 	/*Definimos el id*/
 	this -> id = id;
+
+	/*Definimos el punto de control a cero para luego modificarlo según el sprite*/
 	this -> x = 0;
 	this -> y =0;
 

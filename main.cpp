@@ -94,15 +94,15 @@ int main(){
 			}
 		}
 
-		/*Ponemos el cursor del deposito del jugador en la primer bala*/
+		/*Ponemos el cursor del depósito del jugador en la primer bala*/
 		J -> primerBala();
 		
-		/*Recorremos todo el deposito moviendo cada bala*/
+		/*Recorremos todo el depósito del jugador moviendo a las balas que disparo*/
 		for(int i = J -> getNumBalas(); i>0; i--){
 			/*Movemos a la bala*/
 			T -> mueveBala(J);
 
-			/*Nos movemos a la siguiente bala del deposito*/
+			/*Nos movemos a la siguiente bala del depósito*/
 			J -> siguienteBala();
 		}	
 
@@ -114,7 +114,7 @@ int main(){
 
 		/*Movemos las balas de cada soldado*/
 
-		/*Colocamos el cursor de los soldados en el primerp*/
+		/*Colocamos el cursor de los soldados en el primero*/
 		T -> primerSoldado();
 
 		/*Recorremos a todos los soldados*/

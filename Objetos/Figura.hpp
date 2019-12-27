@@ -70,8 +70,8 @@ class Figura{
 		int getX();
 
 		/**
-		 * @brief Método que retorna la posción en y de la figura
-		 * @return La psoción en y de la figura
+		 * @brief Método que retorna la posición en y de la figura
+		 * @return La posición en y de la figura
 		 */
 		int getY();
 
@@ -88,7 +88,7 @@ class Figura{
 		int getFilas();
 
 		/**
-		 * @brief Método que retorn el numero de columnas de la forma
+		 * @brief Método que retorna el numero de columnas de la forma
 		 * @return Columnas de la forma
 		 */
 		int getColumnas();

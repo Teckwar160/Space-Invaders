@@ -11,7 +11,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-/**!<Numero de puntos que se dan por soldado derrotado*/
+/**!<Número de puntos que se dan por soldado derrotado*/
 #define puntosSoldado 3
 
 /**
@@ -74,7 +74,7 @@ class Tablero : public Figura{
 		/**
 		 * @brief Método que mueve al jugador
 		 * @param J Jugador a mover
-		 * @param Tecla tecla pulsada por el jugador
+		 * @param Tecla Tecla pulsada por el jugador
 		 */
 		void mueveJugador(Jugador *J, int Tecla);
 
@@ -107,7 +107,7 @@ class Tablero : public Figura{
 		 * @param J Jugador que disparo la bala
 		 * @return Contra que choco la bala
 		 */
-		int mueveBala(Jugador *J);
+		Bala::Choco mueveBala(Jugador *J);
 		
 		/*========Métodos de los soldados========*/
 
@@ -128,8 +128,7 @@ class Tablero : public Figura{
 		void borrarSoldados();
 
 		/**
-		 * @brief Método que mueve al soldado en el tablero
-		 * @param S Soldado que se movera en el tablero
+		 * @brief Método que mueve a los soldados en el tablero
 		 */
 		void mueveSoldados();
 
@@ -144,7 +143,7 @@ class Tablero : public Figura{
 		 * @param J Jugador del tablero
 		 * @return Contra que choco la bala
 		 */
-		int mueveBala(Soldado *S, Jugador *J);
+		Bala::Choco mueveBala(Soldado *S, Jugador *J);
 
 		/**
 		 * @brief Método que mueve el cursor de los soldados al primero de ellos
@@ -158,7 +157,7 @@ class Tablero : public Figura{
 
 		/**
 		 * @brief Método que dice cuantos soldados vivos hay
-		 * @return Numero de soldados vivos
+		 * @return Número de soldados vivos
 		 */
 		int getNumSoldados();
 

@@ -25,10 +25,11 @@ class Soldado : public Figura{
 		static void liberaBala(Bala *B);	
 		
 	public:
+		/**!<Indica el posible movimiento de los enemigos*/
 		enum Sentido{DERECHA,IZQUIERDA};
 
 		/**!<Indica el sentido del movimiento del soldado*/
-		static int sentido;
+		static Soldado::Sentido sentido;
 
 		/**
 		 * @brief Método constructor de soldado
