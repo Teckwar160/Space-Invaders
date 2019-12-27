@@ -223,9 +223,6 @@ void Tablero::borrarBala(Bala *B){
 
 void Tablero::dispararJugador(Jugador *J){
 
-	/*Obtenemos la forma del tablero*/
-	char **formaTablero = this -> getForma();
-
 	/*Obtenemos las coordenadas del jugador*/
 	int x = J -> getX();
 	int y = J -> getY();
@@ -314,10 +311,10 @@ Bala::Choco Tablero::mueveBala(Jugador *J){
 		/*Vemos si la bala choco contra el soldado*/
 
 		/*Verificamos la coordenada en Y*/
-		if(y -2 == S -> getY()){
+		if(y-1 == S -> getY() + 1 || y -2 == S -> getY() || y - 3 == S -> getY() - 1){
 			
 			/*Verificamos la coordenada en X*/
-			if(x == S -> getX() ||  x -1 == S -> getX() || x +1 == S -> getX() || x +2 == S -> getX() || x -2 == S -> getX()){
+			if(x == S -> getX() ||  x -1 == S -> getX() || x -2 == S -> getX() || x +1 == S -> getX() || x +2 == S -> getX()){
 				
 				/*Borramos la bala*/
 				this -> borrarBala(B);
