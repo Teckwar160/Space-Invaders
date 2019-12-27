@@ -159,6 +159,8 @@ int main(){
 
 		/*Cambia el nivel si se llega a una cantidad de puntos*/
 		T -> subirNivel(J,&nivel);
+		
+		
 	}
 
 	/*Fin del cambio de modo*/

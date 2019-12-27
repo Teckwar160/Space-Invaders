@@ -79,27 +79,56 @@ void Tablero::pintaPuntos(Jugador *J){
 }
 
 void Tablero::mostrarNivel(int nivel){
+
+	/*Obtenemos la forma del tablero*/
 	char **formaTablero = this -> getForma();
 
-	formaTablero[nivelY][nivelX] = '0' + nivel;
+	/*Se seguira mostrando el nivel en el que va hasta llegar al 10 que es el jefe final*/
+	if(nivel <=9){
+
+		/*Vamos actualizando el nivel del juego*/
+		formaTablero[nivelY][nivelX] = '0' + nivel;
+
+	}else{
+
+		/*Al llegar al nivel 10 se mostrara que es el jefe final*/
+		formaTablero[nivelY][nivelX] = 'B';
+		formaTablero[nivelY][nivelX+1] = 'O';
+		formaTablero[nivelY][nivelX+2] = 'O';
+		formaTablero[nivelY][nivelX+3] = 'S';
+	}
+	
 }
 
 void Tablero::subirNivel(Jugador *J, int *nivel){
 
+	/*Se comprobara que el jugador haya terminado con todos los enemigos*/
 	if(J -> getPuntos() == numEnemigos*puntosSoldado + this -> puntosJugador){
 
-		this -> puntosJugador = J -> getPuntos();
+		/*Incrementamos el nivel*/
 		*nivel +=1;
 
-		if(this -> numEnemigos <=10){
-			this -> numEnemigos++;
-		}
+		if(*nivel <= 9){
+			
+			/*Guardamos los puntos actuales del jugador*/
+			this -> puntosJugador = J -> getPuntos();
 
-		for(size_t i = 0; i< this -> numEnemigos; i++){
-			this -> soldados -> InsertBack(new Soldado(4+i*7,2));
-		}
-		this -> balasSoldados +=1;
+			/*Comprobamos que el numero de enemigos no pase de 10 para evitar que sea muy difícil*/
+			if(this -> numEnemigos <=10){
 
+				/*Incrementamos el numero de enemigos*/
+				this -> numEnemigos++;
+			}
+
+			/*Creamos a los nuevos soldados para que el juego continue*/
+			for(size_t i = 0; i< this -> numEnemigos; i++){
+
+				this -> soldados -> InsertBack(new Soldado(4+i*7,2));
+			}
+
+			/*Para mayor dificultad aumentamos el número de balas que pueden disparar los soldados*/
+			this -> balasSoldados +=1;			
+		}
 	}
 }
 

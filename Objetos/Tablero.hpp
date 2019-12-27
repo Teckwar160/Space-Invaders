@@ -54,7 +54,7 @@ class Tablero : public Figura{
 		/**!<Guarda el número anterior de puntos del jugador*/
 		int puntosJugador;
 
-		/**!<Bloqueo de balas de los soldados*/
+		/**!<Número de balas que pueden disparar los soldados*/
 		int balasSoldados;
 
 	public:
@@ -75,11 +75,16 @@ class Tablero : public Figura{
 		 */
 		void pintaPuntos(Jugador *J);
 
+		/**
+		 * @brief Método que se encarga de mostrar el nivel en el que va el juego
+		 * @param nivel Nivel a mostrar en la pantalla
+		 */
 		void mostrarNivel(int nivel);
 
 		/**
 		 * @brief Método que aumenta el nivel del juego
-		 * @param 
+		 * @param J Jugador del tablero
+		 * @param nivel Nivel en el que se va el juego
 		 */
 		void subirNivel(Jugador *J, int *nivel);
 
