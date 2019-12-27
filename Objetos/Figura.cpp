@@ -39,6 +39,8 @@ Figura::Figura(Figura::Sprite id){
 
 		case Figura::Sprite::JEFE:
 
+			direccionSprite = "Sprites/Jefe.txt";
+
 			direccionDimension = "Sprites/dimensionesJefe.txt";
 
 			break;

@@ -7,6 +7,7 @@
 #include "Jugador.hpp"
 #include "Bala.hpp"
 #include "Soldado.hpp"
+#include "Jefe.hpp"
 #include "../Recursos/DLL.hpp"
 #include <stdlib.h>
 #include <time.h>
@@ -191,6 +192,19 @@ class Tablero : public Figura{
 		 * @return Soldado al que esta apuntando el cursor de soldados
 		 */
 		Soldado *getSoldado();
+
+		/*========Métodos para el jefe========*/
+
+		/**
+		 * Método que pinta al jefe del juego
+		 */
+		void pintaJefe(Jefe *J);
+
+		/**
+		 * Método que borra al jefe del juego
+		 */
+		void borrarJefe();
+
 };
 
 #endif
