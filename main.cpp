@@ -77,6 +77,22 @@ int main(){
 	/*Cargamos al jugador en el tablero*/
 	T -> pintaJugador(J);
 
+	/*Mostramos las instrucciones*/
+	T -> mostrarInstrucciones();
+
+	/*Mostramos el tablero*/
+	T -> mostrar();
+
+	/*Bucle para que no continue el programa*/
+	while(getch() != 'e'){
+		
+	}
+
+	/*Limpiamos la pantalla*/
+	erase();
+
+	T -> borrarInstrucciones();
+
 	/*Cargamos a los enemigos en el tablero*/
 	T -> pintaSoldados();
 
@@ -156,17 +172,35 @@ int main(){
 			T -> siguienteSoldado();
 		}
 
-		/*Movemos al Jefe*/
 		if(jefe){
+			/*Hacemos que dispare el jefe*/
+			T -> dispararJefe(Je);
+
+			/*Recorremos toda la lista de balas del jefe si es que esta activo*/
+
+			/*Colocamos el cursor de las balas del depósito del jefe en la primer bala*/
+			Je -> primerBala();
+
+			for(size_t i = Je -> getNumBalas(); i>0; i--){
+				T -> mueveBalaJefe(J,Je);
+
+				Je -> siguienteBala();
+			}
+
+			/*Mostramos la vida del jefe*/
 			T -> mostrarVida(Je);
+
+			/*Movemos al Jefe*/
 			T -> mueveJefe(Je);
+			
+
+			if(Je -> getVida() == 0){
+				jefe = false;
+				victoria = true;
+
+			}
 		}
 
-		if(Je -> getVida() == 0){
-			jefe = false;
-			victoria = true;
-
-		}
 
 		/*Borramos el tablero*/
 		erase();
@@ -176,7 +210,7 @@ int main(){
 
 		/*Verificamos que se pueda seguir jugando*/
 		if(J -> getVidas() == 0){
-			//gameOver = true;
+			gameOver = true;
 		}
 
 		/*Cambia el nivel si se llega a una cantidad de puntos*/
@@ -184,6 +218,7 @@ int main(){
 
 		/*Si gano el jugador*/
 		if(victoria){
+			T -> borrarJefe(Je);
 			T -> mostrarVictoria();
 		}
 			

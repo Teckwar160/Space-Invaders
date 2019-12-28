@@ -49,6 +49,10 @@ Tablero::Tablero(int numEnemigos):Figura(Figura::Sprite::TABLERO){
 	this -> felicitacionesX =40;
 	this -> felicitacionesY = 3;
 
+	/*Definimos la posción de las instrucciones en el tablero*/
+	this -> instruccionesX = 40;
+	this -> instruccionesY = 3;
+
 	/*Definimos el numero inicial de puntos del jugador*/
 	this -> puntosJugador = 0;
 
@@ -190,6 +194,164 @@ void Tablero::mostrarVictoria(){
 	formaTablero[felicitacionesY+2][felicitacionesX+17] = 'l'; 
 	formaTablero[felicitacionesY+2][felicitacionesX+18] = 'i'; 
 	formaTablero[felicitacionesY+2][felicitacionesX+19] = 'r'; 
+}
+
+void Tablero::mostrarInstrucciones(){
+
+	/*Obtenemos la forma del tablero*/
+	char **formaTablero = this -> getForma();
+
+	formaTablero[instruccionesY][instruccionesX] = 'I';
+	formaTablero[instruccionesY][instruccionesX+1] = 'n';
+	formaTablero[instruccionesY][instruccionesX+2] = 's';
+	formaTablero[instruccionesY][instruccionesX+3] = 't';
+	formaTablero[instruccionesY][instruccionesX+4] = 'r';
+	formaTablero[instruccionesY][instruccionesX+5] = 'u';
+	formaTablero[instruccionesY][instruccionesX+6] = 'c';
+	formaTablero[instruccionesY][instruccionesX+7] = 'c';
+	formaTablero[instruccionesY][instruccionesX+8] = 'i';
+	formaTablero[instruccionesY][instruccionesX+9] = 'o';
+	formaTablero[instruccionesY][instruccionesX+10] = 'n';
+	formaTablero[instruccionesY][instruccionesX+11] = 'e';
+	formaTablero[instruccionesY][instruccionesX+12] = 's';
+	formaTablero[instruccionesY][instruccionesX+13] = ':';
+	formaTablero[instruccionesY+2][instruccionesX] = 'P';
+	formaTablero[instruccionesY+2][instruccionesX+1] = 'a';
+	formaTablero[instruccionesY+2][instruccionesX+2] = 'r';
+	formaTablero[instruccionesY+2][instruccionesX+3] = 'a';
+	formaTablero[instruccionesY+2][instruccionesX+5] = 'm';
+	formaTablero[instruccionesY+2][instruccionesX+6] = 'o';
+	formaTablero[instruccionesY+2][instruccionesX+7] = 'v';
+	formaTablero[instruccionesY+2][instruccionesX+8] = 'e';
+	formaTablero[instruccionesY+2][instruccionesX+9] = 'r';
+	formaTablero[instruccionesY+2][instruccionesX+10] = 't';
+	formaTablero[instruccionesY+2][instruccionesX+11] = 'e';
+	formaTablero[instruccionesY+2][instruccionesX+13] = 'u';
+	formaTablero[instruccionesY+2][instruccionesX+14] = 's';
+	formaTablero[instruccionesY+2][instruccionesX+15] = 'a';
+	formaTablero[instruccionesY+2][instruccionesX+17] = '"';
+	formaTablero[instruccionesY+2][instruccionesX+18] = 'a';
+	formaTablero[instruccionesY+2][instruccionesX+19] = '"';
+	formaTablero[instruccionesY+2][instruccionesX+21] = 'y';
+	formaTablero[instruccionesY+2][instruccionesX+23] = '"';
+	formaTablero[instruccionesY+2][instruccionesX+24] = 'd';
+	formaTablero[instruccionesY+2][instruccionesX+25] = '"';
+	formaTablero[instruccionesY+4][instruccionesX] = 'P';
+	formaTablero[instruccionesY+4][instruccionesX+1] = 'a';
+	formaTablero[instruccionesY+4][instruccionesX+2] = 'r';
+	formaTablero[instruccionesY+4][instruccionesX+3] = 'a';
+	formaTablero[instruccionesY+4][instruccionesX+5] = 'd';
+	formaTablero[instruccionesY+4][instruccionesX+6] = 'i';
+	formaTablero[instruccionesY+4][instruccionesX+7] = 's';
+	formaTablero[instruccionesY+4][instruccionesX+8] = 'p';
+	formaTablero[instruccionesY+4][instruccionesX+9] = 'a';
+	formaTablero[instruccionesY+4][instruccionesX+10] = 'r';
+	formaTablero[instruccionesY+4][instruccionesX+11] = 'a';
+	formaTablero[instruccionesY+4][instruccionesX+12] = 'r';
+	formaTablero[instruccionesY+4][instruccionesX+14] = 'u';
+	formaTablero[instruccionesY+4][instruccionesX+15] = 's';
+	formaTablero[instruccionesY+4][instruccionesX+16] = 'a';
+	formaTablero[instruccionesY+4][instruccionesX+18] = '"';
+	formaTablero[instruccionesY+4][instruccionesX+19] = 'f';
+	formaTablero[instruccionesY+4][instruccionesX+20] = '"';
+	formaTablero[instruccionesY+6][instruccionesX] = 'P';
+	formaTablero[instruccionesY+6][instruccionesX+1] = 'u';
+	formaTablero[instruccionesY+6][instruccionesX+2] = 'l';
+	formaTablero[instruccionesY+6][instruccionesX+3] = 's';
+	formaTablero[instruccionesY+6][instruccionesX+4] = 'a';
+	formaTablero[instruccionesY+6][instruccionesX+6] = '"';
+	formaTablero[instruccionesY+6][instruccionesX+7] = 'e';
+	formaTablero[instruccionesY+6][instruccionesX+8] = '"';
+	formaTablero[instruccionesY+6][instruccionesX+10] = 'p';
+	formaTablero[instruccionesY+6][instruccionesX+11] = 'a';
+	formaTablero[instruccionesY+6][instruccionesX+12] = 'r';
+	formaTablero[instruccionesY+6][instruccionesX+13] = 'a';
+	formaTablero[instruccionesY+6][instruccionesX+15] = 'e';
+	formaTablero[instruccionesY+6][instruccionesX+16] = 'm';
+	formaTablero[instruccionesY+6][instruccionesX+17] = 'p';
+	formaTablero[instruccionesY+6][instruccionesX+18] = 'e';
+	formaTablero[instruccionesY+6][instruccionesX+19] = 'z';
+	formaTablero[instruccionesY+6][instruccionesX+20] = 'a';
+	formaTablero[instruccionesY+6][instruccionesX+21] = 'r';
+}
+
+void Tablero::borrarInstrucciones(){
+
+	/*Obtenemos la forma del tablero*/
+	char **formaTablero = this -> getForma();
+
+	formaTablero[instruccionesY][instruccionesX] = this -> caracterBase;
+	formaTablero[instruccionesY][instruccionesX+1] = this -> caracterBase;
+	formaTablero[instruccionesY][instruccionesX+2] = this -> caracterBase;
+	formaTablero[instruccionesY][instruccionesX+3] = this -> caracterBase;
+	formaTablero[instruccionesY][instruccionesX+4] = this -> caracterBase;
+	formaTablero[instruccionesY][instruccionesX+5] = this -> caracterBase;
+	formaTablero[instruccionesY][instruccionesX+6] = this -> caracterBase;
+	formaTablero[instruccionesY][instruccionesX+7] = this -> caracterBase;
+	formaTablero[instruccionesY][instruccionesX+8] = this -> caracterBase;
+	formaTablero[instruccionesY][instruccionesX+9] = this -> caracterBase;
+	formaTablero[instruccionesY][instruccionesX+10] = this -> caracterBase;
+	formaTablero[instruccionesY][instruccionesX+11] = this -> caracterBase;
+	formaTablero[instruccionesY][instruccionesX+12] = this -> caracterBase;
+	formaTablero[instruccionesY][instruccionesX+13] = this -> caracterBase;
+	formaTablero[instruccionesY+2][instruccionesX] = this -> caracterBase;
+	formaTablero[instruccionesY+2][instruccionesX+1] = this -> caracterBase;
+	formaTablero[instruccionesY+2][instruccionesX+2] = this -> caracterBase;
+	formaTablero[instruccionesY+2][instruccionesX+3] = this -> caracterBase;
+	formaTablero[instruccionesY+2][instruccionesX+5] = this -> caracterBase;
+	formaTablero[instruccionesY+2][instruccionesX+6] = this -> caracterBase;
+	formaTablero[instruccionesY+2][instruccionesX+7] = this -> caracterBase;
+	formaTablero[instruccionesY+2][instruccionesX+8] = this -> caracterBase;
+	formaTablero[instruccionesY+2][instruccionesX+9] = this -> caracterBase;
+	formaTablero[instruccionesY+2][instruccionesX+10] = this -> caracterBase;
+	formaTablero[instruccionesY+2][instruccionesX+11] = this -> caracterBase;
+	formaTablero[instruccionesY+2][instruccionesX+13] = this -> caracterBase;
+	formaTablero[instruccionesY+2][instruccionesX+14] = this -> caracterBase;
+	formaTablero[instruccionesY+2][instruccionesX+15] = this -> caracterBase;
+	formaTablero[instruccionesY+2][instruccionesX+17] = this -> caracterBase;
+	formaTablero[instruccionesY+2][instruccionesX+18] = this -> caracterBase;
+	formaTablero[instruccionesY+2][instruccionesX+19] = this -> caracterBase;
+	formaTablero[instruccionesY+2][instruccionesX+21] = this -> caracterBase;
+	formaTablero[instruccionesY+2][instruccionesX+23] = this -> caracterBase;
+	formaTablero[instruccionesY+2][instruccionesX+24] = this -> caracterBase;
+	formaTablero[instruccionesY+2][instruccionesX+25] = this -> caracterBase;
+	formaTablero[instruccionesY+4][instruccionesX] = this -> caracterBase;
+	formaTablero[instruccionesY+4][instruccionesX+1] = this -> caracterBase;
+	formaTablero[instruccionesY+4][instruccionesX+2] = this -> caracterBase;
+	formaTablero[instruccionesY+4][instruccionesX+3] = this -> caracterBase;
+	formaTablero[instruccionesY+4][instruccionesX+5] = this -> caracterBase;
+	formaTablero[instruccionesY+4][instruccionesX+6] = this -> caracterBase;
+	formaTablero[instruccionesY+4][instruccionesX+7] = this -> caracterBase;
+	formaTablero[instruccionesY+4][instruccionesX+8] = this -> caracterBase;
+	formaTablero[instruccionesY+4][instruccionesX+9] = this -> caracterBase;
+	formaTablero[instruccionesY+4][instruccionesX+10] = this -> caracterBase;
+	formaTablero[instruccionesY+4][instruccionesX+11] = this -> caracterBase;
+	formaTablero[instruccionesY+4][instruccionesX+12] = this -> caracterBase;
+	formaTablero[instruccionesY+4][instruccionesX+14] = this -> caracterBase;
+	formaTablero[instruccionesY+4][instruccionesX+15] = this -> caracterBase;
+	formaTablero[instruccionesY+4][instruccionesX+16] = this -> caracterBase;
+	formaTablero[instruccionesY+4][instruccionesX+18] = this -> caracterBase;
+	formaTablero[instruccionesY+4][instruccionesX+19] = this -> caracterBase;
+	formaTablero[instruccionesY+4][instruccionesX+20] = this -> caracterBase;
+	formaTablero[instruccionesY+6][instruccionesX] = this -> caracterBase;
+	formaTablero[instruccionesY+6][instruccionesX+1] = this -> caracterBase;
+	formaTablero[instruccionesY+6][instruccionesX+2] = this -> caracterBase;
+	formaTablero[instruccionesY+6][instruccionesX+3] = this -> caracterBase;
+	formaTablero[instruccionesY+6][instruccionesX+4] = this -> caracterBase;
+	formaTablero[instruccionesY+6][instruccionesX+6] = this -> caracterBase;
+	formaTablero[instruccionesY+6][instruccionesX+7] = this -> caracterBase;
+	formaTablero[instruccionesY+6][instruccionesX+8] = this -> caracterBase;
+	formaTablero[instruccionesY+6][instruccionesX+10] = this -> caracterBase;
+	formaTablero[instruccionesY+6][instruccionesX+11] = this -> caracterBase;
+	formaTablero[instruccionesY+6][instruccionesX+12] = this -> caracterBase;
+	formaTablero[instruccionesY+6][instruccionesX+13] = this -> caracterBase;
+	formaTablero[instruccionesY+6][instruccionesX+15] = this -> caracterBase;
+	formaTablero[instruccionesY+6][instruccionesX+16] = this -> caracterBase;
+	formaTablero[instruccionesY+6][instruccionesX+17] = this -> caracterBase;
+	formaTablero[instruccionesY+6][instruccionesX+18] = this -> caracterBase;
+	formaTablero[instruccionesY+6][instruccionesX+19] = this -> caracterBase;
+	formaTablero[instruccionesY+6][instruccionesX+20] = this -> caracterBase;
+	formaTablero[instruccionesY+6][instruccionesX+21] = this -> caracterBase;
 }
 
 /*========Métodos para el jugador========*/
@@ -765,7 +927,7 @@ void Tablero::mueveSoldados(){
 		}else if(xU == tableroColumnas -4 && sentido == Soldado::Sentido::DERECHA){
 			
 			/*Si llego al limite de la pantalla, indicamos que se muevan hacia abajo a los soldados*/
-			if(yU +1 != tableroFilas -4){
+			if(yU +1 != tableroFilas -10){
 				abajo = true;
 			}
 
@@ -780,7 +942,7 @@ void Tablero::mueveSoldados(){
 		}else if(xP == 3 && sentido == Soldado::Sentido::IZQUIERDA){
 
 			/*Si llego al limite de la pantalla, indicamos que se muevan hacia abajo a los soldados*/
-			if(yP +1 != tableroFilas -4){
+			if(yP +1 != tableroFilas -10){
 				abajo = true;	
 			}
 
@@ -1208,3 +1370,128 @@ void Tablero::mostrarVida(Jefe *J){
 	formaTablero[vidaJefeY][vidaJefeX+10] = '0' + unidades;
 }
 
+void Tablero::dispararJefe(Jefe *J){
+
+	srand(time(NULL));
+
+	/*Si el destino dice que dispare*/
+	if(rand()%999%5 == 0 && J -> getNumBalas() < 10){			
+
+		/*Creamos a la bala que se dispara*/
+		Bala *B = new Bala();
+
+		/*Asignamos las coordenadas de la bala*/
+		B -> setX(J -> getX());
+		B -> setY(J -> getY() + 5);
+
+		/*Pintamos la bala en el tablero*/
+		this -> pintaBala(B);
+
+		/*Cargamos la bala en el deposito del soldado*/
+		J -> cargarBala(B);			
+	}
+
+}
+
+Bala::Choco Tablero::mueveBalaJefe(Jugador *J, Jefe *Je){
+
+	/*Obtenemos a la bala*/
+	Bala *B = Je-> getBala();
+
+	/*Obtenemos las coordenadas de la bala*/
+	int x = B -> getX();
+	int y = B -> getY();
+
+	/*Movemos la bala una posición*/
+	y +=1;
+	
+	/*Obtenemos la forma del tablero*/
+	char **formaTablero = this -> getForma();
+
+	/*Veirificamos si choco contra un muro*/
+	if(formaTablero[y][x] == '#'){
+
+		/*Borramos la bala*/
+		this -> borrarBala(B);
+
+		/*Pintamos el tablero con el fondo*/
+		formaTablero[y][x] = this -> caracterBase;
+
+		/*Borramos la bala de la lista de balas del jefe*/
+		Je -> borrarBala();
+
+		/*Salimos del método*/
+		return Bala::Choco::MURO;
+	}
+
+	/*Verificamos si choco contra otra bala*/
+	if(formaTablero[y][x] == '*'){
+
+		/*Borramos a la bala*/
+		this -> borrarBala(B);
+
+		/*Pintamos el tablero con el fondo*/
+		formaTablero[y][x] = this -> caracterBase;
+
+		/*Borramos la bala de la lista de balas del jefe*/
+		Je -> borrarBala();
+
+		/*Salimos del método*/
+		return Bala::Choco::BALA;
+	}
+
+	/*Verificamos si choco contra el jugador*/
+
+	/*Verificamos la coordenada en Y*/
+	if(y + 2 == J -> getY() || y +1 == J -> getY() -1 || y +3 == J -> getY() + 1 || y + 4 == J -> getY() + 2){
+			
+		/*Verificamos la coordenada en X*/
+		if(x == J -> getX() ||  x -1 == J -> getX() ||  x -2 == J -> getX() ||  x -3 == J -> getX() ||  x +1 == J -> getX() || x +2 == J -> getX() || x + 3 == J -> getX()){
+				
+				/*Borramos la bala*/
+				this -> borrarBala(B);
+
+				/*Restamos vidas al jugador*/
+				J -> setVidas(J -> getVidas() -1);
+
+				/*Dependiendo el numero de vidas, se actualizara el tablero*/
+				if(formaTablero[vidasY][vidasX] == '$'){
+					formaTablero[vidasY][vidasX] = '.';
+				}else if(formaTablero[vidasY][vidasX -2] == '$'){
+					formaTablero[vidasY][vidasX -2] = '.';
+				}else if(formaTablero[vidasY][vidasX -4] == '$'){
+					formaTablero[vidasY][vidasX -4] = '.';
+				}
+				
+
+				/*Borramos la bala de la lista de balas del jefe*/
+				Je -> borrarBala();
+
+				/*Salimos del método*/
+				return Bala::Choco::JUGADOR;
+		}
+
+	}
+
+	/*Verificamos que siga en el tablero*/
+	if(y < 27){
+		/*Borramos la bala*/
+		this -> borrarBala(B);
+
+		/*Actualizamos la posicón de la bala*/
+		B -> setY(y);
+		
+		/*Repintamos la bala*/
+		this -> pintaBala(B);
+
+	}else{
+		/*Borramos la bala*/
+		this -> borrarBala(B);
+
+		/*Borramos a la bala de la lista de balas del soldado*/
+		Je -> borrarBala();
+	}
+
+	/*Indicamos que no paso nada*/
+	return Bala::Choco::NADA;
+}

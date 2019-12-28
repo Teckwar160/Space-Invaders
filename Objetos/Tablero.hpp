@@ -64,6 +64,12 @@ class Tablero : public Figura{
 		/**!<Posición en y del cartel de felicitaciones*/
 		int felicitacionesY;
 
+		/**!<Posición en x del cartel de instrucciones*/
+		int instruccionesX;
+
+		/**!<Posición en y del cartel de instrucciones*/
+		int instruccionesY;
+
 		/**!<Guarda el número anterior de puntos del jugador*/
 		int puntosJugador;
 
@@ -106,6 +112,16 @@ class Tablero : public Figura{
 		 * @brief Método que muestra un cartel de victoria al jugador
 		 */
 		void mostrarVictoria();
+
+		/**
+		 * @brief Método que mostrara las instrucciones al jugador
+		 */
+		void mostrarInstrucciones();
+
+		/**
+		 * @brief Método que borra las isntrucciones
+		 */
+		void borrarInstrucciones();
 
 		/*========Métodos para el jugador========*/
 
@@ -236,6 +252,19 @@ class Tablero : public Figura{
 		 * @param J Jefe que se mostrara su vida
 		 */
 		void mostrarVida(Jefe *J);
+
+		/**
+		 * @brief Método que hace que dispare el Jefe
+		 * @param J Jefe que disparar las balas
+		 */
+		void dispararJefe(Jefe *J);
+
+		/**
+		 * @brief Método que mueve las balas del enemigo
+		 * @param J Jugador del tablero
+		 * @param Je Jefe del juego
+		 */
+		Bala::Choco mueveBalaJefe(Jugador *J, Jefe *Je);
 
 };
 
