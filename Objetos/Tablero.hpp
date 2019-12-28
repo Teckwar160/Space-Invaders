@@ -58,6 +58,12 @@ class Tablero : public Figura{
 		/**!<Posición en y del nivel*/
 		int nivelY;		
 
+		/**!<Posición en x del cartel de felicitaciones*/
+		int felicitacionesX;
+
+		/**!<Posición en y del cartel de felicitaciones*/
+		int felicitacionesY;
+
 		/**!<Guarda el número anterior de puntos del jugador*/
 		int puntosJugador;
 
@@ -95,6 +101,11 @@ class Tablero : public Figura{
 		 * @param nivel Nivel en el que se va el juego
 		 */
 		void subirNivel(Jugador *J, int *nivel);
+
+		/**
+		 * @brief Método que muestra un cartel de victoria al jugador
+		 */
+		void mostrarVictoria();
 
 		/*========Métodos para el jugador========*/
 
@@ -140,7 +151,7 @@ class Tablero : public Figura{
 		 * @param J Jugador que disparo la bala
 		 * @return Contra que choco la bala
 		 */
-		Bala::Choco mueveBala(Jugador *J);
+		Bala::Choco mueveBala(Jugador *J, Jefe *Je);
 		
 		/*========Métodos de los soldados========*/
 

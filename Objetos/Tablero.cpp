@@ -45,6 +45,10 @@ Tablero::Tablero(int numEnemigos):Figura(Figura::Sprite::TABLERO){
 	this -> vidaJefeX = 73;
 	this -> vidaJefeY = 28;
 
+	/*Definimos la posición de la felicitación en el tablero*/
+	this -> felicitacionesX =40;
+	this -> felicitacionesY = 3;
+
 	/*Definimos el numero inicial de puntos del jugador*/
 	this -> puntosJugador = 0;
 
@@ -137,6 +141,55 @@ void Tablero::subirNivel(Jugador *J, int *nivel){
 			this -> balasSoldados +=1;			
 		}
 	}
+}
+
+void Tablero::mostrarVictoria(){
+
+	/*Obtenemos la forma del Tablero*/
+	char **formaTablero = this -> getForma();
+
+	/*Pintamos el mensaje*/ 
+	formaTablero[felicitacionesY][felicitacionesX] = 'F'; 
+	formaTablero[felicitacionesY][felicitacionesX+1] = 'e'; 
+	formaTablero[felicitacionesY][felicitacionesX+2] = 'l'; 
+	formaTablero[felicitacionesY][felicitacionesX+3] = 'i'; 
+	formaTablero[felicitacionesY][felicitacionesX+4] = 'c'; 
+	formaTablero[felicitacionesY][felicitacionesX+5] = 'i'; 
+	formaTablero[felicitacionesY][felicitacionesX+6] = 'd'; 
+	formaTablero[felicitacionesY][felicitacionesX+7] = 'a'; 
+	formaTablero[felicitacionesY][felicitacionesX+8] = 'd'; 
+	formaTablero[felicitacionesY][felicitacionesX+9] = 'e'; 
+	formaTablero[felicitacionesY][felicitacionesX+10] = 's'; 
+	formaTablero[felicitacionesY][felicitacionesX+11] = '.';
+	formaTablero[felicitacionesY][felicitacionesX+12] = 'G'; 
+	formaTablero[felicitacionesY][felicitacionesX+13] = 'a'; 
+	formaTablero[felicitacionesY][felicitacionesX+14] = 'n'; 
+	formaTablero[felicitacionesY][felicitacionesX+15] = 'a'; 
+	formaTablero[felicitacionesY][felicitacionesX+16] = 's'; 
+	formaTablero[felicitacionesY][felicitacionesX+17] = 't';
+	formaTablero[felicitacionesY][felicitacionesX+18] = 'e'; 
+
+	/*Pintamos la forma de salir*/  
+	formaTablero[felicitacionesY+2][felicitacionesX] = 'P'; 
+	formaTablero[felicitacionesY+2][felicitacionesX+1] = 'u'; 
+	formaTablero[felicitacionesY+2][felicitacionesX+2] = 'l'; 
+	formaTablero[felicitacionesY+2][felicitacionesX+3] = 's'; 
+	formaTablero[felicitacionesY+2][felicitacionesX+4] = 'a'; 
+	formaTablero[felicitacionesY+2][felicitacionesX+5] = '.'; 
+	formaTablero[felicitacionesY+2][felicitacionesX+6] = '"'; 
+	formaTablero[felicitacionesY+2][felicitacionesX+7] = '.'; 
+	formaTablero[felicitacionesY+2][felicitacionesX+8] = '"'; 
+	formaTablero[felicitacionesY+2][felicitacionesX+9] = '.'; 
+	formaTablero[felicitacionesY+2][felicitacionesX+10] = 'p'; 
+	formaTablero[felicitacionesY+2][felicitacionesX+11] = 'a'; 
+	formaTablero[felicitacionesY+2][felicitacionesX+12] = 'r'; 
+	formaTablero[felicitacionesY+2][felicitacionesX+13] = 'a'; 
+	formaTablero[felicitacionesY+2][felicitacionesX+14] = '.'; 
+	formaTablero[felicitacionesY+2][felicitacionesX+15] = 's'; 
+	formaTablero[felicitacionesY+2][felicitacionesX+16] = 'a'; 
+	formaTablero[felicitacionesY+2][felicitacionesX+17] = 'l'; 
+	formaTablero[felicitacionesY+2][felicitacionesX+18] = 'i'; 
+	formaTablero[felicitacionesY+2][felicitacionesX+19] = 'r'; 
 }
 
 /*========Métodos para el jugador========*/
@@ -315,7 +368,7 @@ void Tablero::dispararJugador(Jugador *J){
 	J -> incrementaDisparos();
 }
 
-Bala::Choco Tablero::mueveBala(Jugador *J){
+Bala::Choco Tablero::mueveBala(Jugador *J, Jefe *Je){
 
 	/*Obtenemos a la bala*/
 	Bala *B = J -> getBala();
@@ -445,6 +498,22 @@ Bala::Choco Tablero::mueveBala(Jugador *J){
 	/*Si el soldado murio lo indicamos y salimos del método*/
 	if(muereSoldado){
 		return Bala::Choco::SOLDADO;
+	}
+
+	/*Verificamos si choco contra el jefe*/
+	if(formaTablero[y][x] == '%'){
+
+		/*Borramos la bala*/
+		this -> borrarBala(B);
+
+		/*Restamos vida al Jefe*/
+		Je -> setVida(Je -> getVida() -5);
+
+		/*Borramos la bala del depósito del jugador*/
+		J -> borrarBala();
+
+		/*Salimos del Método*/
+		return Bala::Choco::JEFE;
 	}
 
 	/*Verificamos que siga en el tablero*/

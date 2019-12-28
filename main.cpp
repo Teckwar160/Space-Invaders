@@ -54,7 +54,10 @@ int main(){
 	bool gameOver = false;
 
 	/**!<Indica si sale el Jefe o no*/
-	bool JefeListo = false;
+	bool jefe = false;
+
+	/**!<Indica si se vencio al juego o no*/
+	bool victoria = false;
 
 	/**!<Indica el nivel del juego*/
 	int nivel = 1;
@@ -87,7 +90,7 @@ int main(){
 		T -> mostrar();
 
 		/*Mostrar nivel*/
-		T -> mostrarNivel(nivel,&JefeListo);
+		T -> mostrarNivel(nivel,&jefe);
 
 		/*Comprobamos si se pulso una tecla*/
 		if(kbhit()){
@@ -113,7 +116,7 @@ int main(){
 		/*Recorremos todo el depósito del jugador moviendo a las balas que disparo*/
 		for(int i = J -> getNumBalas(); i>0; i--){
 			/*Movemos a la bala*/
-			T -> mueveBala(J);
+			T -> mueveBala(J,Je);
 
 			/*Nos movemos a la siguiente bala del depósito*/
 			J -> siguienteBala();
@@ -154,9 +157,15 @@ int main(){
 		}
 
 		/*Movemos al Jefe*/
-		if(JefeListo){
+		if(jefe){
 			T -> mostrarVida(Je);
 			T -> mueveJefe(Je);
+		}
+
+		if(Je -> getVida() == 0){
+			jefe = false;
+			victoria = true;
+
 		}
 
 		/*Borramos el tablero*/
@@ -172,8 +181,12 @@ int main(){
 
 		/*Cambia el nivel si se llega a una cantidad de puntos*/
 		T -> subirNivel(J,&nivel);
-		
-		
+
+		/*Si gano el jugador*/
+		if(victoria){
+			T -> mostrarVictoria();
+		}
+			
 	}
 
 	/*Fin del cambio de modo*/
