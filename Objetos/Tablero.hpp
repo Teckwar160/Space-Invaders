@@ -203,7 +203,7 @@ class Tablero : public Figura{
 		/**
 		 * Método que borra al jefe del juego
 		 */
-		void borrarJefe();
+		void borrarJefe(Jefe *J);
 
 };
 

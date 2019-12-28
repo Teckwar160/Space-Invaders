@@ -921,9 +921,6 @@ void Tablero::pintaJefe(Jefe *J){
 
 	/*Obtenemos la forma del Jefe*/
 	char **formaJefe = J -> getForma();
-	
-	/*Colocamos al cursor de la lista de soldados en el primer soldado*/
-	this -> soldados -> CursorFirst();
 
 	/*Obtenemos las coordenadas del punto de control del jefe*/
 	int x = J -> getX();
@@ -947,7 +944,7 @@ void Tablero::pintaJefe(Jefe *J){
 
 	/*Pintamos la antena derecha*/
 	formaTablero[y-2][x+2] = formaJefe[1][7];
-	formaTablero[y-2][x+3] = formaJefe[0][8];
+	formaTablero[y-3][x+3] = formaJefe[0][8];
 
 	/*Pintamos la parte central izquierda*/
 	formaTablero[y][x-1] = formaJefe[3][4];
@@ -971,5 +968,95 @@ void Tablero::pintaJefe(Jefe *J){
 	formaTablero[y+1][x+3] = formaJefe[3][8];
 	formaTablero[y+1][x+4] = formaJefe[3][9];
 	formaTablero[y+1][x+5] = formaJefe[3][10];
+
+	/*Pintamos las piernas y los brazos*/
+	formaTablero[y+2][x] = formaJefe[5][5];
+	formaTablero[y+2][x-1] = formaJefe[5][4];
+	formaTablero[y+2][x-2] = formaJefe[5][3];
+	formaTablero[y+2][x-3] = formaJefe[5][2];
+	formaTablero[y+2][x-5] = formaJefe[5][0];
+	formaTablero[y+2][x+1] = formaJefe[5][6];
+	formaTablero[y+2][x+2] = formaJefe[5][7];
+	formaTablero[y+2][x+3] = formaJefe[5][8];
+	formaTablero[y+2][x+5] = formaJefe[5][10];
+	formaTablero[y+3][x-3] = formaJefe[6][2];
+	formaTablero[y+3][x-5] = formaJefe[6][0];
+	formaTablero[y+3][x+3] = formaJefe[6][8];
+	formaTablero[y+3][x+5] = formaJefe[6][10];
+	formaTablero[y+4][x-1] = formaJefe[7][4];
+	formaTablero[y+4][x-2] = formaJefe[7][3];
+	formaTablero[y+4][x+1] = formaJefe[7][6];
+	formaTablero[y+4][x+2] = formaJefe[7][7];
+}
+
+void Tablero::borrarJefe(Jefe *J){
+	/*Obtenemos la forma del tablero*/
+	char **formaTablero = this -> getForma();
+
+	/*Obtenemos las coordenadas del punto de control del jefe*/
+	int x = J -> getX();
+	int y = J -> getY();
+
+	/*pintamos el punto de contro del Jefe*/
+	formaTablero[y][x] = this -> caracterBase;
+
+	/*Pintamos la parte superior del jefe*/
+	formaTablero[y-1][x-1] = this -> caracterBase;
+	formaTablero[y-1][x-2] = this -> caracterBase;
+	formaTablero[y-1][x-3] = this -> caracterBase;
+	formaTablero[y-1][x] = this -> caracterBase;
+	formaTablero[y-1][x+1] = this -> caracterBase;
+	formaTablero[y-1][x+2] = this -> caracterBase;
+	formaTablero[y-1][x+3] = this -> caracterBase;
+
+	/*Pintamos la antena izquierda*/
+	formaTablero[y-2][x-2] = this -> caracterBase;
+	formaTablero[y-3][x-3] = this -> caracterBase;
+
+	/*Pintamos la antena derecha*/
+	formaTablero[y-2][x+2] = this -> caracterBase;
+	formaTablero[y-3][x+3] = this -> caracterBase;
+
+	/*Pintamos la parte central izquierda*/
+	formaTablero[y][x-1] = this -> caracterBase;
+	formaTablero[y][x-3] = this -> caracterBase;
+	formaTablero[y][x-4] = this -> caracterBase;
+
+	/*Pintamos la parte central derecha*/
+	formaTablero[y][x+1] = this -> caracterBase;
+	formaTablero[y][x+3] = this -> caracterBase;
+	formaTablero[y][x+4] = this -> caracterBase;
+
+	/*Pintamos la parte inferior del jefe*/
+	formaTablero[y+1][x] = this -> caracterBase;
+	formaTablero[y+1][x-1] = this -> caracterBase;
+	formaTablero[y+1][x-2] = this -> caracterBase;
+	formaTablero[y+1][x-3] = this -> caracterBase;
+	formaTablero[y+1][x-4] = this -> caracterBase;
+	formaTablero[y+1][x-5] = formaJefe[3][0];
+	formaTablero[y+1][x+1] = formaJefe[3][6];
+	formaTablero[y+1][x+2] = formaJefe[3][7];
+	formaTablero[y+1][x+3] = formaJefe[3][8];
+	formaTablero[y+1][x+4] = formaJefe[3][9];
+	formaTablero[y+1][x+5] = formaJefe[3][10];
+
+	/*Pintamos las piernas y los brazos*/
+	formaTablero[y+2][x] = formaJefe[5][5];
+	formaTablero[y+2][x-1] = formaJefe[5][4];
+	formaTablero[y+2][x-2] = formaJefe[5][3];
+	formaTablero[y+2][x-3] = formaJefe[5][2];
+	formaTablero[y+2][x-5] = formaJefe[5][0];
+	formaTablero[y+2][x+1] = formaJefe[5][6];
+	formaTablero[y+2][x+2] = formaJefe[5][7];
+	formaTablero[y+2][x+3] = formaJefe[5][8];
+	formaTablero[y+2][x+5] = formaJefe[5][10];
+	formaTablero[y+3][x-3] = formaJefe[6][2];
+	formaTablero[y+3][x-5] = formaJefe[6][0];
+	formaTablero[y+3][x+3] = formaJefe[6][8];
+	formaTablero[y+3][x+5] = formaJefe[6][10];
+	formaTablero[y+4][x-1] = formaJefe[7][4];
+	formaTablero[y+4][x-2] = formaJefe[7][3];
+	formaTablero[y+4][x+1] = formaJefe[7][6];
+	formaTablero[y+4][x+2] = formaJefe[7][7];
 }
 
