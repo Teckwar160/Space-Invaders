@@ -49,6 +49,12 @@ class Tablero : public Figura{
 		/**!<Posición en x del nivel*/
 		int nivelX;
 
+		/**!<Posición en x de la vida del Jefe*/
+		int vidaJefeX;
+
+		/**!<Posición en y de la vida dek jefe*/
+		int vidaJefeY;
+
 		/**!<Posición en y del nivel*/
 		int nivelY;		
 
@@ -79,8 +85,9 @@ class Tablero : public Figura{
 		/**
 		 * @brief Método que se encarga de mostrar el nivel en el que va el juego
 		 * @param nivel Nivel a mostrar en la pantalla
+		 * @param JefeListo Indica si sale o no el jefe
 		 */
-		void mostrarNivel(int nivel);
+		void mostrarNivel(int nivel,bool *JefeListo);
 
 		/**
 		 * @brief Método que aumenta el nivel del juego
@@ -196,14 +203,28 @@ class Tablero : public Figura{
 		/*========Métodos para el jefe========*/
 
 		/**
-		 * Método que pinta al jefe del juego
+		 * @brief Método que pinta al jefe del juego
+		 * @param J Jefe del juego
 		 */
 		void pintaJefe(Jefe *J);
 
 		/**
-		 * Método que borra al jefe del juego
+		 * @brief Método que borra al jefe del juego
+		 * @param J Jefe del juego
 		 */
 		void borrarJefe(Jefe *J);
+
+		/**
+		 * @brief Método que mueve al jefe por el tablero
+		 * @param J Jefe del juego
+		 */
+		void mueveJefe(Jefe *J);
+
+		/**
+		 * @brief Método que mostrara la vida del jefe en el tablero
+		 * @param J Jefe que se mostrara su vida
+		 */
+		void mostrarVida(Jefe *J);
 
 };
 

@@ -23,6 +23,9 @@ class Jefe : public Figura{
 		 * @param B Bala que se liberara la memoria
 		 */
 		static void liberaBala(Bala *B);	
+
+		/**!<Vida del Jefe*/
+		int vida;
 		
 	public:
 		/**!<Indica el posible movimiento de los enemigos*/
@@ -76,6 +79,30 @@ class Jefe : public Figura{
 		 * @return Numero de balas del depósito
 		 */
 		int getNumBalas();
+
+		/**
+		* @brief Método que permite definir el sentido del movimiento del jefe
+		* @param sentido Nuevo Sentido del Jefe
+		*/
+		void setSentido(Jefe::Sentido sentido);
+
+		/**
+		 * @brief Método que nos permite obtener el sentido del Jefe
+		 * @return Sentido del movimiento del Jefe
+		 */
+		Jefe::Sentido getSentido();
+
+		/**
+		 * @brief Método que define la vida del jefe
+		 * @param vida Nuevo valor de la vida del jefe
+		 */
+		void setVida(int vida);
+
+		/**
+		 * @brief Método que devuelve la vida del Jefe
+		 * @return Vida del jefe
+ 		 */
+		int getVida();
 };
 
 

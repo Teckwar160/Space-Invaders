@@ -18,6 +18,12 @@ Jefe::Jefe(int x, int y) : Figura(Figura::Sprite::JEFE){
 
 	/*Creamos el depósito de balas del soldado*/
 	this -> deposito = new DLL<Bala*>();
+
+	/*Definimos el sentido*/
+	this -> sentido = Jefe::Sentido::DERECHA;
+
+	/*Definimos la vida del Jefe*/
+	this -> vida = 500;
 }
 
 Jefe::~Jefe(){
@@ -60,5 +66,21 @@ void Jefe::siguienteBala(){
 
 int Jefe::getNumBalas(){
 	this -> deposito -> Len();
+}
+
+void Jefe::setSentido(Jefe::Sentido sentido){
+	this -> sentido = sentido;
+}
+
+Jefe::Sentido Jefe::getSentido(){
+	return this -> sentido;
+}
+
+void Jefe::setVida(int vida){
+	this -> vida = vida;
+}
+
+int Jefe::getVida(){
+	return this -> vida;
 }
 

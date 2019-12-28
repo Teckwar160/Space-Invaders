@@ -41,6 +41,10 @@ Tablero::Tablero(int numEnemigos):Figura(Figura::Sprite::TABLERO){
 	this -> nivelX = 11;
 	this -> nivelY = 28;
 
+	/*Definimso la posición de la vida del Jefe*/
+	this -> vidaJefeX = 73;
+	this -> vidaJefeY = 28;
+
 	/*Definimos el numero inicial de puntos del jugador*/
 	this -> puntosJugador = 0;
 
@@ -78,7 +82,7 @@ void Tablero::pintaPuntos(Jugador *J){
 	formaTablero[puntosY][puntosX -6] = '0' + millares;
 }
 
-void Tablero::mostrarNivel(int nivel){
+void Tablero::mostrarNivel(int nivel, bool *JefeListo){
 
 	/*Obtenemos la forma del tablero*/
 	char **formaTablero = this -> getForma();
@@ -89,13 +93,16 @@ void Tablero::mostrarNivel(int nivel){
 		/*Vamos actualizando el nivel del juego*/
 		formaTablero[nivelY][nivelX] = '0' + nivel;
 
-	}else{
+	}else if(nivel == 10){
 
 		/*Al llegar al nivel 10 se mostrara que es el jefe final*/
 		formaTablero[nivelY][nivelX] = 'B';
 		formaTablero[nivelY][nivelX+1] = 'O';
 		formaTablero[nivelY][nivelX+2] = 'O';
 		formaTablero[nivelY][nivelX+3] = 'S';
+
+		/*Indicamos que el jefe esta listo para pelear*/
+		*JefeListo = true;
 	}
 	
 }
@@ -680,7 +687,7 @@ void Tablero::mueveSoldados(){
 		int tableroColumnas = this -> getColumnas();
 
 		/*Obtenemos el sentido del movimiento del soldado*/
-		int sentido = Soldado::sentido;
+		Soldado::Sentido sentido = Soldado::sentido;
 
 		/*Vemos si se puede mover a los soldados hacia la derecha*/
 		if(sentido == Soldado::Sentido::DERECHA && xU +2 < tableroColumnas -2){
@@ -926,7 +933,7 @@ void Tablero::pintaJefe(Jefe *J){
 	int x = J -> getX();
 	int y = J -> getY();
 
-	/*pintamos el punto de contro del Jefe*/
+	/*Pintamos el punto de contro del Jefe*/
 	formaTablero[y][x] = formaJefe[3][5];
 
 	/*Pintamos la parte superior del jefe*/
@@ -957,17 +964,17 @@ void Tablero::pintaJefe(Jefe *J){
 	formaTablero[y][x+4] = formaJefe[3][9];
 
 	/*Pintamos la parte inferior del jefe*/
-	formaTablero[y+1][x] = formaJefe[3][5];
-	formaTablero[y+1][x-1] = formaJefe[3][4];
-	formaTablero[y+1][x-2] = formaJefe[3][3];
-	formaTablero[y+1][x-3] = formaJefe[3][2];
-	formaTablero[y+1][x-4] = formaJefe[3][1];
-	formaTablero[y+1][x-5] = formaJefe[3][0];
-	formaTablero[y+1][x+1] = formaJefe[3][6];
-	formaTablero[y+1][x+2] = formaJefe[3][7];
-	formaTablero[y+1][x+3] = formaJefe[3][8];
-	formaTablero[y+1][x+4] = formaJefe[3][9];
-	formaTablero[y+1][x+5] = formaJefe[3][10];
+	formaTablero[y+1][x] = formaJefe[4][5];
+	formaTablero[y+1][x-1] = formaJefe[4][4];
+	formaTablero[y+1][x-2] = formaJefe[4][3];
+	formaTablero[y+1][x-3] = formaJefe[4][2];
+	formaTablero[y+1][x-4] = formaJefe[4][1];
+	formaTablero[y+1][x-5] = formaJefe[4][0];
+	formaTablero[y+1][x+1] = formaJefe[4][6];
+	formaTablero[y+1][x+2] = formaJefe[4][7];
+	formaTablero[y+1][x+3] = formaJefe[4][8];
+	formaTablero[y+1][x+4] = formaJefe[4][9];
+	formaTablero[y+1][x+5] = formaJefe[4][10];
 
 	/*Pintamos las piernas y los brazos*/
 	formaTablero[y+2][x] = formaJefe[5][5];
@@ -997,10 +1004,10 @@ void Tablero::borrarJefe(Jefe *J){
 	int x = J -> getX();
 	int y = J -> getY();
 
-	/*pintamos el punto de contro del Jefe*/
+	/*Borramos el punto de contro del Jefe*/
 	formaTablero[y][x] = this -> caracterBase;
 
-	/*Pintamos la parte superior del jefe*/
+	/*Borramos la parte superior del jefe*/
 	formaTablero[y-1][x-1] = this -> caracterBase;
 	formaTablero[y-1][x-2] = this -> caracterBase;
 	formaTablero[y-1][x-3] = this -> caracterBase;
@@ -1009,20 +1016,20 @@ void Tablero::borrarJefe(Jefe *J){
 	formaTablero[y-1][x+2] = this -> caracterBase;
 	formaTablero[y-1][x+3] = this -> caracterBase;
 
-	/*Pintamos la antena izquierda*/
+	/*Borramos la antena izquierda*/
 	formaTablero[y-2][x-2] = this -> caracterBase;
 	formaTablero[y-3][x-3] = this -> caracterBase;
 
-	/*Pintamos la antena derecha*/
+	/*Borramos la antena derecha*/
 	formaTablero[y-2][x+2] = this -> caracterBase;
 	formaTablero[y-3][x+3] = this -> caracterBase;
 
-	/*Pintamos la parte central izquierda*/
+	/*Borramos la parte central izquierda*/
 	formaTablero[y][x-1] = this -> caracterBase;
 	formaTablero[y][x-3] = this -> caracterBase;
 	formaTablero[y][x-4] = this -> caracterBase;
 
-	/*Pintamos la parte central derecha*/
+	/*Borramos la parte central derecha*/
 	formaTablero[y][x+1] = this -> caracterBase;
 	formaTablero[y][x+3] = this -> caracterBase;
 	formaTablero[y][x+4] = this -> caracterBase;
@@ -1033,30 +1040,102 @@ void Tablero::borrarJefe(Jefe *J){
 	formaTablero[y+1][x-2] = this -> caracterBase;
 	formaTablero[y+1][x-3] = this -> caracterBase;
 	formaTablero[y+1][x-4] = this -> caracterBase;
-	formaTablero[y+1][x-5] = formaJefe[3][0];
-	formaTablero[y+1][x+1] = formaJefe[3][6];
-	formaTablero[y+1][x+2] = formaJefe[3][7];
-	formaTablero[y+1][x+3] = formaJefe[3][8];
-	formaTablero[y+1][x+4] = formaJefe[3][9];
-	formaTablero[y+1][x+5] = formaJefe[3][10];
+	formaTablero[y+1][x-5] = this -> caracterBase;
+	formaTablero[y+1][x+1] = this -> caracterBase;
+	formaTablero[y+1][x+2] = this -> caracterBase;
+	formaTablero[y+1][x+3] = this -> caracterBase;
+	formaTablero[y+1][x+4] = this -> caracterBase;
+	formaTablero[y+1][x+5] = this -> caracterBase;
 
 	/*Pintamos las piernas y los brazos*/
-	formaTablero[y+2][x] = formaJefe[5][5];
-	formaTablero[y+2][x-1] = formaJefe[5][4];
-	formaTablero[y+2][x-2] = formaJefe[5][3];
-	formaTablero[y+2][x-3] = formaJefe[5][2];
-	formaTablero[y+2][x-5] = formaJefe[5][0];
-	formaTablero[y+2][x+1] = formaJefe[5][6];
-	formaTablero[y+2][x+2] = formaJefe[5][7];
-	formaTablero[y+2][x+3] = formaJefe[5][8];
-	formaTablero[y+2][x+5] = formaJefe[5][10];
-	formaTablero[y+3][x-3] = formaJefe[6][2];
-	formaTablero[y+3][x-5] = formaJefe[6][0];
-	formaTablero[y+3][x+3] = formaJefe[6][8];
-	formaTablero[y+3][x+5] = formaJefe[6][10];
-	formaTablero[y+4][x-1] = formaJefe[7][4];
-	formaTablero[y+4][x-2] = formaJefe[7][3];
-	formaTablero[y+4][x+1] = formaJefe[7][6];
-	formaTablero[y+4][x+2] = formaJefe[7][7];
+	formaTablero[y+2][x] = this -> caracterBase;
+	formaTablero[y+2][x-1] = this -> caracterBase;
+	formaTablero[y+2][x-2] = this -> caracterBase;
+	formaTablero[y+2][x-3] = this -> caracterBase;
+	formaTablero[y+2][x-5] = this -> caracterBase;
+	formaTablero[y+2][x+1] = this -> caracterBase;
+	formaTablero[y+2][x+2] = this -> caracterBase;
+	formaTablero[y+2][x+3] = this -> caracterBase;
+	formaTablero[y+2][x+5] = this -> caracterBase;
+	formaTablero[y+3][x-3] = this -> caracterBase;
+	formaTablero[y+3][x-5] = this -> caracterBase;
+	formaTablero[y+3][x+3] = this -> caracterBase;
+	formaTablero[y+3][x+5] = this -> caracterBase;
+	formaTablero[y+4][x-1] = this -> caracterBase;
+	formaTablero[y+4][x-2] = this -> caracterBase;
+	formaTablero[y+4][x+1] = this -> caracterBase;
+	formaTablero[y+4][x+2] = this -> caracterBase;
+}
+
+void Tablero::mueveJefe(Jefe *J){
+
+	/*Obtenemos el punto de control del Jefe en X*/
+	int x = J -> getX();
+
+	/*Borramos al viejo jefe*/
+	this -> borrarJefe(J);
+
+
+	/*Obtenemos las dimensiones del tablero*/
+	int tableroColumnas = this -> getColumnas();
+
+	/*Obtenemos el sentido del movimiento del jefe*/
+	Jefe::Sentido sentido = J -> getSentido();
+
+	/*Vemos si se puede mover al jefe hacia la derecha*/
+	if(sentido == Jefe::Sentido::DERECHA && x + 6 < tableroColumnas -1){
+		
+		/*Movemos al Jefe*/
+		x++;
+
+	}else if(x == tableroColumnas - 7 && sentido == Jefe::Sentido::DERECHA){
+
+		/*Cambiamos el sentido del movimiento*/
+		J -> setSentido(Jefe::Sentido::IZQUIERDA);
+	}
+
+	/*Vemos si se puede mover al jefe hacia la izquierda*/
+	if(sentido == Jefe::Sentido::IZQUIERDA && x - 5 > 1){
+		x--;
+
+	}else if(x == 6 && sentido == Jefe::Sentido::IZQUIERDA){
+
+		/*Cambiamos el sentido del movimiento*/
+		J -> setSentido(Jefe::Sentido::DERECHA);
+	}
+
+	/*Actualizamos las coordenada en X del Jefe*/
+	J -> setX(x);	
+
+	/*Pintamos al nuevo Jefe*/
+	this -> pintaJefe(J);
+}
+
+void Tablero::mostrarVida(Jefe *J){
+
+	/*Obtenemos la forma de tablero*/
+	char **formaTablero = this -> getForma();
+
+	/*Obtenemos la vida del Jefe*/
+	int vida = J -> getVida();
+
+	/*Separamos el numero*/
+	int millares = vida/1000;
+	int centenas = (vida - (millares *1000))/100;
+	int decenas = (vida - (millares*1000 + centenas*100))/10;
+	int unidades = vida -(millares*1000 + centenas*100 +decenas*10);
+
+	/*Actualizamos los puntos en el pantalla*/
+	formaTablero[vidaJefeY][vidaJefeX] = 'I';
+	formaTablero[vidaJefeY][vidaJefeX+1] = 'n';
+	formaTablero[vidaJefeY][vidaJefeX+2] = 'v';
+	formaTablero[vidaJefeY][vidaJefeX+3] = 'a';
+	formaTablero[vidaJefeY][vidaJefeX+4] = 'd';
+	formaTablero[vidaJefeY][vidaJefeX+5] = 'e';
+	formaTablero[vidaJefeY][vidaJefeX+6] = 'r';
+	formaTablero[vidaJefeY][vidaJefeX+7] = ':' ;
+	formaTablero[vidaJefeY][vidaJefeX+8] = '0' + centenas;
+	formaTablero[vidaJefeY][vidaJefeX+9] = '0' + decenas;
+	formaTablero[vidaJefeY][vidaJefeX+10] = '0' + unidades;
 }
 

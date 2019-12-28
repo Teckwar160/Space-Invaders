@@ -47,8 +47,14 @@ int main(){
 	/**!<Soldado generico de apoyo*/
 	Soldado *S;
 
+	/**!<Jefe del juego*/
+	Jefe *Je;
+
 	/**!<Indica si el juego acabo o no*/
 	bool gameOver = false;
+
+	/**!<Indica si sale el Jefe o no*/
+	bool JefeListo = false;
 
 	/**!<Indica el nivel del juego*/
 	int nivel = 1;
@@ -56,6 +62,7 @@ int main(){
 	/*Iniciamos los componenes del juego*/
 	T = new Tablero(5);
 	J = new Jugador();
+	Je = new Jefe(25,6);
 
 	/*Cambiamos el modo de pantalla para usar curses y la función kbhit*/
 	initscr();
@@ -80,7 +87,7 @@ int main(){
 		T -> mostrar();
 
 		/*Mostrar nivel*/
-		T -> mostrarNivel(nivel);
+		T -> mostrarNivel(nivel,&JefeListo);
 
 		/*Comprobamos si se pulso una tecla*/
 		if(kbhit()){
@@ -146,6 +153,12 @@ int main(){
 			T -> siguienteSoldado();
 		}
 
+		/*Movemos al Jefe*/
+		if(JefeListo){
+			T -> mostrarVida(Je);
+			T -> mueveJefe(Je);
+		}
+
 		/*Borramos el tablero*/
 		erase();
 
@@ -169,4 +182,5 @@ int main(){
 	/*Eliminamos los objetos creados*/
 	delete T;
 	delete J;
+	delete Je;
 }
