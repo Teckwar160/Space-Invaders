@@ -329,12 +329,12 @@ void Tablero::mueveJugador(Jugador *J, int Tecla){
 	/*Dependiendo la tecla sera el movimiento*/
 	switch(Tecla){
 		case 'a':
-			if(x -3 > 1){
+			if(x -3 > 3){
 				x -=1;
 			}
 			break;
 		case 'd':
-			if(x + 3 < tableroColumnas -2){
+			if(x + 3 < tableroColumnas -4){
 				x+=1;
 			}
 			break;

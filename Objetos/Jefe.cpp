@@ -2,11 +2,11 @@
 #include "Jefe.hpp"
 
 Jefe::Jefe(int x, int y) : Figura(Figura::Sprite::JEFE), AdministradorDeBalas(){
-	/*Definimos el punto de control del soldado*/
+	/*Definimos el punto de control del jefe*/
 	this -> setX(x);
 	this -> setY(y);
 
-	/*Definimos el sentido*/
+	/*Definimos el sentido del movimiento del jefe*/
 	this -> sentido = Jefe::Sentido::DERECHA;
 
 	/*Definimos la vida del Jefe*/
