@@ -219,7 +219,14 @@ int main(){
 
 		/*Si gano el jugador*/
 		if(victoria){
+
+			/*Borramos al jefe*/
 			T -> borrarJefe(Je);
+
+			/*Ponemos los puntos del jugar a todo*/
+			J -> setPuntos(9999);
+
+			/*Mostramos el mensaje de victoria*/
 			T -> Mensaje(Tablero::Mensajes::VICTORIA);
 		}
 			

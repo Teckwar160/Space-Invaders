@@ -23,7 +23,7 @@ Jefe::Jefe(int x, int y) : Figura(Figura::Sprite::JEFE){
 	this -> sentido = Jefe::Sentido::DERECHA;
 
 	/*Definimos la vida del Jefe*/
-	this -> vida = 300;
+	this -> vida = 150;
 }
 
 Jefe::~Jefe(){
