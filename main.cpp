@@ -78,26 +78,27 @@ int main(){
 	T -> pintaJugador(J);
 
 	/*Mostramos las instrucciones*/
-	T -> mostrarInstrucciones();
+	T -> Mensaje(Tablero::Mensajes::INSTRUCCIONES);
 
 	/*Mostramos el tablero*/
 	T -> mostrar();
 
 	/*Bucle para que no continue el programa*/
 	while(getch() != 'e'){
-		
+		/*No necesitamos nada aquí*/
 	}
+
+	/*Borramos las instrucciones*/
+	T -> borrarInstrucciones();
 
 	/*Limpiamos la pantalla*/
 	erase();
-
-	T -> borrarInstrucciones();
 
 	/*Cargamos a los enemigos en el tablero*/
 	T -> pintaSoldados();
 
 	/*Iniciamos el juego*/
-	while(Tecla != '.' && !gameOver){
+	while(Tecla != 'k' && !gameOver){
 
 		/*Mostramos los puntos del jugador*/
 		T -> pintaPuntos(J);
@@ -193,7 +194,7 @@ int main(){
 			/*Movemos al Jefe*/
 			T -> mueveJefe(Je);
 			
-
+			/*Si la vida del jefe se acabo activamos la victoria*/
 			if(Je -> getVida() == 0){
 				jefe = false;
 				victoria = true;
@@ -219,10 +220,29 @@ int main(){
 		/*Si gano el jugador*/
 		if(victoria){
 			T -> borrarJefe(Je);
-			T -> mostrarVictoria();
+			T -> Mensaje(Tablero::Mensajes::VICTORIA);
 		}
 			
 	}
+
+	/*Si el jugador perdio lo mostramos*/
+	if(gameOver){
+
+		/*Borramos a los soldados para evitar fallos*/
+		T -> borrarSoldados();
+
+		/*Mostramos el mensaje de gameOver*/
+		T -> Mensaje(Tablero::Mensajes::GAMEOVER);
+
+		/*Mostramos el tablero*/
+		T -> mostrar();
+
+		/*Evitamos que se cierre el juego*/
+		while(getch() != 'k'){
+			/*No necesitamos nada aquí*/
+		}		
+	}
+
 
 	/*Fin del cambio de modo*/
 	endwin();

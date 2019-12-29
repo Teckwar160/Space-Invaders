@@ -21,6 +21,8 @@
  * mover todas las figuras
  */
 class Tablero : public Figura{
+	public:
+		enum Mensajes{VICTORIA,INSTRUCCIONES,GAMEOVER};
 	private:
 		/**!<Caracter del fondo del tablero*/
 		char caracterBase;
@@ -49,26 +51,20 @@ class Tablero : public Figura{
 		/**!<Posición en x del nivel*/
 		int nivelX;
 
+		/**!<Posición en y del nivel*/
+		int nivelY;	
+
 		/**!<Posición en x de la vida del Jefe*/
 		int vidaJefeX;
 
 		/**!<Posición en y de la vida dek jefe*/
 		int vidaJefeY;
 
-		/**!<Posición en y del nivel*/
-		int nivelY;		
+		/**!<Posición en x de los mensaje*/
+		int mensajeX;
 
-		/**!<Posición en x del cartel de felicitaciones*/
-		int felicitacionesX;
-
-		/**!<Posición en y del cartel de felicitaciones*/
-		int felicitacionesY;
-
-		/**!<Posición en x del cartel de instrucciones*/
-		int instruccionesX;
-
-		/**!<Posición en y del cartel de instrucciones*/
-		int instruccionesY;
+		/**!<Posición en y de los mensajes*/
+		int mensajeY;	
 
 		/**!<Guarda el número anterior de puntos del jugador*/
 		int puntosJugador;
@@ -109,14 +105,10 @@ class Tablero : public Figura{
 		void subirNivel(Jugador *J, int *nivel);
 
 		/**
-		 * @brief Método que muestra un cartel de victoria al jugador
+		 * @brief Método encargado de mostrar mensajes en el tablero
+		 * @param Mensaje que se mostrara en el tablero
 		 */
-		void mostrarVictoria();
-
-		/**
-		 * @brief Método que mostrara las instrucciones al jugador
-		 */
-		void mostrarInstrucciones();
+		void Mensaje(Tablero::Mensajes Mensaje);
 
 		/**
 		 * @brief Método que borra las isntrucciones

@@ -45,13 +45,9 @@ Tablero::Tablero(int numEnemigos):Figura(Figura::Sprite::TABLERO){
 	this -> vidaJefeX = 73;
 	this -> vidaJefeY = 28;
 
-	/*Definimos la posición de la felicitación en el tablero*/
-	this -> felicitacionesX =40;
-	this -> felicitacionesY = 3;
-
-	/*Definimos la posción de las instrucciones en el tablero*/
-	this -> instruccionesX = 40;
-	this -> instruccionesY = 3;
+	/*Definimos las posición de los mensaje en el tablero*/
+	this -> mensajeX = 40;
+	this -> mensajeY = 3;
 
 	/*Definimos el numero inicial de puntos del jugador*/
 	this -> puntosJugador = 0;
@@ -147,211 +143,131 @@ void Tablero::subirNivel(Jugador *J, int *nivel){
 	}
 }
 
-void Tablero::mostrarVictoria(){
-
-	/*Obtenemos la forma del Tablero*/
-	char **formaTablero = this -> getForma();
-
-	/*Pintamos el mensaje*/ 
-	formaTablero[felicitacionesY][felicitacionesX] = 'F'; 
-	formaTablero[felicitacionesY][felicitacionesX+1] = 'e'; 
-	formaTablero[felicitacionesY][felicitacionesX+2] = 'l'; 
-	formaTablero[felicitacionesY][felicitacionesX+3] = 'i'; 
-	formaTablero[felicitacionesY][felicitacionesX+4] = 'c'; 
-	formaTablero[felicitacionesY][felicitacionesX+5] = 'i'; 
-	formaTablero[felicitacionesY][felicitacionesX+6] = 'd'; 
-	formaTablero[felicitacionesY][felicitacionesX+7] = 'a'; 
-	formaTablero[felicitacionesY][felicitacionesX+8] = 'd'; 
-	formaTablero[felicitacionesY][felicitacionesX+9] = 'e'; 
-	formaTablero[felicitacionesY][felicitacionesX+10] = 's'; 
-	formaTablero[felicitacionesY][felicitacionesX+11] = '.';
-	formaTablero[felicitacionesY][felicitacionesX+12] = 'G'; 
-	formaTablero[felicitacionesY][felicitacionesX+13] = 'a'; 
-	formaTablero[felicitacionesY][felicitacionesX+14] = 'n'; 
-	formaTablero[felicitacionesY][felicitacionesX+15] = 'a'; 
-	formaTablero[felicitacionesY][felicitacionesX+16] = 's'; 
-	formaTablero[felicitacionesY][felicitacionesX+17] = 't';
-	formaTablero[felicitacionesY][felicitacionesX+18] = 'e'; 
-
-	/*Pintamos la forma de salir*/  
-	formaTablero[felicitacionesY+2][felicitacionesX] = 'P'; 
-	formaTablero[felicitacionesY+2][felicitacionesX+1] = 'u'; 
-	formaTablero[felicitacionesY+2][felicitacionesX+2] = 'l'; 
-	formaTablero[felicitacionesY+2][felicitacionesX+3] = 's'; 
-	formaTablero[felicitacionesY+2][felicitacionesX+4] = 'a'; 
-	formaTablero[felicitacionesY+2][felicitacionesX+5] = '.'; 
-	formaTablero[felicitacionesY+2][felicitacionesX+6] = '"'; 
-	formaTablero[felicitacionesY+2][felicitacionesX+7] = '.'; 
-	formaTablero[felicitacionesY+2][felicitacionesX+8] = '"'; 
-	formaTablero[felicitacionesY+2][felicitacionesX+9] = '.'; 
-	formaTablero[felicitacionesY+2][felicitacionesX+10] = 'p'; 
-	formaTablero[felicitacionesY+2][felicitacionesX+11] = 'a'; 
-	formaTablero[felicitacionesY+2][felicitacionesX+12] = 'r'; 
-	formaTablero[felicitacionesY+2][felicitacionesX+13] = 'a'; 
-	formaTablero[felicitacionesY+2][felicitacionesX+14] = '.'; 
-	formaTablero[felicitacionesY+2][felicitacionesX+15] = 's'; 
-	formaTablero[felicitacionesY+2][felicitacionesX+16] = 'a'; 
-	formaTablero[felicitacionesY+2][felicitacionesX+17] = 'l'; 
-	formaTablero[felicitacionesY+2][felicitacionesX+18] = 'i'; 
-	formaTablero[felicitacionesY+2][felicitacionesX+19] = 'r'; 
-}
-
-void Tablero::mostrarInstrucciones(){
+void Tablero::Mensaje(Tablero::Mensajes Mensaje){
 
 	/*Obtenemos la forma del tablero*/
 	char **formaTablero = this -> getForma();
 
-	formaTablero[instruccionesY][instruccionesX] = 'I';
-	formaTablero[instruccionesY][instruccionesX+1] = 'n';
-	formaTablero[instruccionesY][instruccionesX+2] = 's';
-	formaTablero[instruccionesY][instruccionesX+3] = 't';
-	formaTablero[instruccionesY][instruccionesX+4] = 'r';
-	formaTablero[instruccionesY][instruccionesX+5] = 'u';
-	formaTablero[instruccionesY][instruccionesX+6] = 'c';
-	formaTablero[instruccionesY][instruccionesX+7] = 'c';
-	formaTablero[instruccionesY][instruccionesX+8] = 'i';
-	formaTablero[instruccionesY][instruccionesX+9] = 'o';
-	formaTablero[instruccionesY][instruccionesX+10] = 'n';
-	formaTablero[instruccionesY][instruccionesX+11] = 'e';
-	formaTablero[instruccionesY][instruccionesX+12] = 's';
-	formaTablero[instruccionesY][instruccionesX+13] = ':';
-	formaTablero[instruccionesY+2][instruccionesX] = 'P';
-	formaTablero[instruccionesY+2][instruccionesX+1] = 'a';
-	formaTablero[instruccionesY+2][instruccionesX+2] = 'r';
-	formaTablero[instruccionesY+2][instruccionesX+3] = 'a';
-	formaTablero[instruccionesY+2][instruccionesX+5] = 'm';
-	formaTablero[instruccionesY+2][instruccionesX+6] = 'o';
-	formaTablero[instruccionesY+2][instruccionesX+7] = 'v';
-	formaTablero[instruccionesY+2][instruccionesX+8] = 'e';
-	formaTablero[instruccionesY+2][instruccionesX+9] = 'r';
-	formaTablero[instruccionesY+2][instruccionesX+10] = 't';
-	formaTablero[instruccionesY+2][instruccionesX+11] = 'e';
-	formaTablero[instruccionesY+2][instruccionesX+13] = 'u';
-	formaTablero[instruccionesY+2][instruccionesX+14] = 's';
-	formaTablero[instruccionesY+2][instruccionesX+15] = 'a';
-	formaTablero[instruccionesY+2][instruccionesX+17] = '"';
-	formaTablero[instruccionesY+2][instruccionesX+18] = 'a';
-	formaTablero[instruccionesY+2][instruccionesX+19] = '"';
-	formaTablero[instruccionesY+2][instruccionesX+21] = 'y';
-	formaTablero[instruccionesY+2][instruccionesX+23] = '"';
-	formaTablero[instruccionesY+2][instruccionesX+24] = 'd';
-	formaTablero[instruccionesY+2][instruccionesX+25] = '"';
-	formaTablero[instruccionesY+4][instruccionesX] = 'P';
-	formaTablero[instruccionesY+4][instruccionesX+1] = 'a';
-	formaTablero[instruccionesY+4][instruccionesX+2] = 'r';
-	formaTablero[instruccionesY+4][instruccionesX+3] = 'a';
-	formaTablero[instruccionesY+4][instruccionesX+5] = 'd';
-	formaTablero[instruccionesY+4][instruccionesX+6] = 'i';
-	formaTablero[instruccionesY+4][instruccionesX+7] = 's';
-	formaTablero[instruccionesY+4][instruccionesX+8] = 'p';
-	formaTablero[instruccionesY+4][instruccionesX+9] = 'a';
-	formaTablero[instruccionesY+4][instruccionesX+10] = 'r';
-	formaTablero[instruccionesY+4][instruccionesX+11] = 'a';
-	formaTablero[instruccionesY+4][instruccionesX+12] = 'r';
-	formaTablero[instruccionesY+4][instruccionesX+14] = 'u';
-	formaTablero[instruccionesY+4][instruccionesX+15] = 's';
-	formaTablero[instruccionesY+4][instruccionesX+16] = 'a';
-	formaTablero[instruccionesY+4][instruccionesX+18] = '"';
-	formaTablero[instruccionesY+4][instruccionesX+19] = 'f';
-	formaTablero[instruccionesY+4][instruccionesX+20] = '"';
-	formaTablero[instruccionesY+6][instruccionesX] = 'P';
-	formaTablero[instruccionesY+6][instruccionesX+1] = 'u';
-	formaTablero[instruccionesY+6][instruccionesX+2] = 'l';
-	formaTablero[instruccionesY+6][instruccionesX+3] = 's';
-	formaTablero[instruccionesY+6][instruccionesX+4] = 'a';
-	formaTablero[instruccionesY+6][instruccionesX+6] = '"';
-	formaTablero[instruccionesY+6][instruccionesX+7] = 'e';
-	formaTablero[instruccionesY+6][instruccionesX+8] = '"';
-	formaTablero[instruccionesY+6][instruccionesX+10] = 'p';
-	formaTablero[instruccionesY+6][instruccionesX+11] = 'a';
-	formaTablero[instruccionesY+6][instruccionesX+12] = 'r';
-	formaTablero[instruccionesY+6][instruccionesX+13] = 'a';
-	formaTablero[instruccionesY+6][instruccionesX+15] = 'e';
-	formaTablero[instruccionesY+6][instruccionesX+16] = 'm';
-	formaTablero[instruccionesY+6][instruccionesX+17] = 'p';
-	formaTablero[instruccionesY+6][instruccionesX+18] = 'e';
-	formaTablero[instruccionesY+6][instruccionesX+19] = 'z';
-	formaTablero[instruccionesY+6][instruccionesX+20] = 'a';
-	formaTablero[instruccionesY+6][instruccionesX+21] = 'r';
+	/**!<Variable para cargar el mensaje*/
+	std::ifstream mensaje;
+
+	/**!<Variable para cargar las dimensiones*/
+	std::ifstream dimensiones;
+
+	/**!<Varibale para guardar la dirección del mensaje*/
+	std::string direccionMensaje;
+
+	/**!<Variable para guardar la dirección de las dimensiones del mensaje*/
+	std::string direccionDimensiones;
+
+	/**!<Número de filas del mensaje*/
+	int filas;
+
+	/**!<Número de columans del mensaje*/
+	int columnas;
+
+	switch(Mensaje){
+		case Tablero::Mensajes::INSTRUCCIONES:
+
+			direccionMensaje = "Mensajes/instrucciones.txt";
+
+			direccionDimensiones = "Mensajes/dimensionesInstrucciones.txt";
+
+			break;
+
+		case Tablero::Mensajes::VICTORIA:
+
+			direccionMensaje = "Mensajes/victoria.txt";
+
+			direccionDimensiones = "Mensajes/dimensionesVictoria.txt";	
+
+			break;
+
+		case Tablero::Mensajes::GAMEOVER:
+
+			direccionMensaje = "Mensajes/gameOver.txt";
+
+			direccionDimensiones = "Mensajes/dimensionesGameOver.txt";
+
+			break;
+	}
+
+	/*Abrimos el tamaño del mensaje*/
+	dimensiones.open(direccionDimensiones,std::ios::in);
+
+	/*Cargamos las dimensioens del mensaje*/
+	if(!dimensiones.fail()){
+
+		dimensiones >> filas;
+
+		dimensiones >>  columnas;
+	}
+
+	/*Cerramos el archivo de dimensiones*/
+	dimensiones.close();
+
+	/*Abrimos el mensaje*/
+	mensaje.open(direccionMensaje,std::ios::in);
+
+	/*Cargamos el mensaje en el tablero*/
+	if(!mensaje.fail()){
+		for(size_t i = 0; i<filas; i++){
+			for(size_t j = 0; j <columnas; j++){
+				mensaje >> formaTablero[mensajeY+i][mensajeX+j];
+			}
+		}
+	}
+
+	/*Cerramos el archivo del mensaje*/
+	mensaje.close();
 }
+
 
 void Tablero::borrarInstrucciones(){
 
 	/*Obtenemos la forma del tablero*/
 	char **formaTablero = this -> getForma();
 
-	formaTablero[instruccionesY][instruccionesX] = this -> caracterBase;
-	formaTablero[instruccionesY][instruccionesX+1] = this -> caracterBase;
-	formaTablero[instruccionesY][instruccionesX+2] = this -> caracterBase;
-	formaTablero[instruccionesY][instruccionesX+3] = this -> caracterBase;
-	formaTablero[instruccionesY][instruccionesX+4] = this -> caracterBase;
-	formaTablero[instruccionesY][instruccionesX+5] = this -> caracterBase;
-	formaTablero[instruccionesY][instruccionesX+6] = this -> caracterBase;
-	formaTablero[instruccionesY][instruccionesX+7] = this -> caracterBase;
-	formaTablero[instruccionesY][instruccionesX+8] = this -> caracterBase;
-	formaTablero[instruccionesY][instruccionesX+9] = this -> caracterBase;
-	formaTablero[instruccionesY][instruccionesX+10] = this -> caracterBase;
-	formaTablero[instruccionesY][instruccionesX+11] = this -> caracterBase;
-	formaTablero[instruccionesY][instruccionesX+12] = this -> caracterBase;
-	formaTablero[instruccionesY][instruccionesX+13] = this -> caracterBase;
-	formaTablero[instruccionesY+2][instruccionesX] = this -> caracterBase;
-	formaTablero[instruccionesY+2][instruccionesX+1] = this -> caracterBase;
-	formaTablero[instruccionesY+2][instruccionesX+2] = this -> caracterBase;
-	formaTablero[instruccionesY+2][instruccionesX+3] = this -> caracterBase;
-	formaTablero[instruccionesY+2][instruccionesX+5] = this -> caracterBase;
-	formaTablero[instruccionesY+2][instruccionesX+6] = this -> caracterBase;
-	formaTablero[instruccionesY+2][instruccionesX+7] = this -> caracterBase;
-	formaTablero[instruccionesY+2][instruccionesX+8] = this -> caracterBase;
-	formaTablero[instruccionesY+2][instruccionesX+9] = this -> caracterBase;
-	formaTablero[instruccionesY+2][instruccionesX+10] = this -> caracterBase;
-	formaTablero[instruccionesY+2][instruccionesX+11] = this -> caracterBase;
-	formaTablero[instruccionesY+2][instruccionesX+13] = this -> caracterBase;
-	formaTablero[instruccionesY+2][instruccionesX+14] = this -> caracterBase;
-	formaTablero[instruccionesY+2][instruccionesX+15] = this -> caracterBase;
-	formaTablero[instruccionesY+2][instruccionesX+17] = this -> caracterBase;
-	formaTablero[instruccionesY+2][instruccionesX+18] = this -> caracterBase;
-	formaTablero[instruccionesY+2][instruccionesX+19] = this -> caracterBase;
-	formaTablero[instruccionesY+2][instruccionesX+21] = this -> caracterBase;
-	formaTablero[instruccionesY+2][instruccionesX+23] = this -> caracterBase;
-	formaTablero[instruccionesY+2][instruccionesX+24] = this -> caracterBase;
-	formaTablero[instruccionesY+2][instruccionesX+25] = this -> caracterBase;
-	formaTablero[instruccionesY+4][instruccionesX] = this -> caracterBase;
-	formaTablero[instruccionesY+4][instruccionesX+1] = this -> caracterBase;
-	formaTablero[instruccionesY+4][instruccionesX+2] = this -> caracterBase;
-	formaTablero[instruccionesY+4][instruccionesX+3] = this -> caracterBase;
-	formaTablero[instruccionesY+4][instruccionesX+5] = this -> caracterBase;
-	formaTablero[instruccionesY+4][instruccionesX+6] = this -> caracterBase;
-	formaTablero[instruccionesY+4][instruccionesX+7] = this -> caracterBase;
-	formaTablero[instruccionesY+4][instruccionesX+8] = this -> caracterBase;
-	formaTablero[instruccionesY+4][instruccionesX+9] = this -> caracterBase;
-	formaTablero[instruccionesY+4][instruccionesX+10] = this -> caracterBase;
-	formaTablero[instruccionesY+4][instruccionesX+11] = this -> caracterBase;
-	formaTablero[instruccionesY+4][instruccionesX+12] = this -> caracterBase;
-	formaTablero[instruccionesY+4][instruccionesX+14] = this -> caracterBase;
-	formaTablero[instruccionesY+4][instruccionesX+15] = this -> caracterBase;
-	formaTablero[instruccionesY+4][instruccionesX+16] = this -> caracterBase;
-	formaTablero[instruccionesY+4][instruccionesX+18] = this -> caracterBase;
-	formaTablero[instruccionesY+4][instruccionesX+19] = this -> caracterBase;
-	formaTablero[instruccionesY+4][instruccionesX+20] = this -> caracterBase;
-	formaTablero[instruccionesY+6][instruccionesX] = this -> caracterBase;
-	formaTablero[instruccionesY+6][instruccionesX+1] = this -> caracterBase;
-	formaTablero[instruccionesY+6][instruccionesX+2] = this -> caracterBase;
-	formaTablero[instruccionesY+6][instruccionesX+3] = this -> caracterBase;
-	formaTablero[instruccionesY+6][instruccionesX+4] = this -> caracterBase;
-	formaTablero[instruccionesY+6][instruccionesX+6] = this -> caracterBase;
-	formaTablero[instruccionesY+6][instruccionesX+7] = this -> caracterBase;
-	formaTablero[instruccionesY+6][instruccionesX+8] = this -> caracterBase;
-	formaTablero[instruccionesY+6][instruccionesX+10] = this -> caracterBase;
-	formaTablero[instruccionesY+6][instruccionesX+11] = this -> caracterBase;
-	formaTablero[instruccionesY+6][instruccionesX+12] = this -> caracterBase;
-	formaTablero[instruccionesY+6][instruccionesX+13] = this -> caracterBase;
-	formaTablero[instruccionesY+6][instruccionesX+15] = this -> caracterBase;
-	formaTablero[instruccionesY+6][instruccionesX+16] = this -> caracterBase;
-	formaTablero[instruccionesY+6][instruccionesX+17] = this -> caracterBase;
-	formaTablero[instruccionesY+6][instruccionesX+18] = this -> caracterBase;
-	formaTablero[instruccionesY+6][instruccionesX+19] = this -> caracterBase;
-	formaTablero[instruccionesY+6][instruccionesX+20] = this -> caracterBase;
-	formaTablero[instruccionesY+6][instruccionesX+21] = this -> caracterBase;
+	/**!<Variable para cargar el mensaje*/
+	std::ifstream mensaje;
+
+	/**!<Variable para cargar las dimensiones*/
+	std::ifstream dimensiones;
+
+	/**!<Número de filas del mensaje*/
+	int filas;
+
+	/**!<Número de columans del mensaje*/
+	int columnas;
+
+	/*Abrimos el tamaño del mensaje*/
+	dimensiones.open("Mensajes/dimensionesInstrucciones.txt",std::ios::in);
+
+	/*Cargamos las dimensioens del mensaje*/
+	if(!dimensiones.fail()){
+
+		dimensiones >> filas;
+
+		dimensiones >>  columnas;
+	}
+
+	/*Cerramos el archivo de dimensiones*/
+	dimensiones.close();
+
+	/*Abrimos el mensaje*/
+	mensaje.open("Mensajes/instrucciones.txt",std::ios::in);
+
+	/*Cargamos el mensaje en el tablero*/
+	if(!mensaje.fail()){
+		for(size_t i = 0; i<filas; i++){
+			for(size_t j = 0; j <columnas; j++){
+				formaTablero[mensajeY+i][mensajeX+j] = this -> caracterBase;
+			}
+		}
+	}
+
+	/*Cerramos el archivo del mensaje*/
+	mensaje.close();
 }
 
 /*========Métodos para el jugador========*/
